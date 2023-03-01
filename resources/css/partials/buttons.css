@@ -1,0 +1,15 @@
+.btn {
+  @apply inline-block h-auto min-h-min px-8 py-2.5 border border-solid border-transparent text-sm font-semibold normal-case no-underline rounded-md shadow-md hover:shadow-lg transition duration-300 hover:bg-transparent hover:border-transparent active:border-transparent;
+  &.btn-primary {
+    @apply bg-brand-blue hover:bg-brand-bluedark text-white;
+  }
+  &.btn-secondary {
+    @apply bg-white text-brand-bluedark border border-solid border-brand-bluedark hover:border-brand-blue hover:bg-brand-blue hover:text-white active:border-brand-blue;
+  }
+  &.btn-white {
+    @apply bg-white text-brand-bluedark border-transparent hover:shadow-lg;
+  }
+  &.btn-red {
+    @apply bg-brand-red hover:bg-brand-redchili text-white border-transparent hover:shadow-lg;
+  }
+}

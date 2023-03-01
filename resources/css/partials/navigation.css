@@ -1,0 +1,35 @@
+#primary-menu .menu-ul {
+  @apply flex justify-between;
+  > li {
+    > a {
+      @apply block py-4 px-6 font-semibold text-brand-bluedark hover:text-brand-red transition duration-200;
+    }
+  }
+  .menu-item {
+    @apply relative;
+    &.menu-item-has-children {
+      &:hover {
+        .sub-menu {
+          @apply visible opacity-100;
+        }
+      }
+    }
+  }
+  .sub-menu {
+    @apply absolute rounded-md bg-white z-20 min-w-[240px] p-2 flex flex-col flex-wrap transition duration-300 invisible opacity-0;
+    > li {
+      > a {
+        @apply py-3 px-4 rounded-md hover:bg-brand-graylight flex;
+      }
+    }
+  }
+}
+
+#footer-menu .menu-ul {
+  @apply flex justify-between;
+  > li {
+    > a {
+      @apply block py-4 px-6 font-semibold uppercase text-white hover:text-white hover:underline transition duration-200;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.breadcrumbs {
+  @apply flex gap-x-3 text-brand-bluedark;
+  a {
+    @apply text-brand-bluedark hover:underline;
+  }
+}
+
+.content-carousel--swiper {
+  .swiper-slide {
+    @apply opacity-50 transition duration-300;
+    &.swiper-slide-active {
+      @apply opacity-100;
+    }
+  }
+}
+
+.home-slider--swiper {
+  .swiper-pagination {
+    @apply relative;
+  }
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    @apply bottom-0 left-0 text-left;
+  }
+}
+.swiper-pagination-bullet {
+  @apply h-3 w-3;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-brand-blue;
+}
+
+.collapse-plus .collapse-title:after {
+  top: 1.25rem;
+  right: 2.5rem;
+  font-weight: 300;
+  font-size: 40px;
+}
+.collapse:not(.collapse-open):not(.collapse-close) input[type='checkbox'],
+.collapse:not(.collapse-open):not(.collapse-close) .collapse-title {
+  @apply bg-white rounded-xl;
+}
+.collapse:focus:not(.collapse-open):not(.collapse-close) .collapse-title {
+  @apply bg-brand-blue text-white shadow-[0_3px_6px_rgba(0,0,0,0.16)];
+}
+.collapse-content {
+  @apply px-8 text-lg;
+}
+.collapse-open :where(.collapse-content),
+.collapse:focus:not(.collapse-close) :where(.collapse-content),
+.collapse:not(.collapse-close)
+  :where(input[type='checkbox']:checked ~ .collapse-content) {
+  @apply py-8;
+}
