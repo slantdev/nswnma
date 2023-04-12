@@ -82,7 +82,7 @@ get_header();
 <section class="bg-brand-grayblue py-20">
   <div class="container">
     <div class="w-1/2">
-      <h2 class="h3 text-brand-bluedark font-light mb-8 mt-8">Search Education Events</h2>
+      <h2 class="h3 text-brand-bluedark font-medium mb-8 mt-8">Search Education Events</h2>
     </div>
   </div>
   <div class="container">

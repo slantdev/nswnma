@@ -4509,6 +4509,34 @@ h6,
   left: 0;
 }
 
+.aspect-h-12 {
+  --tw-aspect-h: 12;
+}
+
+.aspect-h-8 {
+  --tw-aspect-h: 8;
+}
+
+.aspect-w-4 {
+  position: relative;
+  padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+  --tw-aspect-w: 4;
+}
+
+.aspect-w-4 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.aspect-h-5 {
+  --tw-aspect-h: 5;
+}
+
 .collapse {
   visibility: collapse;
 }
@@ -7732,6 +7760,16 @@ h6,
   padding-bottom: 0.875rem;
 }
 
+.\!py-4 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.\!px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
 .pt-0 {
   padding-top: 0px;
 }
@@ -8357,6 +8395,16 @@ h6,
   line-height: 2.5rem;
 }
 
+.\!text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
+.\!text-base {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+
 .font-light {
   font-weight: 300;
 }
@@ -8484,6 +8532,10 @@ h6,
 
 .opacity-60 {
   opacity: 0.6;
+}
+
+.opacity-80 {
+  opacity: 0.8;
 }
 
 .shadow {
@@ -9030,6 +9082,10 @@ article > *:not(.entry-content),
 
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+
+.hover\:opacity-100:hover {
+  opacity: 1;
 }
 
 .hover\:shadow-2xl:hover {
