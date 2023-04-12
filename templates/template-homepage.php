@@ -9,7 +9,7 @@ get_header();
 ?>
 
 <!-- Content Carousel -->
-<section class="bg-brand-graylight pb-10 overflow-hidden">
+<section class="bg-brand-bluedark pb-10 overflow-hidden">
   <div class="home-slider--swiper relative">
     <div class="swiper-wrapper h-[500px]">
       <div class="swiper-slide w-full h-full relative">
@@ -91,7 +91,7 @@ get_header();
 </section>
 
 <!-- Site Navigation -->
-<section class="relative bg-brand-graylight">
+<section class="relative bg-brand-bluedark">
   <div class="container py-12">
     <div class="flex justify-center">
       <div class="dropdown dropdown-end">

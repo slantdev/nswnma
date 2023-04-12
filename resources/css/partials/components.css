@@ -5,6 +5,13 @@
   }
 }
 
+.swiper-pagination-bullet {
+  @apply h-3 w-3;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-brand-blue;
+}
+
 .content-carousel--swiper {
   .swiper-slide {
     @apply opacity-50 transition duration-300;
@@ -24,12 +31,12 @@
   .swiper-pagination-fraction {
     @apply bottom-0 left-0 text-left;
   }
-}
-.swiper-pagination-bullet {
-  @apply h-3 w-3;
-}
-.swiper-pagination-bullet-active {
-  @apply bg-brand-blue;
+  .swiper-pagination-bullet {
+    @apply bg-white opacity-100;
+  }
+  .swiper-pagination-bullet-active {
+    @apply bg-brand-blue;
+  }
 }
 
 .collapse-plus .collapse-title:after {
