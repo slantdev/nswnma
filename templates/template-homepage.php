@@ -110,7 +110,7 @@ get_header();
   </div>
 </section>
 
-<!-- Content Card with Filter -->
+<!-- Info Box with Filter -->
 <section class="bg-white relative py-20">
   <div class="container">
     <div class="text-center mb-10">
