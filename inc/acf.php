@@ -23,3 +23,14 @@ function nswnma_acf_input_admin_footer()
 <?php
 }
 add_action('acf/input/admin_footer', 'nswnma_acf_input_admin_footer');
+
+/*
+ * ACF Icon Picker
+ * Modify the path to the icons directory
+ * https://github.com/houke/acf-icon-picker
+ */
+add_filter('acf_icon_path_suffix', 'acf_icon_path_suffix');
+function acf_icon_path_suffix($path_suffix)
+{
+  return 'assets/icons/content/';
+}

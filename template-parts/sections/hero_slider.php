@@ -25,7 +25,7 @@ if ($hero_slider) : ?>
           </div>
         </div>
       </div>
-      <div class="swiper-wrapper h-[500px]">
+      <div class="swiper-wrapper h-[580px]">
         <?php foreach ($hero_slider as $slide) : ?>
           <?php
           $slide_image = $slide['slide_image'];

@@ -90,10 +90,10 @@ $posts_per_page = $posts['posts_per_page'];
             <?php endif; ?>
           </div>
           <div class="flex gap-x-6 justify-center py-10">
-            <div class="content-carousel--button-prev p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
+            <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
               <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
             </div>
-            <div class="content-carousel--button-next p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
+            <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
               <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
             </div>
           </div>

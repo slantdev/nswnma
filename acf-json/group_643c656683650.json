@@ -1,9 +1,9 @@
 {
-    "key": "group_643841846a069",
-    "title": "Layout - Latest News Card",
+    "key": "group_643c656683650",
+    "title": "Layout - Image Center",
     "fields": [
         {
-            "key": "field_643841846d94c",
+            "key": "field_643c656688b41",
             "label": "Content Settings",
             "name": "",
             "aria-label": "",
@@ -20,7 +20,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_643841846d957",
+            "key": "field_643c656688b4d",
             "label": "Section Intro",
             "name": "section_intro",
             "aria-label": "",
@@ -44,7 +44,7 @@
             "acfe_group_modal_size": "large",
             "sub_fields": [
                 {
-                    "key": "field_643841846ff0a",
+                    "key": "field_643c65668c6b7",
                     "label": "Headline",
                     "name": "headline",
                     "aria-label": "",
@@ -68,7 +68,7 @@
                     "append": ""
                 },
                 {
-                    "key": "field_643841847001f",
+                    "key": "field_643c65668c6c2",
                     "label": "Description",
                     "name": "description",
                     "aria-label": "",
@@ -90,35 +90,15 @@
                     "placeholder": "",
                     "new_lines": "",
                     "parent_repeater": "field_6420eee83298d"
-                },
-                {
-                    "key": "field_643841846fffc",
-                    "label": "Button Link",
-                    "name": "button_link",
-                    "aria-label": "",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_save_meta": 0,
-                    "return_format": "array",
-                    "acfe_settings": "",
-                    "acfe_validate": "",
-                    "acfe_permissions": ""
                 }
             ]
         },
         {
-            "key": "field_643841846d961",
-            "label": "Posts",
-            "name": "posts",
+            "key": "field_643c657637bba",
+            "label": "Image",
+            "name": "image",
             "aria-label": "",
-            "type": "group",
+            "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -128,81 +108,24 @@
                 "id": ""
             },
             "acfe_save_meta": 0,
-            "layout": "block",
-            "acfe_seamless_style": 0,
-            "acfe_group_modal": 0,
+            "uploader": "",
+            "return_format": "array",
+            "acfe_thumbnail": 0,
             "acfe_settings": "",
+            "acfe_validate": "",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
             "acfe_permissions": "",
-            "acfe_group_modal_close": 0,
-            "acfe_group_modal_button": "",
-            "acfe_group_modal_size": "large",
-            "sub_fields": [
-                {
-                    "key": "field_643841847d7fa",
-                    "label": "Post Taxonomy",
-                    "name": "post_taxonomy",
-                    "aria-label": "",
-                    "type": "acfe_taxonomy_terms",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_save_meta": 0,
-                    "taxonomy": "",
-                    "allow_terms": "",
-                    "allow_level": "",
-                    "field_type": "select",
-                    "default_value": [],
-                    "return_format": "id",
-                    "ui": 1,
-                    "allow_null": 0,
-                    "placeholder": "",
-                    "multiple": 1,
-                    "ajax": 0,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "acfe_settings": "",
-                    "acfe_validate": "",
-                    "choices": [],
-                    "search_placeholder": "",
-                    "layout": "",
-                    "toggle": 0,
-                    "allow_custom": 0,
-                    "other_choice": 0
-                },
-                {
-                    "key": "field_643841847d805",
-                    "label": "Posts Per Page",
-                    "name": "posts_per_page",
-                    "aria-label": "",
-                    "type": "number",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_save_meta": 0,
-                    "default_value": "",
-                    "acfe_settings": "",
-                    "acfe_validate": "",
-                    "min": "",
-                    "max": "",
-                    "placeholder": "",
-                    "step": "",
-                    "prepend": "",
-                    "append": ""
-                }
-            ]
+            "preview_size": "medium",
+            "library": "all"
         },
         {
-            "key": "field_643841846d969",
+            "key": "field_643c656688b75",
             "label": "Section Settings",
             "name": "",
             "aria-label": "",
@@ -219,7 +142,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_643841846d972",
+            "key": "field_643c656688b9c",
             "label": "Section Settings",
             "name": "section_settings",
             "aria-label": "",
@@ -272,7 +195,7 @@
     "acfe_form": 1,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681690126,
+    "modified": 1681679807,
     "acfe_categories": {
         "layout": "Layout"
     }

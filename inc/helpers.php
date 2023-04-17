@@ -67,7 +67,7 @@ function nswnma_icon($atts = array())
   if ($atts['icon_src']) {
     $icon_path = get_attached_file($atts['icon_src']);
   } else {
-    $icon_path = get_theme_file_path('/assets/images/icons/' . $atts['group'] . '/' . $atts['icon'] . '.svg');
+    $icon_path = get_theme_file_path('/assets/icons/' . $atts['group'] . '/' . $atts['icon'] . '.svg');
   }
   if (!file_exists($icon_path))
     return;

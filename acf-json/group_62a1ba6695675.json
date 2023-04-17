@@ -73,6 +73,123 @@
             "acfe_clone_modal_close": 0,
             "acfe_clone_modal_button": "",
             "acfe_clone_modal_size": "large"
+        },
+        {
+            "key": "field_643c3c1ce9613",
+            "label": "Page Anchor",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_643c3c35e9614",
+            "label": "Enable Page Anchor Navigation",
+            "name": "enable_page_anchor_navigation",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_643c3c4ee9615",
+            "label": "Anchor List",
+            "name": "anchor_list",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_632cac7826045",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "acfe_repeater_stylised_button": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Anchor",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_643c3c75e9616",
+                    "label": "Navigation Title",
+                    "name": "navigation_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_save_meta": 0,
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_643c3c4ee9615"
+                },
+                {
+                    "key": "field_643c3cdae9617",
+                    "label": "Section Target ID",
+                    "name": "section_target_id",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_save_meta": 0,
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_643c3c4ee9615"
+                }
+            ]
         }
     ],
     "location": [
@@ -105,7 +222,7 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1677688844,
+    "modified": 1681670484,
     "acfe_categories": {
         "settings": "Settings"
     }

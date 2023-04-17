@@ -11,8 +11,8 @@ if (have_rows('section', $the_id)) :
   // Loop through rows.
   while (have_rows('section', $the_id)) : the_row();
 
-    if (get_row_layout() == 'image_left_text') :
-      get_template_part('template-parts/sections/image_left_text');
+    if (get_row_layout() == 'text_left_image_right') :
+      get_template_part('template-parts/sections/text_left_image_right');
 
     elseif (get_row_layout() == 'hero_slider') :
       get_template_part('template-parts/sections/hero_slider');
@@ -30,10 +30,28 @@ if (have_rows('section', $the_id)) :
       get_template_part('template-parts/sections/content_slider');
 
     elseif (get_row_layout() == 'latest_news') :
-      get_template_part('template-parts/sections/latest_news');
+      get_template_part('template-parts/sections/latest_news_card');
 
     elseif (get_row_layout() == 'full_width_banner') :
       get_template_part('template-parts/sections/full_width_banner');
+
+    elseif (get_row_layout() == 'accordion') :
+      get_template_part('template-parts/sections/accordion');
+
+    elseif (get_row_layout() == 'team_grid') :
+      get_template_part('template-parts/sections/team_grid');
+
+    elseif (get_row_layout() == 'image_center') :
+      get_template_part('template-parts/sections/image_center');
+
+    elseif (get_row_layout() == 'text_content') :
+      get_template_part('template-parts/sections/text_content');
+
+    elseif (get_row_layout() == 'latest_news_featured') :
+      get_template_part('template-parts/sections/latest_news_featured');
+
+    elseif (get_row_layout() == 'latest_news_archive') :
+      get_template_part('template-parts/sections/latest_news_archive');
 
     endif;
 
