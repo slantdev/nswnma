@@ -12,7 +12,7 @@ $headline = $section_intro['headline'];
 $description = $section_intro['description'];
 $posts = get_sub_field('posts');
 $show_search_bar = $posts['show_search_bar'];
-$post_taxonomy = $posts['post_taxonomy'];
+$report_category = $posts['report_category'];
 $posts_per_page = $posts['posts_per_page'];
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
@@ -51,53 +51,54 @@ $posts_per_page = $posts['posts_per_page'];
       </div>
     <?php endif; ?>
 
-    <?php if ($post_taxonomy) : ?>
-      <div class="container mt-12">
-        <?php
+    <div class="container mt-12">
+      <?php
+      if ($report_category) {
         $args = array(
-          'post_type' => 'post',
+          'post_type' => 'report',
           'posts_per_page' => $posts_per_page,
           'tax_query' => array(
             array(
               'taxonomy' => 'category',
               'field' => 'term_id',
-              'terms' => $post_taxonomy
+              'terms' => $report_category
             )
           )
         );
-        $the_query = new WP_Query($args);
-        ?>
-        <?php if ($the_query->have_posts()) : ?>
-          <div class="grid grid-cols-3 gap-8">
-            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-              <?php
-              $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
-              $title =  get_the_title();
-              $date =  get_the_date();
-              $excerpt = wp_trim_words(get_the_excerpt(), $num_words = 30, $more = null);
-              $link = get_the_permalink();
-              ?>
-              <div class="border rounded-2xl overflow-hidden shadow-[0_0px_24px_rgba(0,0,0,0.12)] flex flex-col">
-                <div class="aspect-w-6 aspect-h-4">
-                  <a href="<?php echo $link ?>" class=""><img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full"></a>
-                </div>
-                <div class="p-8 flex flex-col grow">
-                  <div class="mb-6 text-gray-500"><?php echo $date ?></div>
-                  <h3 class="h4 font-semibold mb-6"><a href="<?php echo $link ?>" class="text-brand-blue hover:underline"><?php echo $title ?></a></h3>
-                  <div class="prose mb-8">
-                    <p><?php echo $excerpt ?></p>
-                  </div>
-                  <div class="mt-auto">
-                    <a href="<?php echo $link ?>" class="font-medium text-brand-red hover:text-brand-redchili hover:underline">LEARN MORE &raquo;</a>
-                  </div>
+      } else {
+        $args = array(
+          'post_type' => 'report',
+          'posts_per_page' => $posts_per_page,
+        );
+      }
+      $the_query = new WP_Query($args);
+      ?>
+      <?php if ($the_query->have_posts()) : ?>
+        <div class="grid grid-cols-3 gap-6">
+          <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php
+            $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $title =  get_the_title();
+            $report_pdf = get_field('report_pdf', get_the_ID());
+            ?>
+            <div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
+              <div class="aspect-w-4 aspect-h-5">
+                <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
+              </div>
+              <div class="pt-8">
+                <div class="flex justify-between">
+                  <div class="text-white text-xl"><?php echo $title ?></div>
+                  <?php if ($report_pdf) : ?>
+                    <div><a href="<?php echo $report_pdf ?>" class="inline-block text-white opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
+                  <?php endif; ?>
                 </div>
               </div>
-            <?php endwhile; ?>
-            <?php wp_reset_postdata(); ?>
-          </div>
-        <?php endif; ?>
-      </div>
-    <?php endif; ?>
+            </div>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+        </div>
+      <?php endif; ?>
+    </div>
 
   </div>
 </section>

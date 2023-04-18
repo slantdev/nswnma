@@ -1,28 +1,26 @@
-<?php get_header(); ?>
+<?php
 
-	<div class="container my-8 mx-auto">
+get_header();
 
-	<?php if ( have_posts() ) : ?>
+get_template_part('template-parts/layouts/single-header');
+?>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
-			?>
+<div class="relative container mx-auto">
 
-			<?php get_template_part( 'template-parts/content', 'single' ); ?>
+  <?php if (have_posts()) : ?>
 
-			<?php
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-			?>
+    <?php
+    while (have_posts()) :
+      the_post();
+    ?>
 
-		<?php endwhile; ?>
+      <?php get_template_part('template-parts/singles/content', 'single'); ?>
 
-	<?php endif; ?>
+    <?php endwhile; ?>
 
-	</div>
+  <?php endif; ?>
+
+</div>
 
 <?php
 get_footer();

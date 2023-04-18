@@ -53,6 +53,18 @@ if (have_rows('section', $the_id)) :
     elseif (get_row_layout() == 'latest_news_archive') :
       get_template_part('template-parts/sections/latest_news_archive');
 
+    elseif (get_row_layout() == 'download_guides') :
+      get_template_part('template-parts/sections/download_guides');
+
+    elseif (get_row_layout() == 'contact_form') :
+      get_template_part('template-parts/sections/contact_form');
+
+    elseif (get_row_layout() == 'reports_archive') :
+      get_template_part('template-parts/sections/reports_archive');
+
+    elseif (get_row_layout() == 'scholarship_archive') :
+      get_template_part('template-parts/sections/scholarship_archive');
+
     endif;
 
   // End loop.

@@ -16,6 +16,7 @@ if ($enable_page_header) :
   $page_header = get_field('page_header');
   $hero_title = $page_header['hero_title'];
   $hero_text = $page_header['hero_text'];
+  $hero_button = $page_header['hero_button'];
   $hero_background = $page_header['hero_background'];
   $hero_bg_color = $page_header['hero_bg_color'];
   $hero_overlay_color = $page_header['hero_overlay_color'];
@@ -39,6 +40,7 @@ if ($enable_page_header) :
 
   $enable_page_anchor_navigation = get_field('enable_page_anchor_navigation');
   $anchor_list = get_field('anchor_list');
+
 ?>
   <section>
     <div class="relative bg-cover bg-no-repeat" style="<?php echo $hero_bg_style; ?>">
@@ -54,9 +56,13 @@ if ($enable_page_header) :
             echo '<div class="text-base md:text-lg">' . $hero_text . '</div>';
           }
           ?>
-          <div class="mt-8">
-            <a href="#" class="btn btn-primary">Get in Touch</a>
-          </div>
+          <?php
+          if ($hero_button) {
+            echo '<div class="mt-8">
+              <a href="' . $hero_button['url'] . '" class="btn btn-primary">' . $hero_button['title'] . '</a>
+            </div>';
+          }
+          ?>
         </div>
       </div>
       <div class="absolute inset-0 z-0" style="<?php echo $hero_overlay_style ?>">
