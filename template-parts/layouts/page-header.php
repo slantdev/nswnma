@@ -43,7 +43,7 @@ if ($enable_page_header) :
 
 ?>
   <section>
-    <div class="relative bg-cover bg-no-repeat" style="<?php echo $hero_bg_style; ?>">
+    <div class="relative bg-cover bg-no-repeat bg-center" style="<?php echo $hero_bg_style; ?>">
       <div class="container mx-auto h-full relative z-10 py-6 lg:py-10 xl:py-28">
         <div class="md:w-3/4 lg:w-3/5 text-white">
           <?php
