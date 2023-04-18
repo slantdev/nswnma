@@ -41,9 +41,6 @@ if (have_rows('section', $the_id)) :
     elseif (get_row_layout() == 'team_grid') :
       get_template_part('template-parts/sections/team_grid');
 
-    elseif (get_row_layout() == 'image_center') :
-      get_template_part('template-parts/sections/image_center');
-
     elseif (get_row_layout() == 'text_content') :
       get_template_part('template-parts/sections/text_content');
 
@@ -64,6 +61,15 @@ if (have_rows('section', $the_id)) :
 
     elseif (get_row_layout() == 'scholarship_archive') :
       get_template_part('template-parts/sections/scholarship_archive');
+
+    // elseif (get_row_layout() == 'image_center') :
+    //   get_template_part('template-parts/sections/image_center');
+
+    elseif (get_row_layout() == 'event_search') :
+      get_template_part('template-parts/sections/event_search');
+
+    elseif (get_row_layout() == 'events_card') :
+      get_template_part('template-parts/sections/events_card');
 
     endif;
 

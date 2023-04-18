@@ -1,10 +1,13 @@
 <?php
 $image = get_sub_field('image');
+preint_r($image);
 $image_source = $image['image_source'];
 $image_corners = $image['image_corners'];
 $image_max_width = $image['image_max_width'];
 $image_id = $image_source['ID'];
 $image_src = $image_source['url'];
+
+preint_r($image);
 
 $image_container_class = '';
 switch ($image_max_width) {
@@ -47,8 +50,7 @@ if (isset($args['aspect_h'])) {
 if (isset($args['class'])) {
   $image_class = $args['class'];
 }
-
-$image_class = $args['class'];
+//$image_class = $args['class'];
 if ($image_id) {
   echo '<div class="mb-8 mx-auto xl:mb-12 ' . $image_container_class . '">';
   echo wp_get_attachment_image($image_id, 'large', false, array('class' => $image_corners . ' mx-auto ' . $image_class));
