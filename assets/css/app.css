@@ -2263,6 +2263,20 @@ h6,
   padding-bottom: 0.5rem;
 }
 
+.indicator {
+  position: relative;
+  display: inline-flex;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.indicator :where(.indicator-item) {
+  z-index: 1;
+  position: absolute;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  white-space: nowrap;
+}
+
 .input {
   flex-shrink: 1;
   transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -3711,6 +3725,58 @@ h6,
 
 .btm-nav-lg>*:where(.active) {
   border-top-width: 4px;
+}
+
+.indicator :where(.indicator-item) {
+  right: 0px;
+  left: auto;
+  top: 0px;
+  bottom: auto;
+  --tw-translate-x: 50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-start) {
+  right: auto;
+  left: 0px;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-center) {
+  right: 50%;
+  left: 50%;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-end) {
+  right: 0px;
+  left: auto;
+  --tw-translate-x: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-bottom) {
+  top: auto;
+  bottom: 0px;
+  --tw-translate-y: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-middle) {
+  top: 50%;
+  bottom: 50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.indicator :where(.indicator-item.indicator-top) {
+  top: 0px;
+  bottom: auto;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .steps-horizontal .step {
@@ -7061,10 +7127,6 @@ h6,
   gap: 3rem;
 }
 
-.gap-10 {
-  gap: 2.5rem;
-}
-
 .gap-20 {
   gap: 5rem;
 }
@@ -8681,6 +8743,10 @@ h6,
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -9090,6 +9156,60 @@ h6,
   :where(input[type='checkbox']:checked ~ .collapse-content) {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.info-box--filter-btn .indicator {
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background-color: transparent;
+}
+
+.info-box--filter-btn.active .indicator {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 85 162 / var(--tw-bg-opacity));
+}
+
+.info-box--filter > input {
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  border-style: none;
+  padding: 0px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  font-size: 0;
+}
+
+.info-box--filter > input + label .indicator {
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background-color: transparent;
+}
+
+.info-box--filter > input:focus {
+  border-style: none;
+  border-color: transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.info-box--filter > input:focus + label .indicator {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 85 162 / var(--tw-bg-opacity));
+}
+
+.infobox-swiper {
+  display: none;
+}
+
+.infobox-swiper.active {
+  display: block;
 }
 
 .hover\:scale-105:hover {

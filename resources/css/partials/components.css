@@ -70,3 +70,40 @@
   :where(input[type='checkbox']:checked ~ .collapse-content) {
   @apply py-8;
 }
+
+.info-box--filter-btn {
+  .indicator {
+    @apply w-[14px] h-[14px] bg-transparent rounded-full;
+  }
+  &.active {
+    .indicator {
+      @apply bg-brand-blue;
+    }
+  }
+}
+.info-box--filter {
+  > input {
+    @apply absolute w-0 h-0 border-none p-0 ring-0;
+    font-size: 0;
+    + label {
+      .indicator {
+        @apply w-[14px] h-[14px] bg-transparent rounded-full;
+      }
+    }
+    &:focus {
+      @apply border-none outline-none border-transparent ring-0;
+      + label {
+        .indicator {
+          @apply bg-brand-blue;
+        }
+      }
+    }
+  }
+}
+
+.infobox-swiper {
+  @apply hidden;
+  &.active {
+    @apply block;
+  }
+}
