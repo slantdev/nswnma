@@ -88,9 +88,9 @@
                     "acfe_validate": "",
                     "maxlength": "",
                     "acfe_permissions": "",
-                    "rows": 3,
+                    "rows": 4,
                     "placeholder": "",
-                    "new_lines": ""
+                    "new_lines": "br"
                 }
             ]
         },
@@ -257,7 +257,7 @@
     "acfe_form": 1,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681816292,
+    "modified": 1683081105,
     "acfe_categories": {
         "layout": "Layout"
     }

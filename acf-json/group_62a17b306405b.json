@@ -36,12 +36,13 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_save_meta": 0,
             "default_value": "",
-            "placeholder": "",
+            "acfe_textarea_code": 0,
             "maxlength": "",
-            "rows": "",
-            "new_lines": "",
-            "acfe_textarea_code": 0
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br"
         },
         {
             "key": "field_63ff814b638a0",
@@ -151,7 +152,7 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681798245,
+    "modified": 1683081404,
     "acfe_categories": {
         "layout": "Layout"
     }

@@ -81,15 +81,16 @@
                         "class": "",
                         "id": ""
                     },
+                    "acfe_save_meta": 0,
                     "default_value": "",
                     "acfe_textarea_code": 0,
                     "acfe_settings": "",
                     "acfe_validate": "",
                     "maxlength": "",
-                    "rows": "",
+                    "acfe_permissions": "",
+                    "rows": 3,
                     "placeholder": "",
-                    "new_lines": "",
-                    "parent_repeater": "field_6420eee83298d"
+                    "new_lines": "br"
                 },
                 {
                     "key": "field_643c545742a29",
@@ -262,7 +263,7 @@
     "acfe_form": 1,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681675432,
+    "modified": 1683081007,
     "acfe_categories": {
         "layout": "Layout"
     }
