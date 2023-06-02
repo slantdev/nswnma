@@ -15,12 +15,14 @@ if ($hero_slider) : ?>
     <div class="home-slider--swiper relative">
       <div class="absolute bottom-0 left-0 right-0">
         <div class="container relative">
-          <div class="flex gap-x-4 justify-end py-4 relative z-[5]">
-            <div class="home-slider--button-prev p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
-              <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
-            </div>
-            <div class="home-slider--button-next p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
-              <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
+          <div class="absolute right-0 bottom-0">
+            <div class="flex gap-x-4 justify-end pb-4 relative z-[5]">
+              <div class="home-slider--button-prev p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
+                <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
+              </div>
+              <div class="home-slider--button-next p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
+                <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
+              </div>
             </div>
           </div>
         </div>
@@ -47,7 +49,7 @@ if ($hero_slider) : ?>
               </div>
             <?php endif; ?>
             <div class="container relative h-full">
-              <div class="w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
+              <div class="slide-textbox w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
                 <div class="font-bold mb-4">FEATURED</div>
                 <?php if ($headline) : ?>
                   <h3 class="h3 font-light"><?php echo $headline ?></h3>
@@ -72,6 +74,15 @@ if ($hero_slider) : ?>
     <script>
       const homeSlider = new Swiper('.home-slider--swiper', {
         loop: true,
+        watchOverflow: true,
+        slidesPerView: 1,
+        centeredSlides: true,
+        spaceBetween: 0,
+        effect: 'fade',
+        speed: 1000,
+        autoplay: {
+          delay: 8000,
+        },
         navigation: {
           nextEl: '.home-slider--button-next',
           prevEl: '.home-slider--button-prev',
@@ -80,10 +91,6 @@ if ($hero_slider) : ?>
           el: '.home-slider--pagination',
           clickable: true,
         },
-        watchOverflow: true,
-        slidesPerView: 1,
-        centeredSlides: true,
-        spaceBetween: 0,
       });
     </script>
   </section>

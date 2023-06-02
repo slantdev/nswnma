@@ -107,3 +107,12 @@
     @apply block;
   }
 }
+
+.menu-pointer {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent #007bff transparent;
+  @apply -mt-2 ml-4;
+}

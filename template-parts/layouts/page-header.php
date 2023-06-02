@@ -20,6 +20,8 @@ if ($enable_page_header) :
   $hero_background = $page_header['hero_background'];
   $hero_bg_color = $page_header['hero_bg_color'];
   $hero_overlay_color = $page_header['hero_overlay_color'];
+  $bg_position_x = $page_header['bg_position_x'];
+  $bg_position_y = $page_header['bg_position_y'];
 
   if (!$hero_title) {
     $hero_title = get_the_title();
@@ -31,6 +33,9 @@ if ($enable_page_header) :
   }
   if ($hero_bg_color) {
     $hero_bg_style .= 'background-color: ' . $hero_bg_color . ';';
+  }
+  if ($bg_position_x) {
+    $hero_bg_style .= 'background-position: ' . $bg_position_x . ' ' . $bg_position_y . ';';
   }
 
   $hero_overlay_style = '';
