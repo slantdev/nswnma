@@ -71,3 +71,47 @@
     }
   }
 }
+
+.mega-menu {
+  @apply flex justify-between gap-x-6 w-full max-w-screen-xl;
+  > li {
+    > a {
+      @apply block py-5 px-6 font-semibold text-brand-bluedark transition duration-300 rounded-t-xl whitespace-nowrap hover:text-brand-red;
+    }
+  }
+  .mega-submenu {
+    background: rgb(34, 85, 162);
+    @apply absolute left-0 w-full text-white invisible opacity-0 transition duration-500 -translate-y-2 z-30 shadow-2xl;
+    &.has-featured-text {
+      background: linear-gradient(
+        90deg,
+        rgba(34, 85, 162, 1) 0%,
+        rgba(34, 85, 162, 1) 70%,
+        rgba(88, 89, 91, 1) 70%
+      );
+    }
+    .submenu {
+      .submenu-heading {
+        @apply pb-5 text-[15px] font-bold text-white;
+      }
+      li {
+        a {
+          @apply font-medium inline-flex py-1 text-white hover:underline whitespace-nowrap;
+        }
+      }
+    }
+  }
+  .has-submenu {
+    > a {
+      @apply hover:text-white hover:bg-brand-blue;
+    }
+    &:hover {
+      > a {
+        @apply text-white bg-brand-blue;
+      }
+      > .mega-submenu {
+        @apply visible opacity-100 -translate-y-0;
+      }
+    }
+  }
+}
