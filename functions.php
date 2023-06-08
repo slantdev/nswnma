@@ -11,3 +11,4 @@ require get_template_directory() . '/inc/utilities.php';
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/navigation.php';
 require get_template_directory() . '/inc/breadcrumb.php';
+require get_template_directory() . '/inc/ajax.php';
