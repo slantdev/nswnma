@@ -150,7 +150,7 @@
               echo '<div class="grid grid-flow-col auto-cols-[1fr] gap-8">';
               foreach ($menu_columns as $col) {
                 $submenu = $col['submenu'];
-                echo '<div class="flex flex-col gap-y-8">';
+                echo '<div class="flex flex-col gap-y-10">';
                 foreach ($submenu as $menu) {
                   $submenu_heading = $menu['submenu_heading'];
                   $submenu_items = $menu['submenu_items'];

@@ -92,7 +92,7 @@
     }
     .submenu {
       .submenu-heading {
-        @apply pb-5 text-[15px] font-bold text-white;
+        @apply pb-5 text-[15px] font-bold text-white uppercase;
       }
       li {
         a {
