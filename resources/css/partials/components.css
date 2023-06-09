@@ -116,3 +116,22 @@
   border-color: transparent transparent #007bff transparent;
   @apply -mt-2 ml-4;
 }
+
+.posts-pagination {
+  > ul {
+    @apply flex items-center justify-center gap-x-1;
+    > li {
+      @apply p-2 flex w-10 h-10 justify-center items-center rounded-full cursor-pointer;
+      &.inactive {
+        @apply opacity-50;
+      }
+      &.selected {
+        @apply bg-brand-blue text-white;
+      }
+      &:first-child,
+      &:last-child {
+        @apply tracking-[-0.2em];
+      }
+    }
+  }
+}

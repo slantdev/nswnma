@@ -71,53 +71,40 @@ $posts_per_page = $posts['posts_per_page'];
     <?php endif; ?>
 
     <div class="container mt-12">
-      <div class="posts-grid relative">
-        <?php
-        $args = array(
-          'post_type' => 'post',
-          'posts_per_page' => $posts_per_page,
-          'tax_query' => array(
-            'taxonomy' => 'categories',
-            'field'    => 'term_id',
-            'terms'    => $exclude_terms,
-            'operator' => 'NOT IN',
-          ),
-          // 'paged' => $paged,
-        );
-        $the_query = new WP_Query($args);
-        ?>
-        <?php if ($the_query->have_posts()) : ?>
-          <div class="grid grid-cols-3 gap-8">
-            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-              <?php
-              $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
-              $title =  get_the_title();
-              $date =  get_the_date();
-              $excerpt = wp_trim_words(get_the_excerpt(), $num_words = 30, $more = null);
-              $link = get_the_permalink();
-              ?>
-              <div class="border rounded-2xl overflow-hidden shadow-[0_0px_24px_rgba(0,0,0,0.12)] flex flex-col">
-                <div class="aspect-w-6 aspect-h-4">
-                  <a href="<?php echo $link ?>" class=""><img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full"></a>
-                </div>
-                <div class="p-8 flex flex-col grow">
-                  <div class="mb-6 text-gray-500"><?php echo $date ?></div>
-                  <h3 class="h4 font-semibold mb-6"><a href="<?php echo $link ?>" class="text-brand-blue hover:underline"><?php echo $title ?></a></h3>
-                  <div class="prose mb-8">
-                    <p><?php echo $excerpt ?></p>
-                  </div>
-                  <div class="mt-auto">
-                    <a href="<?php echo $link ?>" class="font-medium text-brand-red hover:text-brand-redchili hover:underline">LEARN MORE &raquo;</a>
-                  </div>
-                </div>
-              </div>
-            <?php endwhile; ?>
-            <?php wp_reset_postdata(); ?>
-          </div>
-        <?php endif; ?>
+      <div class="posts-container relative">
+        <div class="posts-grid"></div>
         <div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>
       </div>
     </div>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
+        function load_all_posts(page) {
+          //$('.dcs_pag_loading').fadeIn().css('background', '#ccc');
+          $('.posts-container .blocker').show();
+          var data = {
+            page: page,
+            per_page: <?php echo $posts_per_page ?>,
+            action: 'pagination_load_posts',
+          };
+          $.post(ajaxurl, data, function(response) {
+            $('.posts-grid').html('').prepend(response);
+            $('.posts-container .blocker').hide();
+          });
+        }
+        load_all_posts(1);
+        $(document).on(
+          'click',
+          '.posts-pagination li.active',
+          function() {
+            var page = $(this).data('page');
+            load_all_posts(page);
+          }
+        );
+      });
+    </script>
 
   </div>
 </section>
