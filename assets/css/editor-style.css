@@ -5218,6 +5218,10 @@
   cursor: default;
 }
 
+.scroll-mt-12 {
+  scroll-margin-top: 3rem;
+}
+
 .auto-cols-\[1fr\] {
   grid-auto-columns: 1fr;
 }

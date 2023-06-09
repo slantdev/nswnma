@@ -71,7 +71,7 @@ $posts_per_page = $posts['posts_per_page'];
     <?php endif; ?>
 
     <div class="container mt-12">
-      <div class="posts-container relative">
+      <div class="posts-container relative scroll-mt-12">
         <div class="posts-grid"></div>
         <div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>
       </div>
@@ -99,6 +99,9 @@ $posts_per_page = $posts['posts_per_page'];
           'click',
           '.posts-pagination li.active',
           function() {
+            $(".posts-container").get(0).scrollIntoView({
+              behavior: 'smooth'
+            });
             var page = $(this).data('page');
             load_all_posts(page);
           }
