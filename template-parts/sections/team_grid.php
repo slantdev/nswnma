@@ -31,9 +31,14 @@ $description = $section_intro['description'];
     </div>
 
     <?php
+    if (is_admin()) {
+      $posts_per_page = 3;
+    } else {
+      $posts_per_page = -1;
+    }
     $args = array(
       'post_type' => 'team',
-      'posts_per_page' => -1,
+      'posts_per_page' => $posts_per_page,
     );
     $the_query = new WP_Query($args);
     ?>

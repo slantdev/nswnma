@@ -14,6 +14,9 @@ $posts = get_sub_field('posts');
 $show_search_bar = $posts['show_search_bar'];
 $exclude_terms = $posts['exclude_terms'];
 $posts_per_page = $posts['posts_per_page'];
+if (is_admin()) {
+  $posts_per_page = 3;
+}
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">

@@ -72,7 +72,7 @@ $posts_per_page = $posts['posts_per_page'];
                   <div class="w-full h-full bg-gradient-to-t from-black/80 to-transparent via-black/50 relative z-10 flex items-end">
                     <div class="text-white p-4 md:p-8 lg:p-12">
                       <div class="font-bold mb-6"><?php echo $date ?></div>
-                      <h3 class="h3 font-medium mb-6"><?php echo $title ?></h3>
+                      <h3 class="h3 font-medium text-white mb-6"><?php echo $title ?></h3>
                       <div class="prose prose-lg text-white">
                         <p><?php echo $excerpt ?></p>
                       </div>

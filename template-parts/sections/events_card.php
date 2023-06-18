@@ -35,6 +35,9 @@ $posts_per_page = $posts['posts_per_page'];
     if (!$posts_per_page) {
       $posts_per_page = -1;
     }
+    if (is_admin()) {
+      $posts_per_page = 1;
+    }
     if ($event_taxonomy) {
       $args = array(
         'post_type' => 'event',

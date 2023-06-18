@@ -28,14 +28,14 @@ if ($hero_slider) : ?>
         </div>
       </div>
       <div class="swiper-wrapper h-[580px]">
-        <?php foreach ($hero_slider as $slide) : ?>
+        <?php if (is_admin()) : ?>
           <?php
-          $slide_image = $slide['slide_image'];
-          $bg_overlay = $slide['bg_overlay'];
-          $headline = $slide['headline'];
-          $description = $slide['description'];
-          $buttons = $slide['buttons'];
-          $link = $slide['link'];
+          $slide_image = $hero_slider[0]['slide_image'];
+          $bg_overlay = $hero_slider[0]['bg_overlay'];
+          $headline = $hero_slider[0]['headline'];
+          $description = $hero_slider[0]['description'];
+          $buttons = $hero_slider[0]['buttons'];
+          $link = $hero_slider[0]['link'];
 
           $overlay_style = '';
           if ($bg_overlay) {
@@ -52,7 +52,7 @@ if ($hero_slider) : ?>
               <div class="slide-textbox w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
                 <div class="font-bold mb-4">FEATURED</div>
                 <?php if ($headline) : ?>
-                  <h3 class="h3 font-light"><?php echo $headline ?></h3>
+                  <h3 class="h3 text-white font-light"><?php echo $headline ?></h3>
                 <?php endif; ?>
                 <?php if ($description) : ?>
                   <div class="mt-6"><?php echo $description ?></div>
@@ -63,35 +63,76 @@ if ($hero_slider) : ?>
               </div>
             </div>
           </div>
-        <?php endforeach; ?>
+        <?php else : ?>
+          <?php foreach ($hero_slider as $slide) : ?>
+            <?php
+            $slide_image = $slide['slide_image'];
+            $bg_overlay = $slide['bg_overlay'];
+            $headline = $slide['headline'];
+            $description = $slide['description'];
+            $buttons = $slide['buttons'];
+            $link = $slide['link'];
+
+            $overlay_style = '';
+            if ($bg_overlay) {
+              $overlay_style = 'background-color: ' . $bg_overlay;
+            }
+            ?>
+            <div class="swiper-slide w-full h-full relative z-0">
+              <?php if ($slide_image) : ?>
+                <div class="absolute inset-0 z-0">
+                  <img src="<?php echo $slide_image['url'] ?>" alt="" class="object-cover h-full w-full">
+                </div>
+              <?php endif; ?>
+              <div class="container relative h-full">
+                <div class="slide-textbox w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
+                  <div class="font-bold mb-4">FEATURED</div>
+                  <?php if ($headline) : ?>
+                    <h3 class="h3 font-light"><?php echo $headline ?></h3>
+                  <?php endif; ?>
+                  <?php if ($description) : ?>
+                    <div class="mt-6"><?php echo $description ?></div>
+                  <?php endif; ?>
+                  <?php if ($link) : ?>
+                    <div class="mt-6"><a href="<?php echo $link['url'] ?>" class="btn btn-secondary"><?php echo $link['title'] ?></a></div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
-      <div class="container relative">
-        <div class="w-1/4 absolute left-auto right-0 -bottom-[34px] pl-14">
-          <div class="swiper-pagination home-slider--pagination"></div>
+      <?php if (!is_admin()) : ?>
+        <div class="container relative">
+          <div class="w-1/4 absolute left-auto right-0 -bottom-[34px] pl-14">
+            <div class="swiper-pagination home-slider--pagination"></div>
+          </div>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
-    <script>
-      const homeSlider = new Swiper('.home-slider--swiper', {
-        loop: true,
-        watchOverflow: true,
-        slidesPerView: 1,
-        centeredSlides: true,
-        spaceBetween: 0,
-        effect: 'fade',
-        speed: 1000,
-        autoplay: {
-          delay: 8000,
-        },
-        navigation: {
-          nextEl: '.home-slider--button-next',
-          prevEl: '.home-slider--button-prev',
-        },
-        pagination: {
-          el: '.home-slider--pagination',
-          clickable: true,
-        },
-      });
-    </script>
+    <?php if (!is_admin()) : ?>
+      <script>
+        const homeSlider = new Swiper('.home-slider--swiper', {
+          loop: true,
+          watchOverflow: true,
+          slidesPerView: 1,
+          centeredSlides: true,
+          spaceBetween: 0,
+          effect: 'fade',
+          speed: 1000,
+          autoplay: {
+            delay: 8000,
+          },
+          navigation: {
+            nextEl: '.home-slider--button-next',
+            prevEl: '.home-slider--button-prev',
+          },
+          pagination: {
+            el: '.home-slider--pagination',
+            clickable: true,
+          },
+        });
+      </script>
+    <?php endif; ?>
   </section>
 <?php endif; ?>

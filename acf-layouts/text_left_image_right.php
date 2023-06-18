@@ -10,6 +10,6 @@
 ?>
 <div class="acf-layout <?php echo ($is_preview) ? 'is-preview' : ''; ?>">
   <?php
-  //include get_template_directory() . '/content-blocks/sections/image_right_text.php';
+  include get_template_directory() . '/template-parts/sections/text_left_image_right.php';
   ?>
 </div>

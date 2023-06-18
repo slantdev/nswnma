@@ -13,6 +13,9 @@ $description = $section_intro['description'];
 $posts = get_sub_field('posts');
 $post_taxonomy = $posts['post_taxonomy'];
 $posts_per_page = $posts['posts_per_page'];
+if (is_admin()) {
+  $posts_per_page = 1;
+}
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">

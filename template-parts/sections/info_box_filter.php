@@ -47,15 +47,15 @@ $info_box = get_sub_field('info_box');
       <?php endif; ?>
       <?php if ($info_boxes) : ?>
         <div class="infobox-swipers">
-          <?php foreach ($info_boxes as $key => $row) : ?>
+          <?php if (is_admin()) : ?>
             <?php
-            $assigned_filter_slug = $row['assigned_filter_slug'];
-            $info_box = $row['info_box'];
+            $assigned_filter_slug = $info_boxes[0]['assigned_filter_slug'];
+            $info_box = $info_boxes[0]['info_box'];
             ?>
-            <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="infobox-swiper my-10">
-              <div class="card-swiper swiper infobox-swiper-<?php echo $key ?>">
-                <div class="swiper-wrapper">
-                  <?php foreach ($info_box as $info) : ?>
+            <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="my-10">
+              <div class="card-swiper swiper">
+                <div class="swiper-wrapper grid grid-cols-3">
+                  <?php foreach (array_slice($info_box, 0, 3) as $info) : ?>
                     <?php
                     $icon = $info['icon'];
                     $icon_color = $info['icon_color'];
@@ -93,21 +93,70 @@ $info_box = get_sub_field('info_box');
                 </div>
                 <div class="card-swiper--pagination mt-10 text-center"></div>
               </div>
-              <script>
-                new Swiper('.infobox-swiper-<?php echo $key ?>', {
-                  loop: false,
-                  pagination: {
-                    el: '.infobox-swiper-<?php echo $key ?> .card-swiper--pagination',
-                    clickable: true,
-                  },
-                  watchOverflow: true,
-                  slidesPerView: 3,
-                  centeredSlides: false,
-                  spaceBetween: 0,
-                });
-              </script>
             </div>
-          <?php endforeach; ?>
+          <?php else : ?>
+            <?php foreach ($info_boxes as $key => $row) : ?>
+              <?php
+              $assigned_filter_slug = $row['assigned_filter_slug'];
+              $info_box = $row['info_box'];
+              ?>
+              <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="infobox-swiper my-10">
+                <div class="card-swiper swiper infobox-swiper-<?php echo $key ?>">
+                  <div class="swiper-wrapper">
+                    <?php foreach ($info_box as $info) : ?>
+                      <?php
+                      $icon = $info['icon'];
+                      $icon_color = $info['icon_color'];
+                      $icon_style = '';
+                      if ($icon_color) {
+                        $icon_style .= 'color: ' . $icon_color . ';';
+                      }
+                      $title = $info['title'];
+                      $description = $info['description'];
+                      $button_link = $info['button_link'];
+                      ?>
+                      <div class="swiper-slide">
+                        <div class="mx-4 px-10 py-14 rounded-lg border border-solid text-center">
+                          <?php if ($icon) : ?>
+                            <div style="<?php echo $icon_style ?>">
+                              <?php echo nswnma_icon(array("icon" => $icon, 'group' => 'content', 'size' => '60', 'class' => 'mx-auto')); ?>
+                            </div>
+                          <?php endif; ?>
+                          <div class="my-4">
+                            <?php if ($title) : ?>
+                              <h4 class="text-xl leading-tight text-brand-blue mb-4"><?php echo $title ?></h4>
+                            <?php endif; ?>
+                            <?php if ($description) : ?>
+                              <p class="text-gray-500 text-sm"><?php echo $description ?></p>
+                            <?php endif; ?>
+                          </div>
+                          <?php if ($button_link) : ?>
+                            <div>
+                              <a href="<?php echo $button_link['url'] ?>" class="btn btn-primary"><?php echo $button_link['title'] ?></a>
+                            </div>
+                          <?php endif; ?>
+                        </div>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
+                  <div class="card-swiper--pagination mt-10 text-center"></div>
+                </div>
+                <script>
+                  new Swiper('.infobox-swiper-<?php echo $key ?>', {
+                    loop: false,
+                    pagination: {
+                      el: '.infobox-swiper-<?php echo $key ?> .card-swiper--pagination',
+                      clickable: true,
+                    },
+                    watchOverflow: true,
+                    slidesPerView: 3,
+                    centeredSlides: false,
+                    spaceBetween: 0,
+                  });
+                </script>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       <?php endif; ?>
     </div>
