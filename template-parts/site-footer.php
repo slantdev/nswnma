@@ -1,80 +1,91 @@
+<?php
+$about_company = get_field('about_company', 'option');
+$footer_links = get_field('footer_links', 'option');
+$contact_info = get_field('contact_info', 'option');
+$social_media = get_field('social_media', 'option');
+$additional_links = get_field('additional_links', 'option');
+?>
 <footer class="bg-[#7C7C7C] text-white">
 
   <div class="container">
     <div class="py-8 border-b border-solid border-white/40">
       <?php
-      wp_nav_menu(
-        array(
-          'container_id'    => 'footer-menu',
-          'container_class' => 'hidden bg-gray-100 w-full mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-transparent lg:block',
-          'menu_class'      => 'menu-ul',
-          'theme_location'  => 'footer',
-          'li_class'        => '',
-          'fallback_cb'     => false,
-        )
-      );
+      if ($footer_links) {
+        echo '<div id="footer-menu" class="hidden bg-gray-100 w-full mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-transparent lg:block">';
+        echo '<ul id="menu-footer-menu" class="menu-ul">';
+        foreach ($footer_links as $link) {
+          echo '<li class="menu-item"><a href="' . $link['link']['url'] . '">' . $link['link']['title'] . '</a></li>';
+        }
+        echo '</ul>';
+        echo '</div>';
+      }
       ?>
     </div>
 
     <div class="flex justify-between items-center py-10 gap-x-16">
       <div class="lg:w-1/3">
-        <div class="block">
-          <img src="<?php echo nswnma_asset('images/nswnma-logo-white.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-auto xl:h-[90px]">
-        </div>
-        <div class="text-xs mt-4">
-          The New South Wales Nurses and Midwives’ Association operates in accordance with the Privacy Act 1988 and the Australian Privacy Principles. For further details please refer to our Privacy Policy (last update Oct 2019) or contact the Association. Information provided by members on this forum will be handled and used in accordance with those Principles. Members have the right to request access to or correct any personal information concerning themselves held by the Association.
-        </div>
+        <?php if ($about_company) : ?>
+          <div class="block">
+            <img src="<?php echo nswnma_asset('images/nswnma-logo-white.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-auto xl:h-[90px]">
+          </div>
+          <div class="text-xs mt-4">
+            <?php echo $about_company ?>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="lg:w-2/3 pt-8 pl-10">
-        <div class="flex gap-x-12 text-sm justify-between">
-          <div>
-            <div class="mb-4">
-              <strong class="uppercase">Sydney office</strong><br />
-              50 O’Dea Avenue, Waterloo, NSW 2017<br />
-              (Limited visitor parking available underground)
-            </div>
-            <div>
-              <strong>Metro tel:</strong> (02) 8595 1234<br />
-              <strong>Regional tel:</strong> 1300 367 962<br />
-              <strong>Fax:</strong> (61 2) 9662 1414<br />
-              <strong>Email:</strong> gensec@nswnma.asn.au
-            </div>
+        <?php if ($contact_info) : ?>
+          <div class="flex gap-x-16 text-sm justify-between">
+            <?php foreach ($contact_info as $contact) : ?>
+              <div class="w-1/2">
+                <strong class="uppercase"><?php echo $contact['heading']; ?></strong><br />
+                <?php echo $contact['address']; ?>
+              </div>
+            <?php endforeach; ?>
           </div>
-          <div>
-            <div class="mb-4">
-              <strong class="uppercase">Hunter office</strong><br />
-              8-14 Telford Street, Newcastle East, <br />
-              NSW 2300
-            </div>
-            <div>
-              <strong>Metro tel:</strong> (02) 8595 1234<br />
-              <strong>Regional tel:</strong> 1300 367 962
-            </div>
-            <div class="mt-10">
-              <div class="flex gap-x-2">
-                <a href="#" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
-                  <?php echo nswnma_icon(array('icon' => 'facebook', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
-                </a>
-                <a href="#" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
-                  <?php echo nswnma_icon(array('icon' => 'twitter', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
-                </a>
-                <a href="#" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
-                  <?php echo nswnma_icon(array('icon' => 'instagram', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
-                </a>
-                <a href="#" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
-                  <?php echo nswnma_icon(array('icon' => 'linkedin', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
-                </a>
-                <a href="#" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
-                  <?php echo nswnma_icon(array('icon' => 'youtube', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
-                </a>
+        <?php endif; ?>
+        <div class="flex gap-x-16 justify-end">
+          <div class="w-1/2 pl-8">
+            <?php if ($social_media) : ?>
+              <div class="mt-4">
+                <div class="flex gap-x-2">
+                  <?php if ($social_media['facebook']) : ?>
+                    <a href="<?php echo $social_media['facebook']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                      <?php echo nswnma_icon(array('icon' => 'facebook', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
+                    </a>
+                  <?php endif; ?>
+                  <?php if ($social_media['twitter']) : ?>
+                    <a href="<?php echo $social_media['twitter']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                      <?php echo nswnma_icon(array('icon' => 'twitter', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
+                    </a>
+                  <?php endif; ?>
+                  <?php if ($social_media['instagram']) : ?>
+                    <a href="<?php echo $social_media['instagram']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                      <?php echo nswnma_icon(array('icon' => 'instagram', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
+                    </a>
+                  <?php endif; ?>
+                  <?php if ($social_media['linkedin']) : ?>
+                    <a href="<?php echo $social_media['linkedin']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                      <?php echo nswnma_icon(array('icon' => 'linkedin', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
+                    </a>
+                  <?php endif; ?>
+                  <?php if ($social_media['youtube']) : ?>
+                    <a href="<?php echo $social_media['youtube']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                      <?php echo nswnma_icon(array('icon' => 'youtube', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
+                    </a>
+                  <?php endif; ?>
+                </div>
               </div>
-            </div>
-            <div class="mt-8">
-              <div class="flex gap-x-10">
-                <a href="#" class="font-semibold hover:underline">Disclaimer</a>
-                <a href="#" class="font-semibold hover:underline">Privacy</a>
+            <?php endif; ?>
+            <?php if ($additional_links) : ?>
+              <div class="mt-4">
+                <div class="flex gap-x-10">
+                  <?php foreach ($additional_links as $link) : ?>
+                    <a href="<?php echo $link['link']['url'] ?>" class="font-semibold hover:underline"><?php echo $link['link']['title'] ?></a>
+                  <?php endforeach; ?>
+                </div>
               </div>
-            </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>

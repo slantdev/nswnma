@@ -6,9 +6,14 @@
         <img src="<?php echo nswnma_asset('images/nswnma-logo.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-auto xl:h-[90px]">
       </a>
       <div class="flex justify-between items-center gap-x-4">
-        <div>
-          <a href="#" class="btn btn-primary">Member Login</a>
-        </div>
+        <?php
+        $member_login_button = get_field('member_login_button', 'option');
+        if ($member_login_button) {
+          echo '<div>';
+          echo '<a href="' . $member_login_button['url'] . '" class="btn btn-primary">' . $member_login_button['title'] . '</a>';
+          echo '</div>';
+        }
+        ?>
         <div>
           <div class="relative">
             <input type="text" value="" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 pr-7 w-72 focus:border-brand-blue">
