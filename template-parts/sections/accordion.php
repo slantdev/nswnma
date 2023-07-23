@@ -32,15 +32,32 @@ $accordion = get_sub_field('accordion');
     </div>
 
     <?php if ($accordion) : ?>
+      <?php
+      $accordion_default_state = get_sub_field('accordion_default_state');
+      ?>
       <section class="pt-12 pb-24">
         <div class="container">
-          <?php foreach ($accordion as $row) : ?>
-            <div tabindex="0" class="collapse collapse-plus bg-brand-graylight rounded-xl shadow-[0_3px_6px_rgba(0,0,0,0.16)] mb-6">
+          <?php foreach ($accordion as $key => $row) : ?>
+            <div class="collapse collapse-plus bg-brand-graylight rounded-xl shadow-[0_3px_6px_rgba(0,0,0,0.16)] mb-6">
+              <?php if ($accordion_default_state == 'closed') {
+                echo '<input type="checkbox" />';
+              } elseif ($accordion_default_state == 'first') {
+                if ($key == 0) {
+                  echo '<input type="checkbox" checked />';
+                } else {
+                  echo '<input type="checkbox" />';
+                }
+              } else {
+                echo '<input type="checkbox" checked />';
+              }
+              ?>
               <div class="collapse-title text-2xl font-bold py-5 pl-8 pr-12">
                 <?php echo $row['title'] ?>
               </div>
               <div class="collapse-content">
-                <?php echo $row['content'] ?>
+                <div class="prose prose-lg max-w-none">
+                  <?php echo $row['content'] ?>
+                </div>
               </div>
             </div>
           <?php endforeach ?>

@@ -10,6 +10,7 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
 $section_intro = get_sub_field('section_intro');
 $headline = $section_intro['headline'];
 $description = $section_intro['description'];
+$team_category = get_sub_field('team_category');
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
@@ -36,10 +37,27 @@ $description = $section_intro['description'];
     } else {
       $posts_per_page = -1;
     }
-    $args = array(
-      'post_type' => 'team',
-      'posts_per_page' => $posts_per_page,
-    );
+    if ($team_category) {
+      $args = array(
+        'post_type' => 'team',
+        'posts_per_page' => $posts_per_page,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'team_category',
+            'field' => 'term_id',
+            'terms' => $team_category,
+          ),
+        ),
+      );
+    } else {
+      $args = array(
+        'post_type' => 'team',
+        'posts_per_page' => $posts_per_page,
+      );
+    }
+
     $the_query = new WP_Query($args);
     ?>
     <?php if ($the_query->have_posts()) : ?>

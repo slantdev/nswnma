@@ -48,18 +48,23 @@
   }
 }
 
+.collapse > input[type='checkbox'] {
+  @apply w-full h-auto text-2xl font-bold py-5 pl-8 pr-12 transition-colors;
+}
+
 .collapse-plus .collapse-title:after {
   top: 1.25rem;
   right: 2.5rem;
   font-weight: 300;
   font-size: 40px;
 }
+.collapse input[type='checkbox']:checked + .collapse-title,
+.collapse.collapse-open .collapse-title {
+  @apply bg-brand-blue text-white shadow-[0_3px_6px_rgba(0,0,0,0.16)] rounded-xl;
+}
 .collapse:not(.collapse-open):not(.collapse-close) input[type='checkbox'],
 .collapse:not(.collapse-open):not(.collapse-close) .collapse-title {
   @apply bg-white rounded-xl;
-}
-.collapse:focus:not(.collapse-open):not(.collapse-close) .collapse-title {
-  @apply bg-brand-blue text-white shadow-[0_3px_6px_rgba(0,0,0,0.16)];
 }
 .collapse-content {
   @apply px-8 text-lg;
@@ -70,6 +75,20 @@
   :where(input[type='checkbox']:checked ~ .collapse-content) {
   @apply py-8;
 }
+/*
+.collapse:focus:not(.collapse-open):not(.collapse-close) .collapse-title,
+.collapse.collapse-open .collapse-title {
+  @apply bg-brand-blue text-white shadow-[0_3px_6px_rgba(0,0,0,0.16)];
+}
+.collapse-content {
+  @apply px-8 text-lg;
+}
+.collapse-open :where(.collapse-content),
+.collapse:focus:not(.collapse-close) :where(.collapse-content),
+.collapse:not(.collapse-close)
+  :where(input[type='checkbox']:checked ~ .collapse-content) {
+  @apply py-8;
+} */
 
 .info-box--filter-btn {
   .indicator {

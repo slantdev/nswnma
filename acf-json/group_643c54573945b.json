@@ -193,6 +193,34 @@
             ]
         },
         {
+            "key": "field_64bb3d320f0e9",
+            "label": "Accordion Default State",
+            "name": "accordion_default_state",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "choices": {
+                "open": "All Open",
+                "closed": "All Closed",
+                "first": "Open First"
+            },
+            "default_value": "open",
+            "return_format": "value",
+            "acfe_settings": "",
+            "acfe_validate": "",
+            "allow_null": 0,
+            "acfe_permissions": "",
+            "layout": "horizontal"
+        },
+        {
             "key": "field_643c54573fab6",
             "label": "Section Settings",
             "name": "",
@@ -263,7 +291,7 @@
     "acfe_form": 1,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1683081007,
+    "modified": 1689993851,
     "acfe_categories": {
         "layout": "Layout"
     }

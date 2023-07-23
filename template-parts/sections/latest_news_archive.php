@@ -12,11 +12,14 @@ $headline = $section_intro['headline'];
 $description = $section_intro['description'];
 $posts = get_sub_field('posts');
 $show_search_bar = $posts['show_search_bar'];
-$exclude_terms = $posts['exclude_terms'];
 $posts_per_page = $posts['posts_per_page'];
+$include_exclude_categories = $posts['include_exclude_categories'];
+$categories = $include_exclude_categories['categories'];
+$condition = $include_exclude_categories['condition'];
 if (is_admin()) {
   $posts_per_page = 3;
 }
+
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
@@ -45,11 +48,33 @@ if (is_admin()) {
               <select id="posts-filter" name="posts-filter" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
                 <option value="all" selected>Filter</option>
                 <?php
-                $taxonomies = get_terms(array(
-                  'taxonomy' => 'category',
-                  'hide_empty' => true,
-                  'orderby' => 'term_order'
-                ));
+                if ($categories) {
+                  if ($condition == 'include') {
+                    $taxonomies = get_terms(array(
+                      'taxonomy' => 'category',
+                      //'hide_empty' => true,
+                      'hide_empty' => false,
+                      'orderby' => 'term_order',
+                      'include' => $categories,
+                    ));
+                  } else {
+                    $taxonomies = get_terms(array(
+                      'taxonomy' => 'category',
+                      //'hide_empty' => true,
+                      'hide_empty' => false,
+                      'orderby' => 'term_order',
+                      'exclude' => $categories,
+                    ));
+                  }
+                } else {
+                  $taxonomies = get_terms(array(
+                    'taxonomy' => 'category',
+                    //'hide_empty' => true,
+                    'hide_empty' => false,
+                    'orderby' => 'term_order'
+                  ));
+                }
+
                 if (!empty($taxonomies)) :
                   foreach ($taxonomies as $category) {
                     $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
@@ -85,14 +110,20 @@ if (is_admin()) {
         var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 
         function load_all_posts(page) {
-          //$('.dcs_pag_loading').fadeIn().css('background', '#ccc');
           $('.posts-container .blocker').show();
+          var categories = <?php echo json_encode($categories) ?>;
+          var categoriesString = JSON.stringify(categories);
+          var include = '<?php echo $condition ?>';
           var data = {
             page: page,
             per_page: <?php echo $posts_per_page ?>,
+            condition: '<?php echo $condition ?>',
+            categories: categoriesString,
             action: 'pagination_load_posts',
           };
+          console.log(data);
           $.post(ajaxurl, data, function(response) {
+            console.log(response);
             $('.posts-grid').html('').prepend(response);
             $('.posts-container .blocker').hide();
           });

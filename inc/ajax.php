@@ -128,7 +128,9 @@ function pagination_load_posts()
     // Sanitize the received page
     $page = sanitize_text_field($_POST['page']);
     $per_page = sanitize_text_field($_POST['per_page']);
-    //$per_page = 3;  //set the per page limit
+    $condition = sanitize_text_field($_POST['condition']);
+    $categories = sanitize_text_field($_POST['categories']);
+    $categories = json_decode(stripslashes($categories));
     $cur_page = $page;
     $page -= 1;
     $previous_btn = true;
@@ -136,24 +138,69 @@ function pagination_load_posts()
     $first_btn = true;
     $last_btn = true;
     $start = $page * $per_page;
-    $all_blog_posts = new WP_Query(
-      array(
-        'post_type'         => 'post',
-        'post_status '      => 'publish',
-        'orderby'           => 'post_date',
-        'order'             => 'DESC',
-        'posts_per_page'    => $per_page,
-        'offset'            => $start
-      )
-    );
 
-    $count = new WP_Query(
-      array(
-        'post_type'         => 'post',
-        'post_status '      => 'publish',
-        'posts_per_page'    => -1
-      )
-    );
+    if ($categories) {
+      if ($condition == 'include') {
+        $all_blog_posts = new WP_Query(
+          array(
+            'post_type'         => 'post',
+            'post_status '      => 'publish',
+            'orderby'           => 'post_date',
+            'order'             => 'DESC',
+            'category__in'          => $categories,
+            'posts_per_page'    => $per_page,
+            'offset'            => $start
+          )
+        );
+        $count = new WP_Query(
+          array(
+            'post_type'         => 'post',
+            'post_status '      => 'publish',
+            'category__in'          => $categories,
+            'posts_per_page'    => -1
+          )
+        );
+      } else {
+        $all_blog_posts = new WP_Query(
+          array(
+            'post_type'         => 'post',
+            'post_status '      => 'publish',
+            'orderby'           => 'post_date',
+            'order'             => 'DESC',
+            'category__not_in'      => json_decode($categories),
+            'posts_per_page'    => $per_page,
+            'offset'            => $start
+          )
+        );
+        $count = new WP_Query(
+          array(
+            'post_type'         => 'post',
+            'post_status '      => 'publish',
+            'category__not_in'      => json_decode($categories),
+            'posts_per_page'    => -1
+          )
+        );
+      }
+    } else {
+      $all_blog_posts = new WP_Query(
+        array(
+          'post_type'         => 'post',
+          'post_status '      => 'publish',
+          'orderby'           => 'post_date',
+          'order'             => 'DESC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'post',
+          'post_status '      => 'publish',
+          'posts_per_page'    => -1
+        )
+      );
+    }
+
     $count = $count->post_count;
     if ($all_blog_posts->have_posts()) {
       echo '<div class="grid grid-cols-3 gap-8">';

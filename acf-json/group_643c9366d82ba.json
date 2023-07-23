@@ -128,7 +128,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -152,7 +152,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -169,44 +169,99 @@
                     "append": ""
                 },
                 {
-                    "key": "field_643c9366e6a6a",
-                    "label": "Exclude Terms",
-                    "name": "exclude_terms",
+                    "key": "field_64bc841cf07b6",
+                    "label": "Include \/ Exclude Categories",
+                    "name": "include_exclude_categories",
                     "aria-label": "",
-                    "type": "acfe_taxonomy_terms",
+                    "type": "group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "100",
                         "class": "",
                         "id": ""
                     },
                     "acfe_save_meta": 0,
-                    "taxonomy": [
-                        "category"
-                    ],
-                    "allow_terms": "",
-                    "allow_level": "",
-                    "field_type": "select",
-                    "default_value": [],
-                    "return_format": "id",
-                    "ui": 1,
-                    "allow_null": 0,
-                    "placeholder": "",
-                    "multiple": 1,
-                    "ajax": 0,
-                    "save_terms": 0,
-                    "load_terms": 0,
+                    "layout": "block",
+                    "acfe_seamless_style": 0,
+                    "acfe_group_modal": 0,
                     "acfe_settings": "",
-                    "acfe_validate": "",
                     "acfe_permissions": "",
-                    "choices": [],
-                    "search_placeholder": "",
-                    "layout": "",
-                    "toggle": 0,
-                    "allow_custom": 0,
-                    "other_choice": 0
+                    "sub_fields": [
+                        {
+                            "key": "field_64bc8433f07b7",
+                            "label": "Categories",
+                            "name": "categories",
+                            "aria-label": "",
+                            "type": "acfe_taxonomy_terms",
+                            "instructions": "Leave blank to show all categories",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "acfe_save_meta": 0,
+                            "taxonomy": [
+                                "category"
+                            ],
+                            "allow_terms": "",
+                            "allow_level": "",
+                            "field_type": "select",
+                            "default_value": [],
+                            "return_format": "id",
+                            "ui": 1,
+                            "allow_null": 1,
+                            "placeholder": "",
+                            "multiple": 1,
+                            "ajax": 0,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "acfe_settings": "",
+                            "acfe_validate": "",
+                            "choices": [],
+                            "search_placeholder": "",
+                            "layout": "",
+                            "toggle": 0,
+                            "allow_custom": 0,
+                            "other_choice": 0
+                        },
+                        {
+                            "key": "field_64bc846bf07b8",
+                            "label": "Condition",
+                            "name": "condition",
+                            "aria-label": "",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "acfe_save_meta": 0,
+                            "choices": {
+                                "include": "Include",
+                                "exclude": "Exclude"
+                            },
+                            "default_value": "include",
+                            "return_format": "value",
+                            "acfe_settings": "",
+                            "acfe_validate": "",
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "layout": "vertical",
+                            "save_other_choice": 0
+                        }
+                    ],
+                    "acfe_group_modal_close": 0,
+                    "acfe_group_modal_button": "",
+                    "acfe_group_modal_size": "large"
                 }
             ]
         },
@@ -281,7 +336,7 @@
     "acfe_form": 1,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1686245732,
+    "modified": 1690076509,
     "acfe_categories": {
         "layout": "Layout"
     }
