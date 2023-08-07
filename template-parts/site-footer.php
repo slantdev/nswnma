@@ -79,7 +79,7 @@ $additional_links = get_field('additional_links', 'option');
             <?php endif; ?>
             <?php if ($additional_links) : ?>
               <div class="mt-4">
-                <div class="flex gap-x-10">
+                <div class="flex gap-x-8 text-sm">
                   <?php foreach ($additional_links as $link) : ?>
                     <a href="<?php echo $link['link']['url'] ?>" class="font-semibold hover:underline"><?php echo $link['link']['title'] ?></a>
                   <?php endforeach; ?>
