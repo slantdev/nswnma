@@ -136,7 +136,8 @@
   @apply -mt-2 ml-4;
 }
 
-.posts-pagination {
+.posts-pagination,
+.reports-pagination {
   > ul {
     @apply flex items-center justify-center gap-x-1;
     > li {

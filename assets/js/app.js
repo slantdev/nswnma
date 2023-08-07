@@ -40,5 +40,27 @@
         }
       });
     });
+    $("#report-search-button").on("click", function(event) {
+      let search_query = $("#report-search").val();
+      let search_filter = $("#report-filter").find(":selected").val();
+      $.ajax({
+        type: "POST",
+        url: "/wp-admin/admin-ajax.php",
+        dataType: "html",
+        data: {
+          action: "filter_reports",
+          query: search_query,
+          filter: search_filter
+        },
+        beforeSend: function() {
+          $("#report-search-button .spinner-border").removeClass("opacity-0").addClass("opacity-100");
+          $(".report-grid .blocker").show();
+        },
+        success: function(res) {
+          $(".report-grid").html(res);
+          $("#report-search-button .spinner-border").removeClass("opacity-100").addClass("opacity-0");
+        }
+      });
+    });
   });
 })();

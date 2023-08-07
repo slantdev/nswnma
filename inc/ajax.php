@@ -302,6 +302,309 @@ function pagination_load_posts()
         } ?>
       </ul>
     </div>
+    <?php
+  }
+  exit();
+}
+
+
+function filter_reports()
+{
+  $search_query = $_POST['query'];
+  $search_filter = $_POST['filter'];
+  if (isset($_POST['postsperpage'])) {
+    $postsPerPage = $_POST['postsperpage'];
+  } else {
+    $postsPerPage = -1;
+  }
+
+  if ($search_query) {
+    if ($search_filter == 'all') {
+      $args = array(
+        'post_type' => 'report',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        's' => $search_query,
+        'post_status' => 'publish',
+      );
+    } else {
+      $args = array(
+        'post_type' => 'report',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        's' => $search_query,
+        'post_status' => 'publish',
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'report_category',
+            'field'    => 'term_id',
+            'terms'    => $search_filter,
+          ),
+        ),
+      );
+    }
+  } else {
+    if ($search_filter == 'all') {
+      $args = array(
+        'post_type' => 'report',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post_status' => 'publish',
+      );
+    } else {
+      $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post_status' => 'publish',
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'report_category',
+            'field'    => 'term_id',
+            'terms'    => $search_filter,
+          ),
+        ),
+      );
+    }
+  }
+
+  $ajaxposts = new WP_Query($args);
+
+  $response = '';
+
+  if ($ajaxposts->have_posts()) {
+
+    $response .= '<div class="grid grid-cols-3 gap-6">';
+
+    while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+
+      $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
+      $title =  get_the_title();
+      $report_pdf = get_field('report_pdf', get_the_ID());
+      $external_link_report = get_field('external_link_report', get_the_ID());
+      $report_pdf_link = '';
+      if ($report_pdf) {
+        $report_pdf_link = $report_pdf['url'];
+      } else {
+        if ($external_link_report) {
+          $report_pdf_link = $external_link_report;
+        }
+      }
+
+      $response .= '<div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
+          <div class="aspect-w-4 aspect-h-5">
+            <img src="' . $img_src . '" alt="" class="w-full h-full object-cover rounded-lg">
+          </div>
+          <div class="pt-8">
+            <div class="flex justify-between">
+              <div class="text-white text-xl">' . $title . '</div>
+                <div><a href="' . $report_pdf_link . '" target="_blank" class="inline-block text-white opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>
+            </div>
+          </div>
+        </div>';
+
+    endwhile;
+
+    $response .= '</div>';
+    $response .= '<div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>';
+  } else {
+    $response = '<div class="text-center py-4 px-8">No Posts Found</div>';
+  }
+
+  echo $response;
+  exit;
+}
+add_action('wp_ajax_filter_reports', 'filter_reports');
+add_action('wp_ajax_nopriv_filter_reports', 'filter_reports');
+
+/* ########################################## */
+/* ########################################## */
+/* ###### Ajax function for pagination ###### */
+/* ########################################## */
+/* ########################################## */
+add_action('wp_ajax_pagination_load_reports', 'pagination_load_reports');
+add_action('wp_ajax_nopriv_pagination_load_reports', 'pagination_load_reports');
+function pagination_load_reports()
+{
+  global $wpdb;
+  // Set default variables
+  $msg = '';
+  if (isset($_POST['page'])) {
+    // Sanitize the received page
+    $page = sanitize_text_field($_POST['page']);
+    $per_page = sanitize_text_field($_POST['per_page']);
+    $categories = sanitize_text_field($_POST['categories']);
+    $categories = json_decode(stripslashes($categories));
+    $cur_page = $page;
+    $page -= 1;
+    $previous_btn = true;
+    $next_btn = true;
+    $first_btn = true;
+    $last_btn = true;
+    $start = $page * $per_page;
+
+    if ($categories) {
+      $all_reports = new WP_Query(
+        array(
+          'post_type'         => 'report',
+          'post_status '      => 'publish',
+          'orderby'           => 'post_date',
+          'order'             => 'DESC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'report_category',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'report',
+          'post_status '      => 'publish',
+          'posts_per_page'    => -1,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'report_category',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+    } else {
+      $all_reports = new WP_Query(
+        array(
+          'post_type'         => 'report',
+          'post_status '      => 'publish',
+          'orderby'           => 'post_date',
+          'order'             => 'DESC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'report',
+          'post_status '      => 'publish',
+          'posts_per_page'    => -1
+        )
+      );
+    }
+
+    $count = $count->post_count;
+    if ($all_reports->have_posts()) {
+      echo '<div class="grid grid-cols-3 gap-6">';
+      while ($all_reports->have_posts()) {
+        $all_reports->the_post(); ?>
+        <?php
+        $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
+        $title =  get_the_title();
+        $report_pdf = get_field('report_pdf', get_the_ID());
+        $external_link_report = get_field('external_link_report', get_the_ID());
+        $report_pdf_link = '';
+        if ($report_pdf) {
+          $report_pdf_link = $report_pdf['url'];
+        } else {
+          if ($external_link_report) {
+            $report_pdf_link = $external_link_report;
+          }
+        }
+        ?>
+        <div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
+          <div class="aspect-w-4 aspect-h-5">
+            <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
+          </div>
+          <div class="pt-8">
+            <div class="flex justify-between">
+              <div class="text-white text-xl"><?php echo $title ?></div>
+              <?php if ($report_pdf_link) : ?>
+                <div><a href="<?php echo $report_pdf_link ?>" target="_blank" class="inline-block text-white opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
+              <?php endif; ?>
+            </div>
+          </div>
+        </div>
+    <?php
+      }
+      echo '</div>';
+    }
+    // Paginations
+    $no_of_paginations = ceil($count / $per_page);
+    if ($cur_page >= 7) {
+      $start_loop = $cur_page - 3;
+      if ($no_of_paginations > $cur_page + 3)
+        $end_loop = $cur_page + 3;
+      else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
+        $start_loop = $no_of_paginations - 6;
+        $end_loop = $no_of_paginations;
+      } else {
+        $end_loop = $no_of_paginations;
+      }
+    } else {
+      $start_loop = 1;
+      if ($no_of_paginations > 7)
+        $end_loop = 7;
+      else
+        $end_loop = $no_of_paginations;
+    }
+    // Pagination Buttons logic
+    ?>
+    <div class='reports-pagination mt-12'>
+      <ul>
+        <?php
+        if ($first_btn && $cur_page > 1) { ?>
+          <li data-page='1' class='active'>
+            &lt;&lt;</li>
+        <?php
+        } else if ($first_btn) { ?>
+          <li data-page='1' class='inactive'>
+            &lt;&lt;</li>
+        <?php
+        }
+        if ($previous_btn && $cur_page > 1) {
+          $pre = $cur_page - 1; ?>
+          <li data-page='<?php echo $pre; ?>' class='active'>
+            &lt;</li>
+        <?php
+        } else if ($previous_btn) { ?>
+          <li class='inactive p-2'>
+            &lt;</li>
+          <?php
+        }
+        for ($i = $start_loop; $i <= $end_loop; $i++) {
+          if ($cur_page == $i) { ?>
+            <li data-page='<?php echo $i; ?>' class='selected'><?php echo $i; ?></li>
+          <?php
+          } else { ?>
+            <li data-page='<?php echo $i; ?>' class='active'><?php echo $i; ?></li>
+          <?php
+          }
+        }
+        if ($next_btn && $cur_page < $no_of_paginations) {
+          $nex = $cur_page + 1; ?>
+          <li data-page='<?php echo $nex; ?>' class='active'>&gt;</li>
+        <?php
+        } else if ($next_btn) { ?>
+          <li class='inactive'>&gt;</li>
+        <?php
+        }
+
+        if ($last_btn && $cur_page < $no_of_paginations) { ?>
+          <li data-page='<?php echo $no_of_paginations; ?>' class='active'>&gt;&gt;</li>
+        <?php
+        } else if ($last_btn) { ?>
+          <li data-page='<?php echo $no_of_paginations; ?>' class='inactive'>&gt;&gt;</li>
+        <?php
+        } ?>
+      </ul>
+    </div>
 <?php
   }
   exit();

@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_643e2999c8036",
-            "label": "Report PDF",
+            "label": "Upload Report PDF",
             "name": "report_pdf",
             "aria-label": "",
             "type": "file",
@@ -23,6 +23,24 @@
             "max_size": "",
             "mime_types": "",
             "library": "all"
+        },
+        {
+            "key": "field_64d1435f5d9dc",
+            "label": "External Link Report",
+            "name": "external_link_report",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -50,7 +68,7 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681795517,
+    "modified": 1691435900,
     "acfe_categories": {
         "cpt": "CPT"
     }

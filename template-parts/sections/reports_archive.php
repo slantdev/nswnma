@@ -38,16 +38,47 @@ if (is_admin()) {
         <div class="flex flex-col gap-y-4">
           <div class="flex gap-x-4 w-full items-center">
             <div class="w-1/2">
-              <input type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
+              <input id="report-search" name="report-search" type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
             </div>
             <div class="w-[24px] text-center flex-none">In</div>
             <div class="w-1/2">
-              <select name="" id="" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-                <option value="">Filter</option>
+              <select id="report-filter" name="report-filter" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
+                <option value="all" selected>Filter</option>
+                <?php
+                if ($report_category) {
+                  $taxonomies = get_terms(array(
+                    'taxonomy' => 'report_category',
+                    //'hide_empty' => true,
+                    'hide_empty' => false,
+                    'orderby' => 'term_order',
+                    'include' => $report_category,
+                  ));
+                } else {
+                  $taxonomies = get_terms(array(
+                    'taxonomy' => 'report_category',
+                    //'hide_empty' => true,
+                    'hide_empty' => false,
+                    'orderby' => 'term_order'
+                  ));
+                }
+
+                if (!empty($taxonomies)) :
+                  foreach ($taxonomies as $category) {
+                    $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
+                  }
+                  echo $output;
+                endif;
+                ?>
               </select>
             </div>
             <div class="ml-2">
-              <button class="btn btn-red !text-base !px-10 !py-4">SEARCH</button>
+              <button id="report-search-button" type="button" class="btn btn-red !text-base !pr-10 !pl-4 !py-[14px] !inline-flex !flex-nowrap">
+                <svg class="spinner-border animate-spin ml-0 mr-2 h-5 w-5 text-white opacity-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="inline-block ml-1">SEARCH</span>
+              </button>
             </div>
           </div>
         </div>
@@ -55,53 +86,47 @@ if (is_admin()) {
     <?php endif; ?>
 
     <div class="container mt-12">
-      <?php
-      if ($report_category) {
-        $args = array(
-          'post_type' => 'report',
-          'posts_per_page' => $posts_per_page,
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'category',
-              'field' => 'term_id',
-              'terms' => $report_category
-            )
-          )
-        );
-      } else {
-        $args = array(
-          'post_type' => 'report',
-          'posts_per_page' => $posts_per_page,
-        );
-      }
-      $the_query = new WP_Query($args);
-      ?>
-      <?php if ($the_query->have_posts()) : ?>
-        <div class="grid grid-cols-3 gap-6">
-          <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php
-            $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
-            $title =  get_the_title();
-            $report_pdf = get_field('report_pdf', get_the_ID());
-            ?>
-            <div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
-              <div class="aspect-w-4 aspect-h-5">
-                <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
-              </div>
-              <div class="pt-8">
-                <div class="flex justify-between">
-                  <div class="text-white text-xl"><?php echo $title ?></div>
-                  <?php if ($report_pdf) : ?>
-                    <div><a href="<?php echo $report_pdf ?>" class="inline-block text-white opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
-                  <?php endif; ?>
-                </div>
-              </div>
-            </div>
-          <?php endwhile; ?>
-          <?php wp_reset_postdata(); ?>
-        </div>
-      <?php endif; ?>
+      <div class="report-container relative scroll-mt-12">
+        <div class="report-grid"></div>
+        <div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>
+      </div>
     </div>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
+        function load_all_reports(page) {
+          $('.report-container .blocker').show();
+          var report_category = <?php echo json_encode($report_category) ?>;
+          var report_category_string = JSON.stringify(report_category);
+          var data = {
+            page: page,
+            per_page: <?php echo $posts_per_page ?>,
+            categories: report_category_string,
+            action: 'pagination_load_reports',
+          };
+          console.log(data);
+          $.post(ajaxurl, data, function(response) {
+            console.log(response);
+            $('.report-grid').html('').prepend(response);
+            $('.report-container .blocker').hide();
+          });
+        }
+        load_all_reports(1);
+        $(document).on(
+          'click',
+          '.reports-pagination li.active',
+          function() {
+            $(".report-container").get(0).scrollIntoView({
+              behavior: 'smooth'
+            });
+            var page = $(this).data('page');
+            load_all_reports(page);
+          }
+        );
+      });
+    </script>
 
   </div>
 </section>
