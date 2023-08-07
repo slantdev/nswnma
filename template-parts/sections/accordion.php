@@ -20,15 +20,22 @@ $accordion = get_sub_field('accordion');
           <h2 class="h3 text-brand-blue mb-8 mt-8"><?php echo $headline ?></h2>
         </div>
       <?php endif; ?>
-      <?php if ($description) : ?>
-        <div class="flex flex-col lg:flex-row lg:items-end">
+
+      <div class="flex flex-col lg:flex-row lg:items-end">
+        <?php if ($description) : ?>
           <div class="w-1/2">
             <div class="prose">
               <?php echo $description ?>
             </div>
           </div>
-        </div>
-      <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($section_intro['button_link']) : ?>
+          <div class="w-1/2">
+            <div class="flex justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
+          </div>
+        <?php endif; ?>
+      </div>
+
     </div>
 
     <?php if ($accordion) : ?>
