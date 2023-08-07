@@ -397,11 +397,11 @@ function filter_reports()
 
       $response .= '<div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">';
       if ($img_src) {
-        $response .= '<div class="aspect-w-4 aspect-h-5">
+        $response .= '<div class="aspect-w-4 aspect-h-5 pb-8">
           <img src="' . $img_src . '" alt="" class="w-full h-full object-cover rounded-lg">
         </div>';
       }
-      $response .= '<div class="pt-8">
+      $response .= '<div class="">
             <div class="flex justify-between">
               <div class="text-white text-xl">' . $title . '</div>
                 <div><a href="' . $report_pdf_link . '" target="_blank" class="inline-block text-white opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>
@@ -522,11 +522,11 @@ function pagination_load_reports()
         ?>
         <div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
           <?php if ($img_src) : ?>
-            <div class="aspect-w-4 aspect-h-5">
+            <div class="aspect-w-4 aspect-h-5 pb-8">
               <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
             </div>
           <?php endif; ?>
-          <div class="pt-8">
+          <div class="">
             <div class="flex justify-between">
               <div class="text-white text-xl"><?php echo $title ?></div>
               <?php if ($report_pdf_link) : ?>
