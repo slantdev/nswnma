@@ -160,7 +160,9 @@ $posts_per_page = $posts['posts_per_page'];
                   <?php endif; ?>
                 </div>
                 <div class="w-1/2">
-                  <div class="aspect-w-6 aspect-h-4"><img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg"></div>
+                  <?php if ($img_src) : ?>
+                    <div class="aspect-w-6 aspect-h-4"><img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg"></div>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
