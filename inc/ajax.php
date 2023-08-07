@@ -397,9 +397,9 @@ function filter_reports()
 
       $response .= '<div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">';
       if ($img_src) {
-        $response .= '<div class="aspect-w-4 aspect-h-5 pb-8">
+        $response .= '<div class="pb-8"><div class="aspect-w-4 aspect-h-5">
           <img src="' . $img_src . '" alt="" class="w-full h-full object-cover rounded-lg">
-        </div>';
+        </div></div>';
       }
       $response .= '<div class="">
             <div class="flex justify-between">
@@ -522,8 +522,10 @@ function pagination_load_reports()
         ?>
         <div class="bg-brand-bluedark rounded-lg p-4 shadow-lg">
           <?php if ($img_src) : ?>
-            <div class="aspect-w-4 aspect-h-5 pb-8">
-              <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
+            <div class="pb-8">
+              <div class="aspect-w-4 aspect-h-5">
+                <img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg">
+              </div>
             </div>
           <?php endif; ?>
           <div class="">
