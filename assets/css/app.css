@@ -7392,9 +7392,9 @@ details.collapse summary::-webkit-details-marker {
        column-gap: 0.5rem;
 }
 
-.gap-x-10 {
-  -moz-column-gap: 2.5rem;
-       column-gap: 2.5rem;
+.gap-x-8 {
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
 }
 
 .gap-x-4 {
@@ -7428,13 +7428,13 @@ details.collapse summary::-webkit-details-marker {
        column-gap: 1.25rem;
 }
 
-.gap-y-6 {
-  row-gap: 1.5rem;
+.gap-x-10 {
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
 }
 
-.gap-x-8 {
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
+.gap-y-6 {
+  row-gap: 1.5rem;
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]) {
@@ -9484,7 +9484,7 @@ details.collapse summary::-webkit-details-marker {
 }
 
 .mega-menu .mega-submenu .submenu .submenu-heading {
-  padding-bottom: 1.25rem;
+  padding-bottom: 1rem !important;
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
