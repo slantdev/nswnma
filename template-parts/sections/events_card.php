@@ -44,7 +44,7 @@ $posts_per_page = $posts['posts_per_page'];
         'posts_per_page' => $posts_per_page,
         'tax_query' => array(
           array(
-            'taxonomy' => 'category',
+            'taxonomy' => 'event_topic',
             'field' => 'term_id',
             'terms' => $event_taxonomy
           )
