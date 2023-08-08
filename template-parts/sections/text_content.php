@@ -12,6 +12,7 @@ $headline = $section_intro['headline'];
 $description = $section_intro['description'];
 $image_featured = get_sub_field('image_featured');
 $text_content = get_sub_field('text_content');
+$button_link = get_sub_field('button_link');
 
 $intro_settings = $section_intro['intro_settings'];
 $intro_text_alignment = $intro_settings['text_alignment'];
@@ -113,6 +114,16 @@ switch ($text_content_container_max_width) {
         <div class="<?php echo $text_content_container_class ?>">
           <div class="prose prose-lg max-w-none">
             <?php echo $text_content ?>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($button_link) : ?>
+      <div class="container">
+        <div class="<?php echo $text_content_container_class ?>">
+          <div class="mt-8">
+            <a href="<?php echo $button_link['url'] ?>" class="btn btn-primary btn-md"><?php echo $button_link['title'] ?></a>
           </div>
         </div>
       </div>
