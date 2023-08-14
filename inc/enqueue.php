@@ -43,5 +43,8 @@ function nswnma_admin_styles()
   if (($current_page->post_type === 'page' && ($pagenow === 'post-new.php' || $pagenow === 'post.php'))) {
     wp_enqueue_style('acf_layouts', get_template_directory_uri() . '/assets/css/acf-layouts.css', false, filemtime(get_stylesheet_directory() . '/assets/css/acf-layouts.css'));
   }
+  if (($current_page->post_type === 'scholarship' && ($pagenow === 'post-new.php' || $pagenow === 'post.php'))) {
+    wp_enqueue_style('acf_layouts', get_template_directory_uri() . '/assets/css/acf-layouts.css', false, filemtime(get_stylesheet_directory() . '/assets/css/acf-layouts.css'));
+  }
 }
 add_action('admin_enqueue_scripts', 'nswnma_admin_styles');
