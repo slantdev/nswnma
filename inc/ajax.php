@@ -356,7 +356,7 @@ function filter_reports()
       );
     } else {
       $args = array(
-        'post_type' => 'post',
+        'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'date',
         'order' => 'DESC',
@@ -423,11 +423,7 @@ function filter_reports()
 add_action('wp_ajax_filter_reports', 'filter_reports');
 add_action('wp_ajax_nopriv_filter_reports', 'filter_reports');
 
-/* ########################################## */
-/* ########################################## */
 /* ###### Ajax function for pagination ###### */
-/* ########################################## */
-/* ########################################## */
 add_action('wp_ajax_pagination_load_reports', 'pagination_load_reports');
 add_action('wp_ajax_nopriv_pagination_load_reports', 'pagination_load_reports');
 function pagination_load_reports()
@@ -611,6 +607,327 @@ function pagination_load_reports()
         } ?>
       </ul>
     </div>
+    <?php
+  }
+  exit();
+}
+
+function filter_submissions()
+{
+  $search_query = $_POST['query'];
+  $search_filter = $_POST['filter'];
+  if (isset($_POST['postsperpage'])) {
+    $postsPerPage = $_POST['postsperpage'];
+  } else {
+    $postsPerPage = -1;
+  }
+
+  if ($search_query) {
+    if ($search_filter == 'all') {
+      $args = array(
+        'post_type' => 'submission',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        's' => $search_query,
+        'post_status' => 'publish',
+      );
+    } else {
+      $args = array(
+        'post_type' => 'submission',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        's' => $search_query,
+        'post_status' => 'publish',
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'submission_year',
+            'field'    => 'term_id',
+            'terms'    => $search_filter,
+          ),
+        ),
+      );
+    }
+  } else {
+    if ($search_filter == 'all') {
+      $args = array(
+        'post_type' => 'submission',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'post_status' => 'publish',
+      );
+    } else {
+      $args = array(
+        'post_type' => 'submission',
+        'posts_per_page' => $postsPerPage,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'post_status' => 'publish',
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'submission_year',
+            'field'    => 'term_id',
+            'terms'    => $search_filter,
+          ),
+        ),
+      );
+    }
+  }
+
+  $ajaxposts = new WP_Query($args);
+
+  $response = '';
+
+  if ($ajaxposts->have_posts()) {
+
+    $response .= '<div class="grid grid-cols-1 gap-0">';
+
+    while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+
+      $title =  get_the_title();
+      $submission_pdf = get_field('submission_pdf', get_the_ID());
+      $external_link_submission = get_field('external_link_submission', get_the_ID());
+      $submission_pdf_link = '';
+      $month = get_the_terms(get_the_ID(), 'submission_year');
+      $month_name = '';
+      $year_name = '';
+      if ($month) {
+        $month_name = $month[0]->name;
+        $parent_id = $month[0]->parent;
+        //$year_name = get_term_by('id', $parent_id, 'submission_year');
+        $year_name = get_term($parent_id)->name;
+      }
+      if ($submission_pdf) {
+        $submission_pdf_link = $submission_pdf['url'];
+      } else {
+        if ($external_link_submission) {
+          $submission_pdf_link = $external_link_submission;
+        }
+      }
+      $response .= '<div class="p-4 border-b border-gray-200">';
+      $response .= '<div class="">
+            <div class="flex">
+              <div class="w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
+                <div>' . $year_name . '</div>
+                <div>' . $month_name . '</div>
+              </div>
+              <div class="w-9/12"><a href="' . $submission_pdf_link . '" target="_blank" class="hover:underline">' . $title . '</a></div>
+              <div class="w-1/12 text-right"><a href="' . $submission_pdf_link . '" target="_blank" class="inline-block opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>
+            </div>
+          </div>';
+      $response .= '</div>';
+
+    endwhile;
+
+    $response .= '</div>';
+    $response .= '<div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>';
+  } else {
+    $response = '<div class="text-center py-4 px-8">No Posts Found</div>';
+  }
+
+  echo $response;
+  exit;
+}
+add_action('wp_ajax_filter_submissions', 'filter_submissions');
+add_action('wp_ajax_nopriv_filter_submissions', 'filter_submissions');
+
+/* ###### Ajax function for pagination ###### */
+add_action('wp_ajax_pagination_load_submissions', 'pagination_load_submissions');
+add_action('wp_ajax_nopriv_pagination_load_submissions', 'pagination_load_submissions');
+function pagination_load_submissions()
+{
+  global $wpdb;
+  // Set default variables
+  $msg = '';
+  if (isset($_POST['page'])) {
+    // Sanitize the received page
+    $page = sanitize_text_field($_POST['page']);
+    $per_page = sanitize_text_field($_POST['per_page']);
+    $categories = sanitize_text_field($_POST['categories']);
+    $categories = json_decode(stripslashes($categories));
+    $cur_page = $page;
+    $page -= 1;
+    $previous_btn = true;
+    $next_btn = true;
+    $first_btn = true;
+    $last_btn = true;
+    $start = $page * $per_page;
+
+    if ($categories) {
+      $all_reports = new WP_Query(
+        array(
+          'post_type'         => 'submission',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'submission_year',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'submission',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => -1,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'submission_year',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+    } else {
+      $all_reports = new WP_Query(
+        array(
+          'post_type'         => 'submission',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'submission',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => -1
+        )
+      );
+    }
+
+    $count = $count->post_count;
+    if ($all_reports->have_posts()) {
+      echo '<div class="grid grid-cols-1 gap-0 shadow-lg border border-gray-200 rounded-lg">';
+      while ($all_reports->have_posts()) {
+        $all_reports->the_post(); ?>
+        <?php
+        $title =  get_the_title();
+        $submission_pdf = get_field('submission_pdf', get_the_ID());
+        $external_link_submission = get_field('external_link_submission', get_the_ID());
+        $submission_pdf_link = '';
+        $month = get_the_terms(get_the_ID(), 'submission_year');
+        $month_name = '';
+        $year_name = '';
+        if ($month) {
+          $month_name = $month[0]->name;
+          $parent_id = $month[0]->parent;
+          //$year_name = get_term_by('id', $parent_id, 'submission_year');
+          $year_name = get_term($parent_id)->name;
+        }
+        if ($submission_pdf) {
+          $submission_pdf_link = $submission_pdf['url'];
+        } else {
+          if ($external_link_submission) {
+            $submission_pdf_link = $external_link_submission;
+          }
+        }
+        ?>
+        <div class="p-4 border-b border-gray-200">
+          <div class="">
+            <div class="flex">
+              <div class="w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
+                <div><?php echo $year_name ?></div>
+                <div><?php echo $month_name ?></div>
+              </div>
+              <div class="w-9/12"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="hover:underline"><?php echo $title ?></a></div>
+              <?php if ($submission_pdf_link) : ?>
+                <div class="w-1/12 text-right"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="inline-block opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
+              <?php endif; ?>
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+      echo '</div>';
+    }
+    // Paginations
+    $no_of_paginations = ceil($count / $per_page);
+    if ($cur_page >= 7) {
+      $start_loop = $cur_page - 3;
+      if ($no_of_paginations > $cur_page + 3)
+        $end_loop = $cur_page + 3;
+      else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
+        $start_loop = $no_of_paginations - 6;
+        $end_loop = $no_of_paginations;
+      } else {
+        $end_loop = $no_of_paginations;
+      }
+    } else {
+      $start_loop = 1;
+      if ($no_of_paginations > 7)
+        $end_loop = 7;
+      else
+        $end_loop = $no_of_paginations;
+    }
+    // Pagination Buttons logic
+    if ($no_of_paginations > 1) :
+      ?>
+      <div class='reports-pagination mt-12'>
+        <ul>
+          <?php
+          if ($first_btn && $cur_page > 1) { ?>
+            <li data-page='1' class='active'>
+              &lt;&lt;</li>
+          <?php
+          } else if ($first_btn) { ?>
+            <li data-page='1' class='inactive'>
+              &lt;&lt;</li>
+          <?php
+          }
+          if ($previous_btn && $cur_page > 1) {
+            $pre = $cur_page - 1; ?>
+            <li data-page='<?php echo $pre; ?>' class='active'>
+              &lt;</li>
+          <?php
+          } else if ($previous_btn) { ?>
+            <li class='inactive p-2'>
+              &lt;</li>
+            <?php
+          }
+          for ($i = $start_loop; $i <= $end_loop; $i++) {
+            if ($cur_page == $i) { ?>
+              <li data-page='<?php echo $i; ?>' class='selected'><?php echo $i; ?></li>
+            <?php
+            } else { ?>
+              <li data-page='<?php echo $i; ?>' class='active'><?php echo $i; ?></li>
+            <?php
+            }
+          }
+          if ($next_btn && $cur_page < $no_of_paginations) {
+            $nex = $cur_page + 1; ?>
+            <li data-page='<?php echo $nex; ?>' class='active'>&gt;</li>
+          <?php
+          } else if ($next_btn) { ?>
+            <li class='inactive'>&gt;</li>
+          <?php
+          }
+
+          if ($last_btn && $cur_page < $no_of_paginations) { ?>
+            <li data-page='<?php echo $no_of_paginations; ?>' class='active'>&gt;&gt;</li>
+          <?php
+          } else if ($last_btn) { ?>
+            <li data-page='<?php echo $no_of_paginations; ?>' class='inactive'>&gt;&gt;</li>
+          <?php
+          } ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 <?php
   }
   exit();

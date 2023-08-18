@@ -62,6 +62,9 @@ if (have_rows('section', $the_id)) :
     elseif (get_row_layout() == 'scholarship_archive') :
       get_template_part('template-parts/sections/scholarship_archive');
 
+    elseif (get_row_layout() == 'submissions_archive') :
+      get_template_part('template-parts/sections/submissions_archive');
+
     // elseif (get_row_layout() == 'image_center') :
     //   get_template_part('template-parts/sections/image_center');
 

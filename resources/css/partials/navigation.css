@@ -26,7 +26,7 @@
 }
 
 #footer-menu .menu-ul {
-  @apply flex justify-between;
+  @apply flex justify-end;
   > li {
     > a {
       @apply block py-4 px-6 font-semibold uppercase text-white hover:text-white hover:underline transition duration-200;

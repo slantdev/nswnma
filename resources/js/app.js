@@ -114,4 +114,35 @@ jQuery(document).ready(function ($) {
       },
     });
   });
+
+  // Submission Search
+  $('#submission-search-button').on('click', function (event) {
+    let search_query = $('#submission-search').val();
+    let search_filter = $('#submission-filter').find(':selected').val();
+    // console.log('Query :', search_query);
+    // console.log('Filter :', search_filter);
+
+    $.ajax({
+      type: 'POST',
+      url: '/wp-admin/admin-ajax.php',
+      dataType: 'html',
+      data: {
+        action: 'filter_submissions',
+        query: search_query,
+        filter: search_filter,
+      },
+      beforeSend: function () {
+        $('#submission-search-button .spinner-border')
+          .removeClass('opacity-0')
+          .addClass('opacity-100');
+        $('.submissions-grid .blocker').show();
+      },
+      success: function (res) {
+        $('.submissions-grid').html(res);
+        $('#submission-search-button .spinner-border')
+          .removeClass('opacity-100')
+          .addClass('opacity-0');
+      },
+    });
+  });
 });

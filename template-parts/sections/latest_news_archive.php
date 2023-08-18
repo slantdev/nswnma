@@ -121,9 +121,9 @@ if (is_admin()) {
             categories: categoriesString,
             action: 'pagination_load_posts',
           };
-          console.log(data);
+          //console.log(data);
           $.post(ajaxurl, data, function(response) {
-            console.log(response);
+            //console.log(response);
             $('.posts-grid').html('').prepend(response);
             $('.posts-container .blocker').hide();
           });
