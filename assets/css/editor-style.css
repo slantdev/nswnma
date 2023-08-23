@@ -5539,6 +5539,10 @@ details.collapse summary::-webkit-details-marker {
   gap: 5rem;
 }
 
+.gap-4 {
+  gap: 1rem;
+}
+
 .gap-x-2 {
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
@@ -5714,6 +5718,11 @@ details.collapse summary::-webkit-details-marker {
 .border-\[\#dcdcde\] {
   --tw-border-opacity: 1;
   border-color: rgb(220 220 222 / var(--tw-border-opacity));
+}
+
+.border-gray-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
 
 .bg-primary {

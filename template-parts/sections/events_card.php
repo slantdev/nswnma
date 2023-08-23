@@ -138,7 +138,7 @@ $posts_per_page = $posts['posts_per_page'];
             <div class="border rounded-md p-10 bg-slate-50">
               <div class="flex gap-x-10">
                 <div class="w-1/2">
-                  <h3 class="h4 text-brand-blue mb-8 mt-2 tracking-tight leading-snug font-bold"><?php echo $title ?></h3>
+                  <h3 class="h4 text-brand-blue mb-8 mt-2 tracking-tight leading-snug font-bold"><a href="<?php echo $link ?>" class="hover:underline"><?php echo $title ?></a></h3>
                   <div class="prose prose-lg">
                     <div><?php echo $event_date ?></div>
                     <div class="mt-8">
@@ -153,11 +153,12 @@ $posts_per_page = $posts['posts_per_page'];
                       <?php endif; ?>
                     </div>
                   </div>
-                  <?php if ($registration_link) : ?>
-                    <div class="mt-8">
+                  <div class="mt-8 inline-flex gap-4">
+                    <?php if ($registration_link) : ?>
                       <a href="<?php echo $registration_link['url'] ?>" class="btn btn-primary">Register</a>
-                    </div>
-                  <?php endif; ?>
+                    <?php endif; ?>
+                    <a href="<?php echo $link ?>" class="btn btn-secondary">Find Out More</a>
+                  </div>
                 </div>
                 <div class="w-1/2">
                   <?php if ($img_src) : ?>
