@@ -172,3 +172,95 @@ function text_left_image_right_layout_thumbnail($thumbnail, $field, $layout)
 {
   return get_stylesheet_directory_uri() . '/assets/images/layouts/text_left_image_right.jpg';
 }
+
+
+/*
+ * Add columns to event post list
+ */
+function add_acf_columns($columns)
+{
+  return array_merge($columns, array(
+    'date_time' => __('Date & Time'),
+    'location'   => __('Location')
+  ));
+}
+add_filter('manage_event_posts_columns', 'add_acf_columns');
+
+/*
+ * Add columns to event post list
+ */
+function event_custom_column($column, $post_id)
+{
+  $id = $post_id;
+  $set_multidate_event = get_field('set_multidate_event', $id);
+  $single_event_date = '';
+  $single_start_time = '';
+  $single_end_time = '';
+  $multi_start_date = '';
+  $multi_start_date_start_time = '';
+  $multi_start_date_end_time = '';
+  $multi_end_date = '';
+  $multi_end_date_start_time = '';
+  $multi_end_date_end_time = '';
+
+  $location = get_field('location', $id);
+
+  $event_date = '';
+  if ($set_multidate_event) {
+    $multidate_event = get_field('multidate_event', $id);
+    $multi_start_date = $multidate_event['start_date']['start_date'];
+    $multi_start_date_start_time = $multidate_event['start_date']['start_time'];
+    $multi_start_date_end_time = $multidate_event['start_date']['end_time'];
+    $multi_end_date = $multidate_event['end_date']['end_date'];
+    $multi_end_date_start_time = $multidate_event['end_date']['start_time'];
+    $multi_end_date_end_time = $multidate_event['end_date']['end_time'];
+    if ($multi_start_date) {
+      $event_date .= $multi_start_date;
+    }
+    if ($multi_start_date_start_time) {
+      $event_date .= ' (' . $multi_start_date_start_time;
+    }
+    if ($multi_start_date_end_time) {
+      $event_date .= ' - ' . $multi_start_date_end_time . ')';
+    } else {
+      $event_date .= ')';
+    }
+    if ($multi_end_date) {
+      $event_date .= ' - ' . $multi_end_date;
+    }
+    if ($multi_end_date_start_time) {
+      $event_date .= ' (' . $multi_end_date_start_time;
+    }
+    if ($multi_end_date_end_time) {
+      $event_date .= ' - ' . $multi_end_date_end_time . ')';
+    } else {
+      $event_date .= ')';
+    }
+  } else {
+    $single_date_event = get_field('single_date_event', $id);
+    $single_event_date = $single_date_event['event_date'];
+    $single_start_time = $single_date_event['start_time'];
+    $single_end_time = $single_date_event['end_time'];
+    if ($single_event_date) {
+      $event_date .= $single_event_date;
+    }
+    if ($single_start_time) {
+      $event_date .= ' (' . $single_start_time;
+    }
+    if ($single_end_time) {
+      $event_date .= ' - ' . $single_end_time . ')';
+    } else {
+      $event_date .= ')';
+    }
+  }
+
+  switch ($column) {
+    case 'date_time':
+      echo $event_date;
+      break;
+    case 'location':
+      echo $location;
+      break;
+  }
+}
+add_action('manage_event_posts_custom_column', 'event_custom_column', 10, 2);

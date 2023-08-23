@@ -73,7 +73,7 @@ $posts_per_page = $posts['posts_per_page'];
             $multi_start_date_end_time = '';
             $multi_end_date = '';
             $multi_end_date_start_time = '';
-            $multi_end_dateend_time = '';
+            $multi_end_date_end_time = '';
 
             $location = get_field('location', $id);
             $cpd_hours = get_field('cpd_hours', $id);
