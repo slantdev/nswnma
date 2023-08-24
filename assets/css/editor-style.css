@@ -5415,6 +5415,10 @@ details.collapse summary::-webkit-details-marker {
   max-width: 56rem;
 }
 
+.max-w-\[800px\] {
+  max-width: 800px;
+}
+
 .flex-none {
   flex: none;
 }
