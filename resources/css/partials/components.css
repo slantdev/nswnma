@@ -137,7 +137,8 @@
 }
 
 .posts-pagination,
-.reports-pagination {
+.reports-pagination,
+.events-pagination {
   > ul {
     @apply flex items-center justify-center gap-x-1;
     > li {

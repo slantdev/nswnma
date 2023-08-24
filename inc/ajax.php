@@ -112,11 +112,7 @@ add_action('wp_ajax_filter_posts', 'filter_posts');
 add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
 
 
-/* ########################################## */
-/* ########################################## */
 /* ###### Ajax function for pagination ###### */
-/* ########################################## */
-/* ########################################## */
 add_action('wp_ajax_pagination_load_posts', 'pagination_load_posts');
 add_action('wp_ajax_nopriv_pagination_load_posts', 'pagination_load_posts');
 function pagination_load_posts()
@@ -306,7 +302,6 @@ function pagination_load_posts()
   }
   exit();
 }
-
 
 function filter_reports()
 {
@@ -612,6 +607,599 @@ function pagination_load_reports()
   exit();
 }
 
+/* ###### Ajax function for pagination ###### */
+add_action('wp_ajax_pagination_load_events', 'pagination_load_events');
+add_action('wp_ajax_nopriv_pagination_load_events', 'pagination_load_events');
+function pagination_load_events()
+{
+  global $wpdb;
+  // Set default variables
+  $msg = '';
+  if (isset($_POST['page'])) {
+    // Sanitize the received page
+    $page = sanitize_text_field($_POST['page']);
+    $per_page = sanitize_text_field($_POST['per_page']);
+    $categories = sanitize_text_field($_POST['categories']);
+    $categories = json_decode(stripslashes($categories));
+    $cur_page = $page;
+    $page -= 1;
+    $previous_btn = true;
+    $next_btn = true;
+    $first_btn = true;
+    $last_btn = true;
+    $start = $page * $per_page;
+
+    if ($categories) {
+      $all_events = new WP_Query(
+        array(
+          'post_type'         => 'event',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'event_topic',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'event',
+          'post_status '      => 'publish',
+          'posts_per_page'    => -1,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'event_topic',
+              'field' => 'term_id',
+              'terms' => $categories
+            )
+          )
+        )
+      );
+    } else {
+      $all_events = new WP_Query(
+        array(
+          'post_type'         => 'event',
+          'post_status '      => 'publish',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
+          'posts_per_page'    => $per_page,
+          'offset'            => $start
+        )
+      );
+      $count = new WP_Query(
+        array(
+          'post_type'         => 'event',
+          'post_status '      => 'publish',
+          'posts_per_page'    => -1
+        )
+      );
+    }
+
+    $count = $count->post_count;
+    if ($all_events->have_posts()) {
+      echo '<div class="grid grid-cols-1 gap-y-10">';
+      while ($all_events->have_posts()) {
+        $all_events->the_post(); ?>
+        <?php
+        $id = get_the_ID();
+        $set_multidate_event = get_field('set_multidate_event', $id);
+        $single_event_date = '';
+        $single_start_time = '';
+        $single_end_time = '';
+        $multi_start_date = '';
+        $multi_start_date_start_time = '';
+        $multi_start_date_end_time = '';
+        $multi_end_date = '';
+        $multi_end_date_start_time = '';
+        $multi_end_date_end_time = '';
+
+        $location = get_field('location', $id);
+        $cpd_hours = get_field('cpd_hours', $id);
+        $cost = get_field('cost', $id);
+        $registration_link = get_field('registration_link', $id);
+
+        $excerpt = wp_trim_words(get_the_excerpt(), $num_words = 30, $more = null);
+        $img_src = get_the_post_thumbnail_url($id, 'large');
+        $title =  get_the_title();
+        $date =  get_the_date();
+        $link = get_the_permalink();
+
+        $event_date = '';
+        if ($set_multidate_event) {
+          $multidate_event = get_field('multidate_event', $id);
+          $multi_start_date = $multidate_event['start_date']['start_date'];
+          $multi_start_date_start_time = $multidate_event['start_date']['start_time'];
+          $multi_start_date_end_time = $multidate_event['start_date']['end_time'];
+          $multi_end_date = $multidate_event['end_date']['end_date'];
+          $multi_end_date_start_time = $multidate_event['end_date']['start_time'];
+          $multi_end_date_end_time = $multidate_event['end_date']['end_time'];
+          if ($multi_start_date) {
+            $event_date .= $multi_start_date;
+          }
+          if ($multi_start_date_start_time) {
+            $event_date .= ' (' . $multi_start_date_start_time;
+          }
+          if ($multi_start_date_end_time) {
+            $event_date .= ' - ' . $multi_start_date_end_time . ')';
+          } else {
+            $event_date .= ')';
+          }
+          if ($multi_end_date) {
+            $event_date .= ' - ' . $multi_end_date;
+          }
+          if ($multi_end_date_start_time) {
+            $event_date .= ' (' . $multi_end_date_start_time;
+          }
+          if ($multi_end_date_end_time) {
+            $event_date .= ' - ' . $multi_end_date_end_time . ')';
+          } else {
+            $event_date .= ')';
+          }
+        } else {
+          $single_date_event = get_field('single_date_event', $id);
+          $single_event_date = $single_date_event['event_date'];
+          $single_start_time = $single_date_event['start_time'];
+          $single_end_time = $single_date_event['end_time'];
+          if ($single_event_date) {
+            $event_date .= $single_event_date;
+          }
+          if ($single_start_time) {
+            $event_date .= ' (' . $single_start_time;
+          }
+          if ($single_end_time) {
+            $event_date .= ' - ' . $single_end_time . ')';
+          } else {
+            $event_date .= ')';
+          }
+        }
+        ?>
+        <div class="border rounded-md p-10 bg-slate-50">
+          <div class="flex gap-x-10">
+            <div class="w-1/2">
+              <h3 class="h4 text-brand-blue mb-8 mt-2 tracking-tight leading-snug font-bold"><a href="<?php echo $link ?>" class="hover:underline"><?php echo $title ?></a></h3>
+              <div class="prose prose-lg">
+                <div><?php echo $event_date ?></div>
+                <div class="mt-8">
+                  <?php if ($location) : ?>
+                    <strong>Location:</strong> <?php echo $location ?><br />
+                  <?php endif; ?>
+                  <?php if ($cpd_hours) : ?>
+                    <strong>CPD Hours:</strong> <?php echo $cpd_hours ?><br />
+                  <?php endif; ?>
+                  <?php if ($cost) : ?>
+                    <strong>Cost:</strong> <?php echo $cost ?>
+                  <?php endif; ?>
+                </div>
+              </div>
+              <div class="mt-8 inline-flex gap-4">
+                <?php if ($registration_link) : ?>
+                  <a href="<?php echo $registration_link['url'] ?>" class="btn btn-primary">Register</a>
+                <?php endif; ?>
+                <a href="<?php echo $link ?>" class="btn btn-secondary">Find Out More</a>
+              </div>
+            </div>
+            <div class="w-1/2">
+              <?php if ($img_src) : ?>
+                <div class="aspect-w-6 aspect-h-4"><img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg"></div>
+              <?php endif; ?>
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+      echo '</div>';
+    }
+    // Paginations
+    $no_of_paginations = ceil($count / $per_page);
+    if ($cur_page >= 7) {
+      $start_loop = $cur_page - 3;
+      if ($no_of_paginations > $cur_page + 3)
+        $end_loop = $cur_page + 3;
+      else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
+        $start_loop = $no_of_paginations - 6;
+        $end_loop = $no_of_paginations;
+      } else {
+        $end_loop = $no_of_paginations;
+      }
+    } else {
+      $start_loop = 1;
+      if ($no_of_paginations > 7)
+        $end_loop = 7;
+      else
+        $end_loop = $no_of_paginations;
+    }
+    // Pagination Buttons logic
+    if ($no_of_paginations > 1) :
+      ?>
+      <div class='events-pagination mt-12'>
+        <ul>
+          <?php
+          if ($first_btn && $cur_page > 1) { ?>
+            <li data-page='1' class='active'>
+              &lt;&lt;</li>
+          <?php
+          } else if ($first_btn) { ?>
+            <li data-page='1' class='inactive'>
+              &lt;&lt;</li>
+          <?php
+          }
+          if ($previous_btn && $cur_page > 1) {
+            $pre = $cur_page - 1; ?>
+            <li data-page='<?php echo $pre; ?>' class='active'>
+              &lt;</li>
+          <?php
+          } else if ($previous_btn) { ?>
+            <li class='inactive p-2'>
+              &lt;</li>
+            <?php
+          }
+          for ($i = $start_loop; $i <= $end_loop; $i++) {
+            if ($cur_page == $i) { ?>
+              <li data-page='<?php echo $i; ?>' class='selected'><?php echo $i; ?></li>
+            <?php
+            } else { ?>
+              <li data-page='<?php echo $i; ?>' class='active'><?php echo $i; ?></li>
+            <?php
+            }
+          }
+          if ($next_btn && $cur_page < $no_of_paginations) {
+            $nex = $cur_page + 1; ?>
+            <li data-page='<?php echo $nex; ?>' class='active'>&gt;</li>
+          <?php
+          } else if ($next_btn) { ?>
+            <li class='inactive'>&gt;</li>
+          <?php
+          }
+
+          if ($last_btn && $cur_page < $no_of_paginations) { ?>
+            <li data-page='<?php echo $no_of_paginations; ?>' class='active'>&gt;&gt;</li>
+          <?php
+          } else if ($last_btn) { ?>
+            <li data-page='<?php echo $no_of_paginations; ?>' class='inactive'>&gt;&gt;</li>
+          <?php
+          } ?>
+        </ul>
+      </div>
+      <?php
+    endif;
+  }
+  exit();
+}
+
+function filter_events()
+{
+  $search_query = $_POST['query'];
+  $search_suburb = $_POST['suburb'];
+  $search_topic = $_POST['topic'];
+  $search_month = $_POST['month'];
+  if (isset($_POST['postsperpage'])) {
+    $postsPerPage = $_POST['postsperpage'];
+  } else {
+    $postsPerPage = -1;
+  }
+
+  // if ($search_query) {
+  //   if ($search_suburb == 'all') {
+  //     $args = array(
+  //       'post_type' => 'event',
+  //       'posts_per_page' => $postsPerPage,
+  //       'orderby' => 'menu_order',
+  //       'order' => 'ASC',
+  //       's' => $search_query,
+  //       'post_status' => 'publish',
+  //     );
+  //   } else {
+  //     $args = array(
+  //       'post_type' => 'event',
+  //       'posts_per_page' => $postsPerPage,
+  //       'orderby' => 'menu_order',
+  //       'order' => 'ASC',
+  //       's' => $search_query,
+  //       'post_status' => 'publish',
+  //       'tax_query' => array(
+  //         array(
+  //           'taxonomy' => 'event_suburb',
+  //           'field'    => 'term_id',
+  //           'terms'    => $search_suburb,
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // } else {
+  //   if ($search_suburb == 'all') {
+  //     $args = array(
+  //       'post_type' => 'event',
+  //       'posts_per_page' => $postsPerPage,
+  //       'orderby' => 'menu_order',
+  //       'order' => 'ASC',
+  //       'post_status' => 'publish',
+  //     );
+  //   } else {
+  //     $args = array(
+  //       'post_type' => 'event',
+  //       'posts_per_page' => $postsPerPage,
+  //       'orderby' => 'menu_order',
+  //       'order' => 'ASC',
+  //       'post_status' => 'publish',
+  //       'tax_query' => array(
+  //         array(
+  //           'taxonomy' => 'event_suburb',
+  //           'field'    => 'term_id',
+  //           'terms'    => $search_suburb,
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  $defaults = array(
+    'post_type' => 'event',
+    'posts_per_page' => $postsPerPage,
+    'orderby' => 'menu_order',
+    'order' => 'ASC',
+    'post_status' => 'publish',
+  );
+
+  if ($search_suburb != 'all' && $search_topic != 'all' && $search_month != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $search_topic,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $search_month,
+        ),
+      ),
+    );
+  } else if ($search_suburb != 'all' && $search_topic != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $search_topic,
+        ),
+      ),
+    );
+  } else if ($search_suburb != 'all' && $search_month != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $search_month,
+        ),
+      ),
+    );
+  } else if ($search_suburb != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+      ),
+    );
+  }
+
+  if ($search_query && $search_suburb != 'all' && $search_topic != 'all' && $search_month != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $search_topic,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $search_month,
+        ),
+      ),
+    );
+  } else if ($search_query && $search_suburb != 'all' && $search_topic != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $search_topic,
+        ),
+      ),
+    );
+  } else if ($search_query && $search_suburb != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $search_suburb,
+        ),
+      ),
+    );
+  } else if ($search_query) {
+    $args = array(
+      's' => $search_query,
+    );
+  }
+
+  $args = wp_parse_args($args, $defaults);
+
+  $ajaxposts = new WP_Query($args);
+
+  $response = '';
+
+  if ($ajaxposts->have_posts()) {
+
+    $response .= '<div class="grid grid-cols-1 gap-y-10">';
+
+    while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+
+      $id = get_the_ID();
+      $set_multidate_event = get_field('set_multidate_event', $id);
+      $single_event_date = '';
+      $single_start_time = '';
+      $single_end_time = '';
+      $multi_start_date = '';
+      $multi_start_date_start_time = '';
+      $multi_start_date_end_time = '';
+      $multi_end_date = '';
+      $multi_end_date_start_time = '';
+      $multi_end_date_end_time = '';
+
+      $location = get_field('location', $id);
+      $cpd_hours = get_field('cpd_hours', $id);
+      $cost = get_field('cost', $id);
+      $registration_link = get_field('registration_link', $id);
+
+      $excerpt = wp_trim_words(get_the_excerpt(), $num_words = 30, $more = null);
+      $img_src = get_the_post_thumbnail_url($id, 'large');
+      $title =  get_the_title();
+      $date =  get_the_date();
+      $link = get_the_permalink();
+
+      $event_date = '';
+      if ($set_multidate_event) {
+        $multidate_event = get_field('multidate_event', $id);
+        $multi_start_date = $multidate_event['start_date']['start_date'];
+        $multi_start_date_start_time = $multidate_event['start_date']['start_time'];
+        $multi_start_date_end_time = $multidate_event['start_date']['end_time'];
+        $multi_end_date = $multidate_event['end_date']['end_date'];
+        $multi_end_date_start_time = $multidate_event['end_date']['start_time'];
+        $multi_end_date_end_time = $multidate_event['end_date']['end_time'];
+        if ($multi_start_date) {
+          $event_date .= $multi_start_date;
+        }
+        if ($multi_start_date_start_time) {
+          $event_date .= ' (' . $multi_start_date_start_time;
+        }
+        if ($multi_start_date_end_time) {
+          $event_date .= ' - ' . $multi_start_date_end_time . ')';
+        } else {
+          $event_date .= ')';
+        }
+        if ($multi_end_date) {
+          $event_date .= ' - ' . $multi_end_date;
+        }
+        if ($multi_end_date_start_time) {
+          $event_date .= ' (' . $multi_end_date_start_time;
+        }
+        if ($multi_end_date_end_time) {
+          $event_date .= ' - ' . $multi_end_date_end_time . ')';
+        } else {
+          $event_date .= ')';
+        }
+      } else {
+        $single_date_event = get_field('single_date_event', $id);
+        $single_event_date = $single_date_event['event_date'];
+        $single_start_time = $single_date_event['start_time'];
+        $single_end_time = $single_date_event['end_time'];
+        if ($single_event_date) {
+          $event_date .= $single_event_date;
+        }
+        if ($single_start_time) {
+          $event_date .= ' (' . $single_start_time;
+        }
+        if ($single_end_time) {
+          $event_date .= ' - ' . $single_end_time . ')';
+        } else {
+          $event_date .= ')';
+        }
+      }
+      $response = '';
+      $response .= '<div class="border rounded-md p-10 bg-slate-50">
+        <div class="flex gap-x-10">
+          <div class="w-1/2">
+            <h3 class="h4 text-brand-blue mb-8 mt-2 tracking-tight leading-snug font-bold"><a href="' . $link . '" class="hover:underline">' . $title . '</a></h3>';
+      $response .= '<div class="prose prose-lg">';
+      $response .= '<div>' . $event_date . '</div>';
+      $response .= '<div class="mt-8">';
+      if ($location) {
+        $response .= '<strong>Location:</strong> ' . $location . '<br />';
+      }
+      if ($cpd_hours) {
+        $response .= '<strong>CPD Hours:</strong> ' . $cpd_hours . '<br />';
+      }
+      if ($cost) {
+        $response .= '<strong>Cost:</strong> ' . $cost;
+      }
+      $response .= '</div>';
+      $response .= '</div>';
+      $response .= '<div class="mt-8 inline-flex gap-4">';
+      if ($registration_link) {
+        $response .= '<a href="' . $registration_link['url'] . '" class="btn btn-primary">Register</a>';
+      }
+      $response .= '<a href="' . $link . '" class="btn btn-secondary">Find Out More</a>';
+      $response .= '</div>';
+      $response .= '</div>';
+      $response .= '<div class="w-1/2">';
+      if ($img_src) {
+        $response .= '<div class="aspect-w-6 aspect-h-4"><img src="' . $img_src . '" alt="" class="w-full h-full object-cover rounded-lg"></div>';
+      }
+      $response .= '</div>';
+      $response .= '</div>';
+      $response .= '</div>';
+
+    endwhile;
+
+    $response .= '</div>';
+    $response .= '<div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>';
+  } else {
+    $response = '<div class="text-center py-4 px-8">No Posts Found</div>';
+  }
+
+  echo $response;
+  exit;
+}
+add_action('wp_ajax_filter_events', 'filter_events');
+add_action('wp_ajax_nopriv_filter_events', 'filter_events');
+
 function filter_submissions()
 {
   $search_query = $_POST['query'];
@@ -876,8 +1464,7 @@ function pagination_load_submissions()
         $end_loop = $no_of_paginations;
     }
     // Pagination Buttons logic
-    if ($no_of_paginations > 1) :
-      ?>
+    if ($no_of_paginations > 1) : ?>
       <div class='reports-pagination mt-12'>
         <ul>
           <?php
@@ -928,6 +1515,7 @@ function pagination_load_submissions()
         </ul>
       </div>
     <?php endif; ?>
+
 <?php
   }
   exit();

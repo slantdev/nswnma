@@ -6378,6 +6378,16 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 14px !important;
 }
 
+.\!py-\[8px\] {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.\!py-\[6px\] {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
 .pt-0 {
   padding-top: 0px;
 }

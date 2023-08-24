@@ -84,5 +84,31 @@
         }
       });
     });
+    $("#events-search-button").on("click", function(event) {
+      let search_query = $("#events-search").val();
+      let search_suburb = $("#events-suburb").find(":selected").val();
+      let search_topic = $("#events-topic").find(":selected").val();
+      let search_month = $("#events-month").find(":selected").val();
+      $.ajax({
+        type: "POST",
+        url: "/wp-admin/admin-ajax.php",
+        dataType: "html",
+        data: {
+          action: "filter_events",
+          query: search_query,
+          suburb: search_suburb,
+          topic: search_topic,
+          month: search_month
+        },
+        beforeSend: function() {
+          $("#events-search-button .spinner-border").removeClass("opacity-0").addClass("opacity-100");
+          $(".events-grid .blocker").show();
+        },
+        success: function(res) {
+          $(".events-grid").html(res);
+          $("#events-search-button .spinner-border").removeClass("opacity-100").addClass("opacity-0");
+        }
+      });
+    });
   });
 })();

@@ -33,30 +33,85 @@ $description = $section_intro['description'];
       <div class="flex flex-col gap-y-4">
         <div class="flex gap-x-4 w-full items-center">
           <div class="w-1/2">
-            <input type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
+            <input id="events-search" name="events-search" type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
           </div>
           <div class="w-[24px] text-center flex-none">In</div>
           <div class="w-1/2">
-            <select name="" id="" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="">Suburb</option>
+            <select id="events-suburb" name="events-suburb" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
+              <option value="all" selected>Suburb</option>
+              <?php
+              $taxonomies = get_terms(array(
+                'taxonomy' => 'event_suburb',
+                'hide_empty' => true,
+                //'hide_empty' => false,
+                'orderby' => 'term_order'
+              ));
+
+              if (!empty($taxonomies)) :
+                $output = '';
+                foreach ($taxonomies as $category) {
+                  $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
+                }
+                echo $output;
+              endif;
+              ?>
             </select>
           </div>
         </div>
         <div class="flex gap-x-4 w-full items-center">
           <div class="w-1/2">
-            <select name="" id="" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="">Topic</option>
+            <select id="events-topic" name="events-topic" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
+              <option value="all" selected>Topic</option>
+              <?php
+              $taxonomies = get_terms(array(
+                'taxonomy' => 'event_topic',
+                'hide_empty' => true,
+                //'hide_empty' => false,
+                'orderby' => 'term_order'
+              ));
+
+              if (!empty($taxonomies)) :
+                $output = '';
+                foreach ($taxonomies as $category) {
+                  $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
+                }
+                echo $output;
+              endif;
+              ?>
             </select>
           </div>
           <div class="w-[24px] text-center flex-none"></div>
           <div class="w-1/2">
-            <select name="" id="" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="">Month</option>
+            <select id="events-month" name="events-month" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
+              <option value="all" selected>Month</option>
+              <?php
+              $taxonomies = get_terms(array(
+                'taxonomy' => 'event_month',
+                'hide_empty' => true,
+                //'hide_empty' => false,
+                'orderby' => 'term_order'
+              ));
+
+              if (!empty($taxonomies)) :
+                $output = '';
+                foreach ($taxonomies as $category) {
+                  $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
+                }
+                echo $output;
+              endif;
+              ?>
             </select>
           </div>
         </div>
         <div class="mt-5 flex items-center gap-x-4">
-          <button class="btn btn-red">SEARCH</button><button class="text-brand-bluedark font-medium">Reset Search</button>
+          <button id="events-search-button" type="button" class="btn btn-red !text-base !pr-10 !pl-4 !py-[8px] !inline-flex !flex-nowrap">
+            <svg class="spinner-border animate-spin ml-0 mr-2 h-5 w-5 text-white opacity-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="inline-block ml-1">Search</span>
+          </button>
+          <button id="events-search-reset" class="text-brand-bluedark font-medium">Reset Search</button>
         </div>
       </div>
     </div>
