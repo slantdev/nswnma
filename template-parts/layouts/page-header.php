@@ -49,16 +49,16 @@ if ($enable_page_header) :
 ?>
   <section>
     <div class="relative bg-cover bg-no-repeat bg-center" style="<?php echo $hero_bg_style; ?>">
-      <div class="container mx-auto h-full relative z-10 py-6 lg:py-10 xl:py-28">
+      <div class="container mx-auto h-full relative z-10 py-16 xl:py-28">
         <div class="md:w-3/4 lg:w-3/5 text-white">
           <?php
           if ($hero_title) {
-            echo '<h1 class="text-4xl md:text-[44px] font-light leading-[1.1em] mb-4">' . $hero_title . '</h1>';
+            echo '<h1 class="text-4xl md:text-[44px] font-light leading-[1.1em]">' . $hero_title . '</h1>';
           }
           ?>
           <?php
           if ($hero_text) {
-            echo '<div class="text-base md:text-lg">' . $hero_text . '</div>';
+            echo '<div class="text-base mt-4 md:text-lg">' . $hero_text . '</div>';
           }
           ?>
           <?php
@@ -75,13 +75,13 @@ if ($enable_page_header) :
     </div>
     <?php if ($enable_page_anchor_navigation) : ?>
       <section class="relative bg-brand-bluedark">
-        <div class="container py-12">
+        <div class="container py-6 lg:py-12">
           <div class="flex justify-center">
             <div class="dropdown dropdown-end">
-              <label tabindex="0" class="m-1 relative flex justify-between items-center text-2xl w-[460px] text-white pb-3 border-b border-brand-redchili">
+              <label tabindex="0" class="my-1 relative flex justify-between items-center text-xl lg:text-2xl text-white pb-3 border-b border-brand-redchili w-[240px] md:w-[460px]">
                 <span>On this page</span>
                 <div>
-                  <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '32', 'class' => 'text-white rotate-90')); ?>
+                  <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '32', 'class' => 'text-white rotate-90 h-6 md:h-8')); ?>
                 </div>
               </label>
               <?php if ($anchor_list) : ?>

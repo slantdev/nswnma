@@ -16,9 +16,9 @@ $description = $section_intro['description'];
 
     <?php if ($headline || $description) : ?>
       <div class="container">
-        <div class="w-1/2">
+        <div class="w-full lg:w-1/2">
           <?php if ($headline) : ?>
-            <h2 class="h3 text-brand-bluedark font-medium mb-8 mt-8"><?php echo $headline ?></h2>
+            <h2 class="h3 text-brand-bluedark font-medium mt-4 mb-6 md:my-8"><?php echo $headline ?></h2>
           <?php endif; ?>
           <?php if ($description) : ?>
             <div class="prose mx-auto">
@@ -31,12 +31,12 @@ $description = $section_intro['description'];
 
     <div class="container">
       <div class="flex flex-col gap-y-4">
-        <div class="flex gap-x-4 w-full items-center">
-          <div class="w-1/2">
+        <div class="flex flex-col md:flex-row gap-y-3 gap-x-4 w-full items-center">
+          <div class="w-full md:w-1/2">
             <input id="events-search" name="events-search" type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
           </div>
-          <div class="w-[24px] text-center flex-none">In</div>
-          <div class="w-1/2">
+          <div class="hidden md:block w-[24px] text-center flex-none">In</div>
+          <div class="w-full md:w-1/2">
             <select id="events-suburb" name="events-suburb" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
               <option value="all" selected>Suburb</option>
               <?php
@@ -58,8 +58,8 @@ $description = $section_intro['description'];
             </select>
           </div>
         </div>
-        <div class="flex gap-x-4 w-full items-center">
-          <div class="w-1/2">
+        <div class="flex flex-col md:flex-row gap-y-3 gap-x-4 w-full items-center">
+          <div class="w-full md:w-1/2">
             <select id="events-topic" name="events-topic" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
               <option value="all" selected>Topic</option>
               <?php
@@ -80,8 +80,8 @@ $description = $section_intro['description'];
               ?>
             </select>
           </div>
-          <div class="w-[24px] text-center flex-none"></div>
-          <div class="w-1/2">
+          <div class="hidden md:block w-[24px] text-center flex-none"></div>
+          <div class="w-full md:w-1/2">
             <select id="events-month" name="events-month" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
               <option value="all" selected>Month</option>
               <?php
@@ -103,7 +103,7 @@ $description = $section_intro['description'];
             </select>
           </div>
         </div>
-        <div class="mt-5 flex items-center gap-x-4">
+        <div class="mt-5 mb-4 md:mb-0 flex items-center gap-x-4">
           <button id="events-search-button" type="button" class="btn btn-red !text-base !pr-10 !pl-4 !py-[8px] !inline-flex !flex-nowrap">
             <svg class="spinner-border animate-spin ml-0 mr-2 h-5 w-5 text-white opacity-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

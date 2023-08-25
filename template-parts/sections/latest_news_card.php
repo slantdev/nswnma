@@ -42,8 +42,8 @@ $posts_per_page = $posts['posts_per_page'];
 
     <?php if ($post_taxonomy) : ?>
       <div class="container mt-12">
-        <div class="flex gap-x-8">
-          <div class="w-1/2">
+        <div class="flex flex-col lg:flex-row lg:gap-x-8">
+          <div class="w-full lg:w-1/2">
             <?php
             $args = array(
               'post_type' => 'post',
@@ -86,7 +86,7 @@ $posts_per_page = $posts['posts_per_page'];
               <?php wp_reset_postdata(); ?>
             <?php endif; ?>
           </div>
-          <div class="w-1/2">
+          <div class="w-full lg:w-1/2">
             <div class="flex flex-col gap-y-6 h-full">
               <?php
               $args = array(

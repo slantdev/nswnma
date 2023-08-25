@@ -8,10 +8,10 @@ $additional_links = get_field('additional_links', 'option');
 <footer class="bg-[#7C7C7C] text-white">
 
   <div class="container">
-    <div class="py-8 border-b border-solid border-white/40">
+    <div class="py-4 border-b border-solid border-white/40 lg:py-8">
       <?php
       if ($footer_links) {
-        echo '<div id="footer-menu" class="hidden bg-gray-100 w-full mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-transparent lg:block">';
+        echo '<div id="footer-menu" class="w-full">';
         echo '<ul id="menu-footer-menu" class="menu-ul">';
         foreach ($footer_links as $link) {
           echo '<li class="menu-item"><a href="' . $link['link']['url'] . '">' . $link['link']['title'] . '</a></li>';
@@ -22,7 +22,7 @@ $additional_links = get_field('additional_links', 'option');
       ?>
     </div>
 
-    <div class="flex justify-between items-center py-10 gap-x-16">
+    <div class="flex flex-col gap-y-8 lg:flex-row lg:justify-between lg:items-center lg:py-10 lg:gap-x-16">
       <div class="lg:w-1/3">
         <?php if ($about_company) : ?>
           <div class="block">
@@ -33,19 +33,19 @@ $additional_links = get_field('additional_links', 'option');
           </div>
         <?php endif; ?>
       </div>
-      <div class="lg:w-2/3 pt-8 pl-10">
+      <div class="lg:w-2/3 lg:pt-8 lg:pl-10">
         <?php if ($contact_info) : ?>
-          <div class="flex gap-x-16 text-sm justify-between">
+          <div class="flex flex-col lg:flex-row gap-y-6 text-sm justify-between lg:gap-x-16">
             <?php foreach ($contact_info as $contact) : ?>
-              <div class="w-1/2">
+              <div class="w-full lg:w-1/2">
                 <strong class="uppercase"><?php echo $contact['heading']; ?></strong><br />
                 <?php echo $contact['address']; ?>
               </div>
             <?php endforeach; ?>
           </div>
         <?php endif; ?>
-        <div class="flex gap-x-16 justify-end">
-          <div class="w-1/2 pl-8">
+        <div class="flex lg:gap-x-16 lg:justify-end">
+          <div class="lg:w-1/2 lg:pl-8">
             <?php if ($social_media) : ?>
               <div class="mt-4">
                 <div class="flex gap-x-2">
@@ -97,7 +97,7 @@ $additional_links = get_field('additional_links', 'option');
     </div>
   </div>
 
-  <div class="bg-white py-8 text-center text-gray-500 text-sm">
+  <div class="bg-white py-6 lg:py-8 text-center text-gray-500 text-sm">
     <div class="container max-w-[800px]">
       All content copyright &copy; <?php echo date_i18n('Y'); ?> NSW Nurses and Midwives' Association and authorised by S. Candish, General Secretary, NSW Nurses and Midwives' Association, 50 O'Dea Avenue Waterloo NSW 2017 Australia.
     </div>

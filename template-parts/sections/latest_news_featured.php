@@ -49,7 +49,7 @@ if (is_admin()) {
         $the_query = new WP_Query($args);
         ?>
         <?php if ($the_query->have_posts()) : ?>
-          <div class="flex flex-col gap-16">
+          <div class="flex flex-col lg:flex-row gap-16">
             <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
               <?php
               $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');
@@ -58,13 +58,13 @@ if (is_admin()) {
               $excerpt = wp_trim_words(get_the_excerpt(), $num_words = 30, $more = null);
               $link = get_the_permalink();
               ?>
-              <div class="flex gap-12">
-                <div class="w-1/2">
-                  <div class="h-full w-full relative rounded-lg overflow-hidden shadow-[0_3px_10px_rgba(0,0,0,0.24)]">
+              <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-1/2">
+                  <div class="aspect-w-16 aspect-h-9 lg:aspect-none lg:h-full lg:w-full relative rounded-lg overflow-hidden shadow-[0_3px_10px_rgba(0,0,0,0.24)]">
                     <a href="<?php echo $link ?>" class=""><img src="<?php echo $img_src ?>" alt="" class="absolute inset-0 object-cover h-full w-full z-0"></a>
                   </div>
                 </div>
-                <div class="w-1/2 py-6">
+                <div class="w-full lg:w-1/2 py-6">
                   <div class="mb-6"><?php echo $date ?></div>
                   <h3 class="h3 font-medium mb-6"><a href="<?php echo $link ?>" class="text-brand-blue hover:underline"><?php echo $title ?></a></h3>
                   <div class="prose prose-lg">

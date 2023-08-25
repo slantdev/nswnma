@@ -32,7 +32,7 @@ $info_box = get_sub_field('info_box');
         </div>
       <?php endif; ?>
       <?php if ($enable_filter) : ?>
-        <div class="info-box--filter flex gap-x-4 justify-center">
+        <div class="info-box--filter flex gap-x-4 xl:justify-center overflow-x-auto pb-6 px-3">
           <?php if ($filters_repeater) : ?>
             <?php foreach ($filters_repeater as $key => $filter) : ?>
               <button data-target="<?php echo $filter['filter_slug'] ?>" class="info-box--filter-btn inline-flex items-center py-3 px-6 rounded-full bg-white shadow-[0_3px_6px_rgba(0,0,0,0.16)] cursor-pointer hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transition duration-200">
@@ -54,7 +54,7 @@ $info_box = get_sub_field('info_box');
             ?>
             <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="my-10">
               <div class="card-swiper swiper">
-                <div class="swiper-wrapper grid grid-cols-3">
+                <div class="swiper-wrapper grid grid-cols-1 md:grid-cols-3">
                   <?php foreach (array_slice($info_box, 0, 3) as $info) : ?>
                     <?php
                     $icon = $info['icon'];
@@ -116,7 +116,7 @@ $info_box = get_sub_field('info_box');
                       $button_link = $info['button_link'];
                       ?>
                       <div class="swiper-slide">
-                        <div class="mx-4 px-10 py-14 rounded-lg border border-solid text-center">
+                        <div class="mx-2 md:mx-4 px-6 py-10 lg:px-10 lg:py-14 rounded-lg border border-solid text-center">
                           <?php if ($icon) : ?>
                             <div style="<?php echo $icon_style ?>">
                               <?php echo nswnma_icon(array("icon" => $icon, 'group' => 'content', 'size' => '60', 'class' => 'mx-auto')); ?>
@@ -149,9 +149,17 @@ $info_box = get_sub_field('info_box');
                       clickable: true,
                     },
                     watchOverflow: true,
-                    slidesPerView: 3,
+                    slidesPerView: 1,
                     centeredSlides: false,
                     spaceBetween: 0,
+                    breakpoints: {
+                      768: {
+                        slidesPerView: 2,
+                      },
+                      1024: {
+                        slidesPerView: 3,
+                      },
+                    },
                   });
                 </script>
               </div>

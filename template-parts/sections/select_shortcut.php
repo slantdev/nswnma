@@ -15,7 +15,7 @@ if ($placeholder) : ?>
     <div class="container py-12">
       <div class="flex justify-center">
         <div class="dropdown dropdown-end">
-          <label tabindex="0" class="m-1 relative flex justify-between items-center text-2xl w-[460px] text-white pb-3 border-b border-brand-redchili">
+          <label tabindex="0" class="my-1 relative flex justify-between items-center text-2xl text-white pb-3 border-b border-brand-redchili w-[240px] md:w-[460px]">
             <?php if ($placeholder) : ?>
               <span><?php echo $placeholder ?></span>
             <?php else : ?>

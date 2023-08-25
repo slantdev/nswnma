@@ -18,13 +18,13 @@
 
   <?php do_action('nswnma_site_before'); ?>
 
-  <div id="page" class="min-h-screen flex flex-col">
+  <div id="page" class="min-h-screen flex flex-col overflow-x-hidden">
 
     <?php do_action('nswnma_header'); ?>
 
     <?php get_template_part('template-parts/site', 'header'); ?>
 
-    <div id="content" class="site-content flex-grow">
+    <div id="content" class="site-content flex-grow pt-[72px] lg:pt-[96px] xl:pt-0">
 
       <?php do_action('nswnma_content_start'); ?>
 

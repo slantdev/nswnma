@@ -55,7 +55,7 @@ if (is_admin()) {
       $the_query = new WP_Query($args);
       ?>
       <?php if ($the_query->have_posts()) : ?>
-        <div class="grid grid-cols-2 gap-20">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-20">
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
             <?php
             $img_src = get_the_post_thumbnail_url(get_the_ID(), 'large');

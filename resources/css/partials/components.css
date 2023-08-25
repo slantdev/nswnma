@@ -5,9 +5,9 @@
   }
 }
 .breadcrumb {
-  @apply text-base text-brand-bluedark;
+  @apply text-sm lg:text-base text-brand-bluedark;
   > span {
-    @apply flex gap-x-3;
+    @apply flex gap-x-2 lg:gap-x-3;
   }
   a {
     @apply hover:text-brand-blue;
@@ -75,20 +75,10 @@
   :where(input[type='checkbox']:checked ~ .collapse-content) {
   @apply py-8;
 }
-/*
-.collapse:focus:not(.collapse-open):not(.collapse-close) .collapse-title,
-.collapse.collapse-open .collapse-title {
-  @apply bg-brand-blue text-white shadow-[0_3px_6px_rgba(0,0,0,0.16)];
+
+.dropdown-content {
+  @apply z-[999];
 }
-.collapse-content {
-  @apply px-8 text-lg;
-}
-.collapse-open :where(.collapse-content),
-.collapse:focus:not(.collapse-close) :where(.collapse-content),
-.collapse:not(.collapse-close)
-  :where(input[type='checkbox']:checked ~ .collapse-content) {
-  @apply py-8;
-} */
 
 .info-box--filter-btn {
   .indicator {

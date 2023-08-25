@@ -683,7 +683,7 @@ function pagination_load_events()
 
     $count = $count->post_count;
     if ($all_events->have_posts()) {
-      echo '<div class="grid grid-cols-1 gap-y-10">';
+      echo '<div class="grid grid-cols-1 gap-y-6 xl:gap-y-10">';
       while ($all_events->have_posts()) {
         $all_events->the_post(); ?>
         <?php
@@ -759,13 +759,13 @@ function pagination_load_events()
           }
         }
         ?>
-        <div class="border rounded-md p-10 bg-slate-50">
-          <div class="flex gap-x-10">
-            <div class="w-1/2">
-              <h3 class="h4 text-brand-blue mb-8 mt-2 tracking-tight leading-snug font-bold"><a href="<?php echo $link ?>" class="hover:underline"><?php echo $title ?></a></h3>
-              <div class="prose prose-lg">
+        <div class="border rounded-md p-4 md:p-6 lg:p-10 bg-slate-50">
+          <div class="flex flex-col lg:flex-row lg:gap-x-10">
+            <div class="w-full order-2 lg:order-1 lg:w-1/2">
+              <h3 class="h4 text-brand-blue mb-4 lg:mb-8 mt-4 lg:mt-2 tracking-tight leading-snug font-bold"><a href="<?php echo $link ?>" class="hover:underline"><?php echo $title ?></a></h3>
+              <div class="prose lg:prose-lg">
                 <div><?php echo $event_date ?></div>
-                <div class="mt-8">
+                <div class="mt-4 lg:mt-8">
                   <?php if ($location) : ?>
                     <strong>Location:</strong> <?php echo $location ?><br />
                   <?php endif; ?>
@@ -777,14 +777,14 @@ function pagination_load_events()
                   <?php endif; ?>
                 </div>
               </div>
-              <div class="mt-8 inline-flex gap-4">
+              <div class="mt-4 lg:mt-8 inline-flex gap-4">
                 <?php if ($registration_link) : ?>
                   <a href="<?php echo $registration_link['url'] ?>" class="btn btn-primary">Register</a>
                 <?php endif; ?>
                 <a href="<?php echo $link ?>" class="btn btn-secondary">Find Out More</a>
               </div>
             </div>
-            <div class="w-1/2">
+            <div class="w-full order-1 lg:order-2 lg:w-1/2">
               <?php if ($img_src) : ?>
                 <div class="aspect-w-6 aspect-h-4"><img src="<?php echo $img_src ?>" alt="" class="w-full h-full object-cover rounded-lg"></div>
               <?php endif; ?>
@@ -1427,16 +1427,14 @@ function pagination_load_submissions()
         }
         ?>
         <div class="p-4 border-b border-gray-200">
-          <div class="">
-            <div class="flex">
-              <div class="w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
-                <div><?php echo $year_name ?></div>
-                <div><?php echo $month_name ?></div>
-              </div>
-              <div class="w-9/12"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="hover:underline"><?php echo $title ?></a></div>
-              <?php if ($submission_pdf_link) : ?>
-                <div class="w-1/12 text-right"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="inline-block opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
-              <?php endif; ?>
+          <div class="flex flex-col lg:flex-row">
+            <div class="w-full mb-2 lg:mb-0 lg:w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
+              <div><?php echo $year_name ?></div>
+              <div><?php echo $month_name ?></div>
+            </div>
+            <div class="w-full lg:w-10/12 flex">
+              <div class="grow pr-4 lg:pr-8"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="hover:underline"><?php echo $title ?></a></div>
+              <div class="flex-none"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="inline-block opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
             </div>
           </div>
         </div>

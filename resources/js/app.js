@@ -1,3 +1,15 @@
+// Headroom
+// var headroom = new Headroom(document.querySelector('.site-header'), {
+//   tolerance: 5,
+//   offset: 205,
+//   classes: {
+//     initial: 'animated',
+//     pinned: 'slideDown',
+//     unpinned: 'slideUp',
+//   },
+// });
+// headroom.init();
+
 // Navigation toggle
 window.addEventListener('load', function () {
   let main_navigation = document.querySelector('#primary-menu');
@@ -10,6 +22,16 @@ window.addEventListener('load', function () {
 });
 
 jQuery(document).ready(function ($) {
+  // $('.site-header').headroom({
+  //   offset: 205,
+  //   tolerance: 5,
+  //   classes: {
+  //     initial: 'animated',
+  //     pinned: 'slideDown',
+  //     unpinned: 'slideUp',
+  //   },
+  // });
+
   $('.info-box--filter .info-box--filter-btn:first-child').addClass('active');
   $('.info-box--filter-btn').click(function (e) {
     e.preventDefault();

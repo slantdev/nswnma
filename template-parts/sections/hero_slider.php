@@ -15,7 +15,7 @@ if ($hero_slider) : ?>
     <div class="home-slider--swiper relative">
       <div class="absolute bottom-0 left-0 right-0">
         <div class="container relative">
-          <div class="absolute right-0 bottom-0">
+          <div class="absolute -bottom-10 left-10 md:right-0 md:bottom-0">
             <div class="flex gap-x-4 justify-end pb-4 relative z-[5]">
               <div class="home-slider--button-prev p-3 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer text-brand-bluedark hover:bg-brand-bluedark hover:text-white transition duration-300">
                 <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
@@ -49,16 +49,16 @@ if ($hero_slider) : ?>
               </div>
             <?php endif; ?>
             <div class="container relative h-full">
-              <div class="slide-textbox w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
+              <div class="slide-textbox w-4/5 md:w-3/4 bg-brand-blue bg-opacity-90 p-6 lg:p-14 absolute z-20 bottom-20 md:-bottom-10 text-white">
                 <div class="font-bold mb-4">FEATURED</div>
                 <?php if ($headline) : ?>
                   <h3 class="h3 text-white font-light"><?php echo $headline ?></h3>
                 <?php endif; ?>
                 <?php if ($description) : ?>
-                  <div class="mt-6"><?php echo $description ?></div>
+                  <div class="mt-4 md:mt-6"><?php echo $description ?></div>
                 <?php endif; ?>
                 <?php if ($link) : ?>
-                  <div class="mt-6"><a href="<?php echo $link['url'] ?>" class="btn btn-secondary"><?php echo $link['title'] ?></a></div>
+                  <div class="mt-4 md:mt-6"><a href="<?php echo $link['url'] ?>" class="btn btn-secondary"><?php echo $link['title'] ?></a></div>
                 <?php endif; ?>
               </div>
             </div>
@@ -85,16 +85,16 @@ if ($hero_slider) : ?>
                 </div>
               <?php endif; ?>
               <div class="container relative h-full">
-                <div class="slide-textbox w-3/4 bg-brand-blue bg-opacity-90 p-14 absolute z-20 -bottom-10 text-white">
+                <div class="slide-textbox w-11/12 md:w-3/4 bg-brand-blue bg-opacity-90 p-6 pb-20 md:p-8 lg:p-14 absolute z-20 -bottom-10 text-white">
                   <div class="font-bold mb-4">FEATURED</div>
                   <?php if ($headline) : ?>
                     <h3 class="h3 font-light"><?php echo $headline ?></h3>
                   <?php endif; ?>
                   <?php if ($description) : ?>
-                    <div class="mt-6"><?php echo $description ?></div>
+                    <div class="mt-4 md:mt-6"><?php echo $description ?></div>
                   <?php endif; ?>
                   <?php if ($link) : ?>
-                    <div class="mt-6"><a href="<?php echo $link['url'] ?>" class="btn btn-secondary"><?php echo $link['title'] ?></a></div>
+                    <div class="mt-4 md:mt-6"><a href="<?php echo $link['url'] ?>" class="btn btn-secondary"><?php echo $link['title'] ?></a></div>
                   <?php endif; ?>
                 </div>
               </div>
@@ -103,8 +103,8 @@ if ($hero_slider) : ?>
         <?php endif; ?>
       </div>
       <?php if (!is_admin()) : ?>
-        <div class="container relative">
-          <div class="w-1/4 absolute left-auto right-0 -bottom-[34px] pl-14">
+        <div class="container relative hidden md:block">
+          <div class="w-1/3 md:w-1/4 absolute left-auto right-0 -bottom-[34px] md:pl-14">
             <div class="swiper-pagination home-slider--pagination"></div>
           </div>
         </div>

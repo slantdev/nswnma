@@ -37,8 +37,8 @@ if (is_admin()) {
       </div>
     <?php endif; ?>
 
-    <div class="container mt-12">
-      <div class="events-container relative scroll-mt-12">
+    <div class="container mt-6 xl:mt-12">
+      <div class="events-container relative scroll-mt-6 xl:scroll-mt-12">
         <div class="events-grid"></div>
         <div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>
       </div>
