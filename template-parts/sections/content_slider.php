@@ -199,7 +199,7 @@ $static_content_card = get_sub_field('static_content_card');
                 <div class="max-w-screen-xl mx-auto">
                   <div class="container">
                     <div class="bg-white flex flex-col md:flex-row rounded-lg overflow-hidden shadow-xl">
-                      <div class="w-full md:w-4/12">
+                      <div class="w-full order-2 md:order-1 md:w-4/12">
                         <div class="p-4 md:p-8 lg:p-12">
                           <?php if ($title) : ?>
                             <h3 class="text-2xl text-brand-bluedark font-medium mb-6"><?php echo $title ?></h3>
@@ -216,7 +216,7 @@ $static_content_card = get_sub_field('static_content_card');
                           <?php endif; ?>
                         </div>
                       </div>
-                      <div class="w-full md:w-8/12">
+                      <div class="w-full order-1 md:order-2 md:w-8/12">
                         <?php if ($img_src) : ?>
                           <div class="aspect-w-16 aspect-h-9">
                             <img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full">
@@ -227,7 +227,7 @@ $static_content_card = get_sub_field('static_content_card');
                   </div>
                 </div>
               </div>
-              <div class="flex gap-x-6 justify-center py-10">
+              <div class="flex gap-x-6 justify-center py-6 md:py-10">
                 <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>
@@ -254,7 +254,7 @@ $static_content_card = get_sub_field('static_content_card');
                   <div class="swiper-slide max-w-screen-xl">
                     <div class="container">
                       <div class="bg-white flex flex-col md:flex-row rounded-lg overflow-hidden shadow-xl">
-                        <div class="w-full md:w-4/12">
+                        <div class="w-full order-2 md:order-1 md:w-4/12">
                           <div class="p-4 md:p-8 lg:p-12">
                             <?php if ($title) : ?>
                               <h3 class="text-2xl text-brand-bluedark font-medium mb-6"><?php echo $title ?></h3>
@@ -271,7 +271,7 @@ $static_content_card = get_sub_field('static_content_card');
                             <?php endif; ?>
                           </div>
                         </div>
-                        <div class="w-full md:w-8/12">
+                        <div class="w-full order-1 md:order-2 md:w-8/12">
                           <?php if ($img_src) : ?>
                             <div class="aspect-w-16 aspect-h-9">
                               <img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full">
@@ -283,7 +283,7 @@ $static_content_card = get_sub_field('static_content_card');
                   </div>
                 <?php endforeach; ?>
               </div>
-              <div class="flex gap-x-6 justify-center py-10">
+              <div class="flex gap-x-6 justify-center py-6 md:py-10">
                 <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>
