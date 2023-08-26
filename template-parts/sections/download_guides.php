@@ -66,12 +66,12 @@ function card_guides($atts = array())
         $group_title = $grid['group_title'];
         $guide_cards = $grid['guide_cards'];
         ?>
-        <div class="container py-10">
+        <div class="container md:py-10">
           <?php if ($group_title) : ?>
             <h3 class="h5 text-brand-bluedark mb-6 font-bold"><?php echo $group_title ?></h3>
           <?php endif; ?>
           <?php if ($guide_cards) : ?>
-            <div class="grid grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-6">
               <?php foreach ($guide_cards as $card) : ?>
                 <?php
                 $card_image = $card['card_image'];

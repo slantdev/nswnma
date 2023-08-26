@@ -93,10 +93,10 @@ switch ($text_content_container_max_width) {
     <div class="container">
       <div class="<?php echo $intro_container_class ?>">
         <?php if ($headline) : ?>
-          <h2 class="h3 text-brand-bluedark font-medium mb-8 mt-8"><?php echo $section_intro['headline'] ?></h2>
+          <h2 class="h3 text-brand-bluedark font-medium mb-4 mt-8 md:mb-8 md:mt-8"><?php echo $section_intro['headline'] ?></h2>
         <?php endif; ?>
         <?php if ($description) : ?>
-          <div class="prose prose-lg max-w-none">
+          <div class="prose lg:prose-lg max-w-none">
             <p><?php echo $description ?></p>
           </div>
         <?php endif; ?>
@@ -104,7 +104,7 @@ switch ($text_content_container_max_width) {
     </div>
 
     <?php if ($image_featured) : ?>
-      <div class="container my-12">
+      <div class="container my-8 lg:my-12">
         <img src="<?php echo $image_featured['url'] ?>" class="rounded-lg shadow-[0_3px_10px_rgba(0,0,0,0.24)]" />
       </div>
     <?php endif; ?>
@@ -112,7 +112,7 @@ switch ($text_content_container_max_width) {
     <?php if ($text_content) : ?>
       <div class="container">
         <div class="<?php echo $text_content_container_class ?>">
-          <div class="prose prose-lg max-w-none">
+          <div class="prose lg:prose-lg max-w-none">
             <?php echo $text_content ?>
           </div>
         </div>
@@ -122,7 +122,7 @@ switch ($text_content_container_max_width) {
     <?php if ($button_link) : ?>
       <div class="container">
         <div class="<?php echo $text_content_container_class ?>">
-          <div class="mt-8">
+          <div class="mt-6 md:mt-8">
             <a href="<?php echo $button_link['url'] ?>" class="btn btn-primary btn-md"><?php echo $button_link['title'] ?></a>
           </div>
         </div>

@@ -15,14 +15,14 @@ $team_category = get_sub_field('team_category');
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
     <div class="container">
-      <div class="w-1/2">
+      <div class="w-full lg:w-1/2">
         <?php if ($headline) : ?>
           <h2 class="h3 text-brand-blue mb-8 mt-8"><?php echo $headline ?></h2>
         <?php endif; ?>
       </div>
       <?php if ($description) : ?>
         <div class="flex flex-col lg:flex-row lg:items-end">
-          <div class="w-1/2">
+          <div class="w-full lg:w-1/2">
             <div class="prose">
               <?php echo $description ?>
             </div>
@@ -62,7 +62,7 @@ $team_category = get_sub_field('team_category');
     ?>
     <?php if ($the_query->have_posts()) : ?>
       <div class="container mt-10">
-        <div class="grid grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
             <?php
             $title =  get_the_title();
@@ -82,13 +82,13 @@ $team_category = get_sub_field('team_category');
                 </div>
                 <div class="mt-6">
                   <?php if ($name) : ?>
-                    <h5 class="font-light text-2xl leading-snug"><?php echo $name ?></h5>
+                    <h5 class="font-light text-xl lg:text-2xl leading-snug"><?php echo $name ?></h5>
                   <?php endif; ?>
                   <?php if ($position) : ?>
-                    <div class="font-bold text-lg mt-6"><?php echo $position ?></div>
+                    <div class="font-bold text-base lg:text-lg mt-6"><?php echo $position ?></div>
                   <?php endif; ?>
                   <?php if ($education) : ?>
-                    <div class="text-lg mt-6"><?php echo $education ?></div>
+                    <div class="text-base lg:text-lg mt-6"><?php echo $education ?></div>
                   <?php endif; ?>
                 </div>
               </div>

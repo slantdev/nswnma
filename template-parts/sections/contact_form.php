@@ -16,22 +16,22 @@ $form_shortcode = get_sub_field('form_shortcode');
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
     <?php if ($headline) : ?>
       <div class="container">
-        <div class="w-1/2">
-          <h2 class="h3 text-brand-bluedark mb-8 mt-8"><?php echo $headline ?></h2>
+        <div class="w-full md:w-1/2">
+          <h2 class="h3 text-brand-bluedark mb-4 mt-4 md:mb-8 md:mt-8"><?php echo $headline ?></h2>
         </div>
       </div>
     <?php endif; ?>
 
     <div class="container">
-      <div class="flex">
-        <div class="w-2/5">
+      <div class="flex flex-col lg:flex-row">
+        <div class="w-full lg:w-2/5">
           <?php if ($content) : ?>
-            <div class="prose xl:prose-lg">
+            <div class="prose lg:prose-lg">
               <?php echo $content ?>
             </div>
           <?php endif; ?>
         </div>
-        <div class="w-3/5 pl-16">
+        <div class="w-full mt-8 lg:mt-0 lg:w-3/5 lg:pl-16">
           <?php if ($form_shortcode) : ?>
             <?php echo do_shortcode($form_shortcode) ?>
           <?php else : ?>

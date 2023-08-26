@@ -29,8 +29,8 @@ $navigation = get_sub_field('navigation');
         <?php endif; ?>
         <?php get_template_part('template-parts/components/buttons', '', array('field' => 'buttons', 'class' => 'mt-6 xl:mt-12')); ?>
       </div>
-      <div class="w-full lg:w-5/12">
-        <div class="flex flex-col pl-24">
+      <div class="w-full mt-8 lg:mt-0 lg:w-5/12">
+        <div class="flex flex-col lg:pl-24">
           <?php if ($image) : ?>
             <div class="mb-4 xl:mb-8">
               <div class="aspect-w-6 aspect-h-7">

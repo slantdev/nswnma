@@ -36,12 +36,12 @@ if (is_admin()) {
     <?php if ($show_search_bar) : ?>
       <div class="container mt-12">
         <div class="flex flex-col gap-y-4">
-          <div class="flex gap-x-4 w-full items-center">
-            <div class="w-1/2">
+          <div class="flex flex-col gap-y-4 md:flex-row gap-x-4 w-full items-center">
+            <div class="w-full md:w-1/2">
               <input id="report-search" name="report-search" type="text" placeholder="Search Query" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-inner">
             </div>
-            <div class="w-[24px] text-center flex-none">In</div>
-            <div class="w-1/2">
+            <div class="hidden md:block w-[24px] text-center flex-none">In</div>
+            <div class="w-full md:w-1/2">
               <select id="report-filter" name="report-filter" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
                 <option value="all" selected>Filter</option>
                 <?php
@@ -71,7 +71,7 @@ if (is_admin()) {
                 ?>
               </select>
             </div>
-            <div class="ml-2">
+            <div class="w-full md:w-auto md:ml-2">
               <button id="report-search-button" type="button" class="btn btn-red !text-base !pr-10 !pl-4 !py-[14px] !inline-flex !flex-nowrap">
                 <svg class="spinner-border animate-spin ml-0 mr-2 h-5 w-5 text-white opacity-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -85,7 +85,7 @@ if (is_admin()) {
       </div>
     <?php endif; ?>
 
-    <div class="container mt-12">
+    <div class="container mt-8 md:mt-12">
       <div class="report-container relative scroll-mt-12">
         <div class="report-grid"></div>
         <div class="blocker absolute inset-0 bg-white bg-opacity-40" style="display: none;"></div>

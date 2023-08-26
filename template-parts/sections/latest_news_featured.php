@@ -60,7 +60,7 @@ if (is_admin()) {
               ?>
               <div class="flex flex-col lg:flex-row gap-12">
                 <div class="w-full lg:w-1/2">
-                  <div class="aspect-w-16 aspect-h-9 lg:aspect-none lg:h-full lg:w-full relative rounded-lg overflow-hidden shadow-[0_3px_10px_rgba(0,0,0,0.24)]">
+                  <div class="aspect-w-16 aspect-h-9 lg:h-full lg:w-full relative rounded-lg overflow-hidden shadow-[0_3px_10px_rgba(0,0,0,0.24)]">
                     <a href="<?php echo $link ?>" class=""><img src="<?php echo $img_src ?>" alt="" class="absolute inset-0 object-cover h-full w-full z-0"></a>
                   </div>
                 </div>

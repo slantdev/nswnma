@@ -25,7 +25,7 @@ if (is_admin()) {
           <h2 class="h3 text-brand-bluedark font-medium mb-8 mt-8"><?php echo $section_intro['headline'] ?></h2>
         <?php endif; ?>
         <?php if ($description) : ?>
-          <div class="prose prose-lg">
+          <div class="prose lg:prose-lg">
             <p><?php echo $description ?></p>
           </div>
         <?php endif; ?>

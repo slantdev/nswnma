@@ -70,7 +70,7 @@ function filter_posts()
 
   if ($ajaxposts->have_posts()) {
 
-    $response .= '<div class="grid grid-cols-3 gap-8">';
+    $response .= '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">';
 
     while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
 
@@ -199,7 +199,7 @@ function pagination_load_posts()
 
     $count = $count->post_count;
     if ($all_blog_posts->have_posts()) {
-      echo '<div class="grid grid-cols-3 gap-8">';
+      echo '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">';
       while ($all_blog_posts->have_posts()) {
         $all_blog_posts->the_post(); ?>
         <?php
@@ -373,7 +373,7 @@ function filter_reports()
 
   if ($ajaxposts->have_posts()) {
 
-    $response .= '<div class="grid grid-cols-3 gap-6">';
+    $response .= '<div class="grid grid-cols-1 md:grid-cols-3 gap-6">';
 
     while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
 
@@ -494,7 +494,7 @@ function pagination_load_reports()
 
     $count = $count->post_count;
     if ($all_reports->have_posts()) {
-      echo '<div class="grid grid-cols-3 gap-6">';
+      echo '<div class="grid grid-cols-1 md:grid-cols-3 gap-6">';
       while ($all_reports->have_posts()) {
         $all_reports->the_post(); ?>
         <?php
@@ -553,7 +553,7 @@ function pagination_load_reports()
     }
     // Pagination Buttons logic
     ?>
-    <div class='reports-pagination mt-12'>
+    <div class='reports-pagination mt-8 md:mt-12'>
       <ul>
         <?php
         if ($first_btn && $cur_page > 1) { ?>

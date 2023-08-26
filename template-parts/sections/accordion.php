@@ -16,22 +16,22 @@ $accordion = get_sub_field('accordion');
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
     <div class="container">
       <?php if ($headline) : ?>
-        <div class="w-1/2">
+        <div class="w-full lg:w-1/2">
           <h2 class="h3 text-brand-blue mb-8 mt-8"><?php echo $headline ?></h2>
         </div>
       <?php endif; ?>
 
       <div class="flex flex-col lg:flex-row lg:items-end">
         <?php if ($description) : ?>
-          <div class="w-1/2">
+          <div class="w-full lg:w-1/2">
             <div class="prose">
               <?php echo $description ?>
             </div>
           </div>
         <?php endif; ?>
         <?php if ($section_intro['button_link']) : ?>
-          <div class="w-1/2">
-            <div class="flex justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
+          <div class="w-full lg:w-1/2">
+            <div class="flex mt-6 lg:mt-0 lg:justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
           </div>
         <?php endif; ?>
       </div>
@@ -58,11 +58,11 @@ $accordion = get_sub_field('accordion');
                 echo '<input type="checkbox" checked />';
               }
               ?>
-              <div class="collapse-title text-2xl font-bold py-5 pl-8 pr-12">
+              <div class="collapse-title text-xl lg:text-2xl font-bold py-5 pl-8 pr-12">
                 <?php echo $row['title'] ?>
               </div>
               <div class="collapse-content">
-                <div class="prose prose-lg max-w-none">
+                <div class="prose lg:prose-lg max-w-none">
                   <?php echo $row['content'] ?>
                 </div>
               </div>

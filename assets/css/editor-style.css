@@ -12979,6 +12979,10 @@ body {
     width: auto;
   }
 
+  .md\:w-\[24px\] {
+    width: 24px;
+  }
+
   .md\:scroll-mt-8 {
     scroll-margin-top: 2rem;
   }
@@ -13001,6 +13005,10 @@ body {
 
   .md\:gap-12 {
     gap: 3rem;
+  }
+
+  .md\:gap-6 {
+    gap: 1.5rem;
   }
 
   .md\:gap-x-6 {
@@ -16479,12 +16487,24 @@ body {
     width: 100%;
   }
 
+  .lg\:w-2\/5 {
+    width: 40%;
+  }
+
   .lg\:max-w-none {
     max-width: none;
   }
 
   .lg\:scroll-mt-12 {
     scroll-margin-top: 3rem;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:flex-row {
@@ -16513,6 +16533,10 @@ body {
 
   .lg\:gap-20 {
     gap: 5rem;
+  }
+
+  .lg\:gap-8 {
+    gap: 2rem;
   }
 
   .lg\:gap-x-10 {
@@ -17587,6 +17611,11 @@ body {
   .lg\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .lg\:prose-lg {
