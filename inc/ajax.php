@@ -1215,7 +1215,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'menu_order',
+        'orderby' => 'title',
         'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
@@ -1224,7 +1224,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'menu_order',
+        'orderby' => 'title',
         'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
@@ -1242,7 +1242,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'menu_order',
+        'orderby' => 'title',
         'order' => 'ASC',
         'post_status' => 'publish',
       );
@@ -1250,7 +1250,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'menu_order',
+        'orderby' => 'title',
         'order' => 'ASC',
         'post_status' => 'publish',
         'tax_query' => array(
@@ -1270,7 +1270,7 @@ function filter_submissions()
 
   if ($ajaxposts->have_posts()) {
 
-    $response .= '<div class="grid grid-cols-1 gap-0">';
+    $response .= '<div class="grid grid-cols-1 gap-0 shadow-lg border border-gray-200 rounded-lg">';
 
     while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
 
@@ -1348,7 +1348,7 @@ function pagination_load_submissions()
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
-          'orderby'           => 'menu_order',
+          'orderby'           => 'title',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
@@ -1382,7 +1382,7 @@ function pagination_load_submissions()
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
-          'orderby'           => 'menu_order',
+          'orderby'           => 'title',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
