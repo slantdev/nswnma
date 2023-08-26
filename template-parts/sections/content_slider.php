@@ -17,22 +17,22 @@ $static_content_card = get_sub_field('static_content_card');
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
     <div class="container">
-      <div class="w-1/2">
+      <div class="w-full lg:w-1/2">
         <?php if ($section_intro['headline']) : ?>
-          <h2 class="h3 text-brand-blue mb-8 mt-8"><?php echo $section_intro['headline'] ?></h2>
+          <h2 class="h3 text-brand-blue mb-4 md:mb-8 md:mt-8"><?php echo $section_intro['headline'] ?></h2>
         <?php endif; ?>
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end">
         <?php if ($section_intro['description']) : ?>
-          <div class="w-1/2">
+          <div class="w-full lg:w-1/2">
             <div class="prose">
               <p><?php echo $section_intro['description'] ?></p>
             </div>
           </div>
         <?php endif; ?>
         <?php if ($section_intro['button_link']) : ?>
-          <div class="w-1/2">
-            <div class="flex justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
+          <div class="w-full lg:w-1/2">
+            <div class="flex mt-5 lg:mt-0 lg:justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
           </div>
         <?php endif; ?>
       </div>
@@ -70,7 +70,7 @@ $static_content_card = get_sub_field('static_content_card');
                     <div class="max-w-screen-xl mx-auto">
                       <div class="container">
                         <div class="bg-white flex flex-col md:flex-row rounded-lg overflow-hidden shadow-xl">
-                          <div class="w-full md:w-4/12">
+                          <div class="w-full order-2 md:order-1 md:w-4/12">
                             <div class="p-4 md:p-8 lg:p-12">
                               <div class="text-sm font-bold mb-8"><?php echo $date ?></div>
                               <h3 class="text-2xl text-brand-bluedark font-medium mb-6"><?php echo $title ?></h3>
@@ -82,7 +82,7 @@ $static_content_card = get_sub_field('static_content_card');
                               </div>
                             </div>
                           </div>
-                          <div class="w-full md:w-8/12">
+                          <div class="w-full order-1 md:order-2 md:w-8/12">
                             <img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full">
                           </div>
                         </div>
@@ -134,19 +134,19 @@ $static_content_card = get_sub_field('static_content_card');
                     <div class="swiper-slide max-w-screen-xl">
                       <div class="container">
                         <div class="bg-white flex flex-col md:flex-row rounded-lg overflow-hidden shadow-xl">
-                          <div class="w-full md:w-4/12">
-                            <div class="p-4 md:p-8 lg:p-12">
-                              <div class="text-sm font-bold mb-8"><?php echo $date ?></div>
+                          <div class="w-full order-2 md:order-1 md:w-4/12">
+                            <div class="p-6 md:p-8 lg:p-12">
+                              <div class="text-sm font-bold mb-4 md:mb-8"><?php echo $date ?></div>
                               <h3 class="text-2xl text-brand-bluedark font-medium mb-6"><?php echo $title ?></h3>
                               <div class="prose text-sm">
                                 <p><?php echo $excerpt ?></p>
                               </div>
-                              <div class="mt-8">
+                              <div class="mt-4 md:mt-8">
                                 <a href="<?php echo $link ?>" class="font-medium text-brand-redchili hover:text-brand-red">Read The Story &raquo;</a>
                               </div>
                             </div>
                           </div>
-                          <div class="w-full md:w-8/12">
+                          <div class="w-full order-1 md:order-2 md:w-8/12">
                             <img src="<?php echo $img_src ?>" alt="" class="object-cover h-full w-full">
                           </div>
                         </div>
@@ -157,7 +157,7 @@ $static_content_card = get_sub_field('static_content_card');
                   <?php wp_reset_postdata(); ?>
                 <?php endif; ?>
               </div>
-              <div class="flex gap-x-6 justify-center py-10">
+              <div class="flex gap-x-6 justify-center py-6 md:py-10">
                 <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>

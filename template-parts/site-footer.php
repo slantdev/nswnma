@@ -22,11 +22,11 @@ $additional_links = get_field('additional_links', 'option');
       ?>
     </div>
 
-    <div class="flex flex-col gap-y-8 lg:flex-row lg:justify-between lg:items-center lg:py-10 lg:gap-x-16">
+    <div class="flex flex-col py-8 gap-y-8 lg:flex-row lg:justify-between lg:items-center lg:py-10 lg:gap-x-16">
       <div class="lg:w-1/3">
         <?php if ($about_company) : ?>
           <div class="block">
-            <img src="<?php echo nswnma_asset('images/nswnma-logo-white.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-auto xl:h-[90px]">
+            <img src="<?php echo nswnma_asset('images/nswnma-logo-white.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-[200px] xl:w-auto xl:h-[90px]">
           </div>
           <div class="text-xs mt-4">
             <?php echo $about_company ?>

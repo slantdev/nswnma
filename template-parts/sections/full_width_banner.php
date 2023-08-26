@@ -22,10 +22,10 @@ $background_overlay = $background['background_overlay'];
     <div class="container relative z-10">
       <div class="lg:w-7/12 pt-10">
         <?php if ($headline) : ?>
-          <h3 class="text-white text-[44px] leading-1.1 font-bold"><?php echo $headline ?></h3>
+          <h3 class="text-white text-3xl md:text-[44px] leading-[1.1] font-bold"><?php echo $headline ?></h3>
         <?php endif; ?>
         <?php if ($description) : ?>
-          <p class="text-2xl text-white mt-4"><?php echo $description ?></p>
+          <p class="text-xl md:text-2xl text-white mt-4"><?php echo $description ?></p>
         <?php endif; ?>
         <?php if ($button_link) : ?>
           <div class="mt-8">

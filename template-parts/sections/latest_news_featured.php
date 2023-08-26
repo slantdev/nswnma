@@ -22,10 +22,10 @@ if (is_admin()) {
     <div class="container">
       <div class="max-w-prose">
         <?php if ($headline) : ?>
-          <h2 class="h3 text-brand-bluedark font-medium mb-8 mt-8"><?php echo $section_intro['headline'] ?></h2>
+          <h2 class="h3 text-brand-bluedark font-medium my-4 md:mb-8 md:mt-8"><?php echo $section_intro['headline'] ?></h2>
         <?php endif; ?>
         <?php if ($description) : ?>
-          <div class="prose prose-lg">
+          <div class="prose md:prose-lg">
             <p><?php echo $description ?></p>
           </div>
         <?php endif; ?>
