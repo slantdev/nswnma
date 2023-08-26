@@ -1,4 +1,8 @@
 <?php
+include get_template_directory() . '/template-parts/layouts/bottom-banner.php';
+?>
+
+<?php
 $about_company = get_field('about_company', 'option');
 $footer_links = get_field('footer_links', 'option');
 $contact_info = get_field('contact_info', 'option');
