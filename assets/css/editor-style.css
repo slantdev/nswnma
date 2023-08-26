@@ -16491,6 +16491,14 @@ body {
     width: 40%;
   }
 
+  .lg\:w-3\/12 {
+    width: 25%;
+  }
+
+  .lg\:w-9\/12 {
+    width: 75%;
+  }
+
   .lg\:max-w-none {
     max-width: none;
   }

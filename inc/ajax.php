@@ -1296,13 +1296,15 @@ function filter_submissions()
       }
       $response .= '<div class="p-4 border-b border-gray-200">';
       $response .= '<div class="">
-            <div class="flex">
-              <div class="w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
+            <div class="flex flex-col lg:flex-row">
+              <div class="w-full mb-2 lg:mb-0 lg:w-3/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
                 <div>' . $year_name . '</div>
                 <div>' . $month_name . '</div>
               </div>
-              <div class="w-9/12"><a href="' . $submission_pdf_link . '" target="_blank" class="hover:underline">' . $title . '</a></div>
-              <div class="w-1/12 text-right"><a href="' . $submission_pdf_link . '" target="_blank" class="inline-block opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>
+              <div class="w-full lg:w-9/12 flex">
+              <div class="grow pr-4 lg:pr-8"><a href="' . $submission_pdf_link . '" target="_blank" class="hover:underline">' . $title . '</a></div>
+              <div class="flex-none"><a href="' . $submission_pdf_link . '" target="_blank" class="inline-block opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>
+              </div>
             </div>
           </div>';
       $response .= '</div>';
@@ -1428,11 +1430,11 @@ function pagination_load_submissions()
         ?>
         <div class="p-4 border-b border-gray-200">
           <div class="flex flex-col lg:flex-row">
-            <div class="w-full mb-2 lg:mb-0 lg:w-2/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
+            <div class="w-full mb-2 lg:mb-0 lg:w-3/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
               <div><?php echo $year_name ?></div>
               <div><?php echo $month_name ?></div>
             </div>
-            <div class="w-full lg:w-10/12 flex">
+            <div class="w-full lg:w-9/12 flex">
               <div class="grow pr-4 lg:pr-8"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="hover:underline"><?php echo $title ?></a></div>
               <div class="flex-none"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="inline-block opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
             </div>
