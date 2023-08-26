@@ -115,3 +115,25 @@
     }
   }
 }
+
+.menumobile {
+  .collapse {
+    @apply rounded-md;
+  }
+  .collapse-title,
+  :where(.collapse > input[type='checkbox']),
+  :where(.collapse > input[type='radio']) {
+    @apply min-h-8;
+  }
+  .collapse input[type='checkbox']:checked + .collapse-title,
+  .collapse.collapse-open .collapse-title {
+    @apply shadow-none;
+  }
+  .collapse:not(.collapse-open):not(.collapse-close) input[type='checkbox'],
+  .collapse:not(.collapse-open):not(.collapse-close) .collapse-title {
+    @apply rounded-t-md rounded-b-none;
+  }
+  .collapse-content {
+    @apply bg-brand-blue text-white;
+  }
+}

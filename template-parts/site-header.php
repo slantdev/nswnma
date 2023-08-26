@@ -22,17 +22,13 @@
             </button>
           </form>
         </div>
-        <div class="xl:hidden">
-          <a href="#" aria-label="Toggle navigation" id="primary-menu-toggle">
-            <svg viewBox="0 0 20 20" class="inline-block w-6 h-6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <g stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
-                <g id="icon-shape">
-                  <path d="M0,3 L20,3 L20,5 L0,5 L0,3 Z M0,9 L20,9 L20,11 L0,11 L0,9 Z M0,15 L20,15 L20,17 L0,17 L0,15 Z" id="Combined-Shape"></path>
-                </g>
-              </g>
-            </svg>
-          </a>
-        </div>
+
+        <button type="button" id="mobilemenu-open" class="p-2 text-black xl:hidden">
+          <svg class="w-8 h-8" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 6H21V8H3V6ZM3 11H21V13H3V11ZM3 16H21V18H3V16Z" fill="currentColor" />
+          </svg>
+        </button>
+
       </div>
     </div>
   </div>
@@ -138,104 +134,99 @@
         echo '</ul>';
       }
       ?>
-      <!-- <ul class="mega-menu">
-        <li class="has-submenu">
-          <a href="#" class="">About Us</a>
-          <div class="mega-submenu absolute left-0 w-full">
-            <div class="container">
-              <div class="flex">
-                <div class="w-3/4 bg-brand-blue">
-                  <div class="px-6 py-10">
-                    <div class="grid grid-flow-col auto-cols-[1fr] gap-8">
-                      <div class="flex flex-col gap-y-8">
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-y-8">
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-y-8">
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                        <div class="submenu">
-                          <h5 class="submenu-heading">ABOUT NSWNMA</h5>
-                          <ul>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-1/4 bg-brand-gray">
-                  <div class="py-10 pl-10">
-                    <div class="aspect-w-6 aspect-h-4">
-                      <img src="http://localhost:3000/wp-content/uploads/2023/03/3957986.jpg" alt="" class="w-full h-full object-cover rounded-lg">
-                    </div>
-                    <div class="mt-4">
-                      <h5 class="text-base font-semibold">About the NSWNMA</h5>
-                      <div class="text-sm mt-3">
-                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Vestibulum ullamcorper mauris at ligula.
-                      </div>
-                      <a href="" class="btn btn-primary mt-4">Learn</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a href="#">Membership</a></li>
-        <li><a href="#">Campaigns</a></li>
-        <li><a href="#">Education</a></li>
-        <li><a href="#">Workplace</a></li>
-        <li><a href="#">Publications</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </ul> -->
     </div>
   </div>
+
+  <div id="mobilemenu" class="h-screen w-[300px] bg-brand-grayplatinum fixed top-0 right-0 px-6 pr-2 pt-20 z-50 translate-x-full transition duration-300 ease-in-out">
+    <button id="mobilemenu-close" type="button" class="absolute top-3 right-3 text-black/70 hover:text-white transition duration-200">
+      <svg class="w-8 h-8" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor" />
+      </svg>
+    </button>
+    <div class="h-full overflow-y-auto">
+      <?php
+      $menu_items = get_field('megamenu_items', 'option');
+      //preint_r($menu_items);
+      if ($menu_items) {
+        echo '<div class="menumobile flex flex-col gap-4 pr-4">';
+        foreach ($menu_items as $menu_id => $menu) :
+          $menu_item = $menu['menu_item'];
+          $has_submenu = $menu['has_submenu'];
+          $menu_columns = $menu['menu_columns'];
+          $add_featured_text = $menu['add_featured_text'];
+          $featured_text = $menu['featured_text'];
+          $has_featured_text_class = '';
+          if ($add_featured_text) {
+            $has_featured_text_class = 'has-featured-text';
+          }
+          if ($has_submenu) {
+            echo '<div class="collapse collapse-arrow">';
+            //echo '<input type="radio" name="mobilemenu-accordion" />';
+            echo '<input type="checkbox" />';
+            echo '<div class="collapse-title text-base font-medium">';
+            //echo '<a href="' . $menu_item['url'] . '" target="' . $menu_item['target'] . '" class="">';
+            echo $menu_item['title'];
+            //echo '</a>';
+            echo '</div>';
+            if ($menu_columns) {
+              echo '<div class="collapse-content bg-brand-blue !p-0">';
+              echo '<div class="grid grid-cols-1 gap-4 py-6 p-4">';
+              foreach ($menu_columns as $col) {
+                $submenu = $col['submenu'];
+                echo '<div class="flex flex-col gap-y-6">';
+                foreach ($submenu as $menu) {
+                  $submenu_heading = $menu['submenu_heading'];
+                  $submenu_items = $menu['submenu_items'];
+                  echo '<div class="submenu">';
+                  if ($submenu_heading) {
+                    echo '<h5 class="text-base text-white font-semibold mb-2">' . $submenu_heading . '</h5>';
+                  }
+                  if ($submenu_items) {
+                    echo '<ul class="flex flex-col">';
+                    foreach ($submenu_items as $item) {
+                      echo '<li><a class="text-base text-white" href="' . $item['submenu_item']['url'] . '" target="' . $item['submenu_item']['target'] . '">' . $item['submenu_item']['title'] . '</a></li>';
+                    }
+                    echo '</ul>';
+                  }
+                  echo '</div>';
+                }
+                echo '</div>';
+              }
+              echo '</div>';
+              echo '</div>';
+            }
+            echo '</div>';
+          } else {
+            echo '<div class="bg-white rounded-md p-4 font-medium">';
+            echo '<a href="' . $menu_item['url'] . '" target="' . $menu_item['target'] . '" class="">';
+            echo $menu_item['title'];
+            echo '</a>';
+            echo '</div>';
+          }
+        //preint_r($menu_item);
+        endforeach;
+
+        $member_login_button = get_field('member_login_button', 'option');
+        if ($member_login_button) {
+          echo '<div class="mt-8">';
+          echo '<a href="' . $member_login_button['url'] . '" class="btn btn-primary btn-block !py-4">' . $member_login_button['title'] . '</a>';
+          echo '</div>';
+        }
+
+        echo '<div class="relative">';
+        echo '<form id="header-searchform" class="" method="get" action="' . esc_url(home_url('/')) . '">';
+        echo '<input id="searchform-input" type="text" name="s" value="' . get_search_query() . '" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 py-4 pr-7 w-full focus:border-brand-blue">';
+        echo '<button type="button" class="absolute right-0 top-2 p-2.5">';
+        echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark'));
+        echo '</button>';
+        echo '</form>';
+        echo '</div>';
+
+        echo '</div>';
+      }
+      ?>
+    </div>
+  </div>
+  <div id="mobilemenu-overlay" tabindex="0" class="fixed inset-0 bg-black/80 z-40 invisible opacity-0 transition duration-300"></div>
 
 </header>
