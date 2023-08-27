@@ -45,7 +45,7 @@
     "description": "",
     "public": true,
     "hierarchical": false,
-    "exclude_from_search": true,
+    "exclude_from_search": false,
     "publicly_queryable": false,
     "show_ui": true,
     "show_in_menu": true,
@@ -80,5 +80,5 @@
     "can_export": true,
     "delete_with_user": false,
     "register_meta_box_cb": "",
-    "modified": 1681676539
+    "modified": 1693108439
 }

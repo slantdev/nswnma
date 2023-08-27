@@ -101,8 +101,8 @@ $additional_links = get_field('additional_links', 'option');
     </div>
   </div>
 
-  <div class="bg-white py-6 lg:py-8 text-center text-gray-500 text-sm">
-    <div class="container max-w-[800px]">
+  <div class="bg-white py-6 lg:py-8 text-center text-gray-500">
+    <div class="container max-w-[800px] text-xs lg:text-sm">
       All content copyright &copy; <?php echo date_i18n('Y'); ?> NSW Nurses and Midwives' Association and authorised by S. Candish, General Secretary, NSW Nurses and Midwives' Association, 50 O'Dea Avenue Waterloo NSW 2017 Australia.
     </div>
   </div>
