@@ -56,7 +56,7 @@ if ($the_query->have_posts()) :
                 }
               }
             } else {
-              $link = the_permalink();
+              $link = get_the_permalink();
               $target = '_self';
             }
 
