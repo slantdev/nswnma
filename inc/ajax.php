@@ -1574,7 +1574,7 @@ function filter_policy()
         'post_type' => 'policy',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'title',
-        'order' => 'ASC',
+        'order' => 'DESC',
         'post_status' => 'publish',
       );
     } else {
@@ -1582,7 +1582,7 @@ function filter_policy()
         'post_type' => 'policy',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'title',
-        'order' => 'ASC',
+        'order' => 'DESC',
         'post_status' => 'publish',
         'tax_query' => array(
           array(
@@ -1674,7 +1674,7 @@ function pagination_load_policy()
           'post_type'         => 'policy',
           'post_status '      => 'publish',
           'orderby'           => 'title',
-          'order'             => 'ASC',
+          'order'             => 'DESC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
           'tax_query' => array(
@@ -1691,7 +1691,7 @@ function pagination_load_policy()
           'post_type'         => 'policy',
           'post_status '      => 'publish',
           'orderby'           => 'title',
-          'order'             => 'ASC',
+          'order'             => 'DESC',
           'posts_per_page'    => -1,
           'tax_query' => array(
             array(
@@ -1708,7 +1708,7 @@ function pagination_load_policy()
           'post_type'         => 'policy',
           'post_status '      => 'publish',
           'orderby'           => 'title',
-          'order'             => 'ASC',
+          'order'             => 'DESC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
         )
@@ -1718,7 +1718,7 @@ function pagination_load_policy()
           'post_type'         => 'policy',
           'post_status '      => 'publish',
           'orderby'           => 'title',
-          'order'             => 'ASC',
+          'order'             => 'DESC',
           'posts_per_page'    => -1
         )
       );
