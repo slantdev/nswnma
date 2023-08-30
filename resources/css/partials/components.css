@@ -128,7 +128,9 @@
 
 .posts-pagination,
 .reports-pagination,
-.events-pagination {
+.events-pagination,
+.submissions-pagination,
+.ajax-pagination {
   > ul {
     @apply flex items-center justify-center gap-x-1;
     > li {

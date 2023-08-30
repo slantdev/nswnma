@@ -7391,10 +7391,6 @@ details.collapse summary::-webkit-details-marker {
   max-width: 100%;
 }
 
-.max-w-\[420px\] {
-  max-width: 420px;
-}
-
 .max-w-prose {
   max-width: 65ch;
 }
@@ -7409,6 +7405,10 @@ details.collapse summary::-webkit-details-marker {
 
 .max-w-screen-lg {
   max-width: 1024px;
+}
+
+.max-w-\[420px\] {
+  max-width: 420px;
 }
 
 .flex-none {
@@ -7878,11 +7878,6 @@ details.collapse summary::-webkit-details-marker {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.object-center {
-  -o-object-position: center;
-     object-position: center;
 }
 
 .p-0 {
@@ -10062,7 +10057,7 @@ details.collapse summary::-webkit-details-marker {
   margin-left: 1rem;
 }
 
-.posts-pagination > ul, .reports-pagination > ul, .events-pagination > ul {
+.posts-pagination > ul, .reports-pagination > ul, .events-pagination > ul, .submissions-pagination > ul, .ajax-pagination > ul {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10070,7 +10065,7 @@ details.collapse summary::-webkit-details-marker {
        column-gap: 0.25rem;
 }
 
-.posts-pagination > ul > li, .reports-pagination > ul > li, .events-pagination > ul > li {
+.posts-pagination > ul > li, .reports-pagination > ul > li, .events-pagination > ul > li, .submissions-pagination > ul > li, .ajax-pagination > ul > li {
   display: flex;
   height: 2.5rem;
   width: 2.5rem;
@@ -10081,12 +10076,12 @@ details.collapse summary::-webkit-details-marker {
   padding: 0.5rem;
 }
 
-.posts-pagination > ul > li.inactive, .reports-pagination > ul > li.inactive, .events-pagination > ul > li.inactive {
+.posts-pagination > ul > li.inactive, .reports-pagination > ul > li.inactive, .events-pagination > ul > li.inactive, .submissions-pagination > ul > li.inactive, .ajax-pagination > ul > li.inactive {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.posts-pagination > ul > li.selected, .reports-pagination > ul > li.selected, .events-pagination > ul > li.selected {
+.posts-pagination > ul > li.selected, .reports-pagination > ul > li.selected, .events-pagination > ul > li.selected, .submissions-pagination > ul > li.selected, .ajax-pagination > ul > li.selected {
   --tw-bg-opacity: 1;
   background-color: rgb(34 85 162 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
@@ -10098,7 +10093,11 @@ details.collapse summary::-webkit-details-marker {
       .reports-pagination > ul > li:first-child,
       .reports-pagination > ul > li:last-child,
       .events-pagination > ul > li:first-child,
-      .events-pagination > ul > li:last-child {
+      .events-pagination > ul > li:last-child,
+      .submissions-pagination > ul > li:first-child,
+      .submissions-pagination > ul > li:last-child,
+      .ajax-pagination > ul > li:first-child,
+      .ajax-pagination > ul > li:last-child {
   letter-spacing: -0.2em;
 }
 
@@ -16675,14 +16674,14 @@ details.collapse summary::-webkit-details-marker {
     font-size: 44px;
   }
 
-  .md\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .md\:prose-lg {
@@ -20213,14 +20212,14 @@ details.collapse summary::-webkit-details-marker {
     line-height: 2rem;
   }
 
-  .lg\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
   .lg\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .lg\:prose-lg {
@@ -22607,11 +22606,6 @@ details.collapse summary::-webkit-details-marker {
 
   .xl\:gap-y-10 {
     row-gap: 2.5rem;
-  }
-
-  .xl\:gap-x-16 {
-    -moz-column-gap: 4rem;
-         column-gap: 4rem;
   }
 
   .xl\:rounded-lg {

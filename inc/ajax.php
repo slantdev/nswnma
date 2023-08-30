@@ -1346,7 +1346,7 @@ function pagination_load_submissions()
     $start = $page * $per_page;
 
     if ($categories) {
-      $all_reports = new WP_Query(
+      $all_submissions = new WP_Query(
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
@@ -1380,7 +1380,7 @@ function pagination_load_submissions()
         )
       );
     } else {
-      $all_reports = new WP_Query(
+      $all_submissions = new WP_Query(
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
@@ -1402,10 +1402,10 @@ function pagination_load_submissions()
     }
 
     $count = $count->post_count;
-    if ($all_reports->have_posts()) {
+    if ($all_submissions->have_posts()) {
       echo '<div class="grid grid-cols-1 gap-0 shadow-lg border border-gray-200 rounded-lg">';
-      while ($all_reports->have_posts()) {
-        $all_reports->the_post(); ?>
+      while ($all_submissions->have_posts()) {
+        $all_submissions->the_post(); ?>
         <?php
         $title =  get_the_title();
         $submission_pdf = get_field('submission_pdf', get_the_ID());
@@ -1465,7 +1465,7 @@ function pagination_load_submissions()
     }
     // Pagination Buttons logic
     if ($no_of_paginations > 1) : ?>
-      <div class='reports-pagination mt-12'>
+      <div class='submissions-pagination ajax-pagination mt-12'>
         <ul>
           <?php
           if ($first_btn && $cur_page > 1) { ?>
