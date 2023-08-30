@@ -94,6 +94,28 @@
         }
       });
     });
+    $("#policy-search-button").on("click", function(event) {
+      let search_query = $("#policy-search").val();
+      let search_filter = $("#policy-filter").find(":selected").val();
+      $.ajax({
+        type: "POST",
+        url: "/wp-admin/admin-ajax.php",
+        dataType: "html",
+        data: {
+          action: "filter_policy",
+          query: search_query,
+          filter: search_filter
+        },
+        beforeSend: function() {
+          $("#policy-search-button .spinner-border").removeClass("opacity-0").addClass("opacity-100");
+          $(".policy-grid .blocker").show();
+        },
+        success: function(res) {
+          $(".policy-grid").html(res);
+          $("#policy-search-button .spinner-border").removeClass("opacity-100").addClass("opacity-0");
+        }
+      });
+    });
     $("#events-search-button").on("click", function(event) {
       let search_query = $("#events-search").val();
       let search_suburb = $("#events-suburb").find(":selected").val();

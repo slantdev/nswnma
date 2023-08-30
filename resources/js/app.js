@@ -160,6 +160,37 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  // Submission Search
+  $('#policy-search-button').on('click', function (event) {
+    let search_query = $('#policy-search').val();
+    let search_filter = $('#policy-filter').find(':selected').val();
+    // console.log('Query :', search_query);
+    // console.log('Filter :', search_filter);
+
+    $.ajax({
+      type: 'POST',
+      url: '/wp-admin/admin-ajax.php',
+      dataType: 'html',
+      data: {
+        action: 'filter_policy',
+        query: search_query,
+        filter: search_filter,
+      },
+      beforeSend: function () {
+        $('#policy-search-button .spinner-border')
+          .removeClass('opacity-0')
+          .addClass('opacity-100');
+        $('.policy-grid .blocker').show();
+      },
+      success: function (res) {
+        $('.policy-grid').html(res);
+        $('#policy-search-button .spinner-border')
+          .removeClass('opacity-100')
+          .addClass('opacity-0');
+      },
+    });
+  });
+
   // Events Search
   $('#events-search-button').on('click', function (event) {
     let search_query = $('#events-search').val();
