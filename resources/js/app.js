@@ -1,37 +1,4 @@
-// Headroom
-// var headroom = new Headroom(document.querySelector('.site-header'), {
-//   tolerance: 5,
-//   offset: 205,
-//   classes: {
-//     initial: 'animated',
-//     pinned: 'slideDown',
-//     unpinned: 'slideUp',
-//   },
-// });
-// headroom.init();
-
-// Navigation toggle
-window.addEventListener('load', function () {
-  let main_navigation = document.querySelector('#primary-menu');
-  document
-    .querySelector('#primary-menu-toggle')
-    .addEventListener('click', function (e) {
-      e.preventDefault();
-      main_navigation.classList.toggle('hidden');
-    });
-});
-
 jQuery(document).ready(function ($) {
-  // $('.site-header').headroom({
-  //   offset: 205,
-  //   tolerance: 5,
-  //   classes: {
-  //     initial: 'animated',
-  //     pinned: 'slideDown',
-  //     unpinned: 'slideUp',
-  //   },
-  // });
-
   // Mobile Menu
   $('#mobilemenu-open').click(function (e) {
     e.preventDefault();
