@@ -7,7 +7,7 @@ function nswnma_yoast_seo_breadcrumb_append_link($links)
 
   if (is_singular('post')) {
     $breadcrumb[] = array(
-      'url' => site_url('/publications/latest-news/'),
+      'url' => '',
       'text' => 'Latest News',
     );
     array_splice($links, 1, -2, $breadcrumb);
