@@ -38,47 +38,52 @@ if ($the_query->have_posts()) :
     <div class="container mx-auto max-w-4xl relative py-16 lg:py-24">
       <ul class="search-results">
         <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-          <li class="mb-4 lg:mb-8">
-            <?php
-            //preint_r($post);
-            $post_type = $post->post_type;
-            //echo $post_type;
-            if ($post_type == 'submission' || $post_type == 'policy') {
-              $id = $post->ID;
-              $submission_pdf = get_field('submission_pdf', $id);
-              $external_link_submission = get_field('external_link_submission', $id);
-              $target = '_blank';
-              if ($submission_pdf) {
-                $link = $submission_pdf['url'];
-              } else {
-                if ($external_link_submission) {
-                  $link = $external_link_submission;
-                }
-              }
+          <?php
+          //preint_r($post);
+          $show_post = TRUE;
+          $post_type = $post->post_type;
+          //echo $post_type;
+          if ($post_type == 'submission' || $post_type == 'policy') {
+            $id = $post->ID;
+            $submission_pdf = get_field('submission_pdf', $id);
+            $external_link_submission = get_field('external_link_submission', $id);
+            $target = '_blank';
+            if ($submission_pdf) {
+              $link = $submission_pdf['url'];
             } else {
-              $link = get_the_permalink();
-              $target = '_self';
+              if ($external_link_submission) {
+                $link = $external_link_submission;
+              } else {
+                $show_post = FALSE;
+              }
             }
+          } else {
+            $link = get_the_permalink();
+            $target = '_self';
+          }
 
-            ?>
-            <a href="<?php echo $link; ?>" target="<?php echo $target; ?>" class="block bg-white shadow-md border border-gray-200 rounded-lg transition duration-300 hover:shadow-xl">
-              <div class="flex flex-wrap md:flex-nowrap">
-                <?php if ($post_type == 'submission' || $post_type == 'policy') : ?>
-                  <div class="w-full flex p-4 lg:p-8">
-                    <div class="grow pr-4 lg:pr-8">
-                      <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
+          ?>
+          <?php if ($show_post) : ?>
+            <li class="mb-4 lg:mb-8">
+              <a href="<?php echo $link; ?>" target="<?php echo $target; ?>" class="block bg-white shadow-md border border-gray-200 rounded-lg transition duration-300 hover:shadow-xl">
+                <div class="flex flex-wrap md:flex-nowrap">
+                  <?php if ($post_type == 'submission' || $post_type == 'policy') : ?>
+                    <div class="w-full flex p-4 lg:p-8">
+                      <div class="grow pr-4 lg:pr-8">
+                        <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
+                      </div>
+                      <div class="flex-none"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></div>
                     </div>
-                    <div class="flex-none"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></div>
-                  </div>
-                <?php else : ?>
-                  <div class="w-full p-4 lg:p-8">
-                    <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
-                    <div class="text-sm"><?php the_excerpt() ?></div>
-                  </div>
-                <?php endif; ?>
-              </div>
-            </a>
-          </li>
+                  <?php else : ?>
+                    <div class="w-full p-4 lg:p-8">
+                      <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
+                      <div class="text-sm"><?php the_excerpt() ?></div>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </a>
+            </li>
+          <?php endif; ?>
         <?php endwhile; ?>
       </ul>
     </div>
