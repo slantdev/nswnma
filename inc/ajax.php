@@ -1215,7 +1215,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'title',
+        'orderby' => 'menu_order',
         'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
@@ -1224,7 +1224,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'title',
+        'orderby' => 'menu_order',
         'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
@@ -1242,7 +1242,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'title',
+        'orderby' => 'menu_order',
         'order' => 'ASC',
         'post_status' => 'publish',
       );
@@ -1250,7 +1250,7 @@ function filter_submissions()
       $args = array(
         'post_type' => 'submission',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'title',
+        'orderby' => 'menu_order',
         'order' => 'ASC',
         'post_status' => 'publish',
         'tax_query' => array(
@@ -1278,14 +1278,19 @@ function filter_submissions()
       $submission_pdf = get_field('submission_pdf', get_the_ID());
       $external_link_submission = get_field('external_link_submission', get_the_ID());
       $submission_pdf_link = '';
-      $month = get_the_terms(get_the_ID(), 'submission_year');
+      $year = get_the_terms(get_the_ID(), 'submission_year');
+      $month = get_the_terms(get_the_ID(), 'submission_month');
       $month_name = '';
       $year_name = '';
-      if ($month) {
-        $month_name = $month[0]->name;
-        $parent_id = $month[0]->parent;
+      if ($year) {
+        // $month_name = $month[0]->name;
+        // $parent_id = $month[0]->parent;
         //$year_name = get_term_by('id', $parent_id, 'submission_year');
-        $year_name = get_term($parent_id)->name;
+        //$year_name = get_term($parent_id)->name;
+        $year_name = $year[0]->name;
+        if ($month) {
+          $month_name = $month[0]->name;
+        }
       }
       if ($submission_pdf) {
         $submission_pdf_link = $submission_pdf['url'];
@@ -1350,7 +1355,7 @@ function pagination_load_submissions()
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
-          'orderby'           => 'title',
+          'orderby'           => 'menu_order',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
@@ -1384,7 +1389,7 @@ function pagination_load_submissions()
         array(
           'post_type'         => 'submission',
           'post_status '      => 'publish',
-          'orderby'           => 'title',
+          'orderby'           => 'menu_order',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
@@ -1411,14 +1416,19 @@ function pagination_load_submissions()
         $submission_pdf = get_field('submission_pdf', get_the_ID());
         $external_link_submission = get_field('external_link_submission', get_the_ID());
         $submission_pdf_link = '';
-        $month = get_the_terms(get_the_ID(), 'submission_year');
+        $year = get_the_terms(get_the_ID(), 'submission_year');
+        $month = get_the_terms(get_the_ID(), 'submission_month');
         $month_name = '';
         $year_name = '';
-        if ($month) {
-          $month_name = $month[0]->name;
-          $parent_id = $month[0]->parent;
+        if ($year) {
+          // $month_name = $month[0]->name;
+          // $parent_id = $month[0]->parent;
           //$year_name = get_term_by('id', $parent_id, 'submission_year');
-          $year_name = get_term($parent_id)->name;
+          //$year_name = get_term($parent_id)->name;
+          $year_name = $year[0]->name;
+          if ($month) {
+            $month_name = $month[0]->name;
+          }
         }
         if ($submission_pdf) {
           $submission_pdf_link = $submission_pdf['url'];
