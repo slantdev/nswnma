@@ -39,22 +39,43 @@ if ($the_query->have_posts()) :
       <ul class="search-results">
         <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
           <li class="mb-4 lg:mb-8">
-            <a href="<?php the_permalink(); ?>" class="block bg-white shadow-md border border-gray-200 rounded-lg transition duration-300 hover:shadow-xl">
+            <?php
+            //preint_r($post);
+            $post_type = $post->post_type;
+            //echo $post_type;
+            if ($post_type == 'submission' || $post_type == 'policy') {
+              $id = $post->ID;
+              $submission_pdf = get_field('submission_pdf', $id);
+              $external_link_submission = get_field('external_link_submission', $id);
+              $target = '_blank';
+              if ($submission_pdf) {
+                $link = $submission_pdf['url'];
+              } else {
+                if ($external_link_submission) {
+                  $link = $external_link_submission;
+                }
+              }
+            } else {
+              $link = the_permalink();
+              $target = '_self';
+            }
+
+            ?>
+            <a href="<?php echo $link; ?>" target="<?php echo $target; ?>" class="block bg-white shadow-md border border-gray-200 rounded-lg transition duration-300 hover:shadow-xl">
               <div class="flex flex-wrap md:flex-nowrap">
-                <!-- <div class="w-full rounded-t-lg aspect-w-16 aspect-h-9 md:hidden">
-                <?php if (has_post_thumbnail()) { ?>
-                  <?php the_post_thumbnail('medium', array('class' => 'object-cover h-full w-full rounded-t-lg md:hidden')); ?>
-                <?php } ?>
-              </div>
-              <div class="hidden md:block w-1/4 rounded-l-lg">
-                <?php if (has_post_thumbnail()) { ?>
-                  <?php the_post_thumbnail('medium', array('class' => 'object-cover h-full w-full rounded-l-lg')); ?>
-                <?php } ?>
-              </div> -->
-                <div class="w-full p-4 lg:p-8">
-                  <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
-                  <div class="text-sm"><?php the_excerpt() ?></div>
-                </div>
+                <?php if ($post_type == 'submission' || $post_type == 'policy') : ?>
+                  <div class="w-full flex p-4 lg:p-8">
+                    <div class="grow pr-4 lg:pr-8">
+                      <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
+                    </div>
+                    <div class="flex-none"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></div>
+                  </div>
+                <?php else : ?>
+                  <div class="w-full p-4 lg:p-8">
+                    <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
+                    <div class="text-sm"><?php the_excerpt() ?></div>
+                  </div>
+                <?php endif; ?>
               </div>
             </a>
           </li>
