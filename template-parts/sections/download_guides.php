@@ -34,9 +34,6 @@ function card_guides($atts = array())
       <a href="' . $atts['download_url'] . '" class="inline-block text-gray-500 hover:text-brand-bluedark">
         ' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '
       </a>
-      <a href="#" class="inline-block text-gray-500 hover:text-brand-bluedark">
-      ' . nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '
-      </a>
     </div>
   </div>';
 
