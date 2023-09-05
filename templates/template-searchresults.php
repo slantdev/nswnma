@@ -1,14 +1,20 @@
 <?php
 
+/**
+ * Template Name: Search Results
+ * Template Post Type: page
+ *
+ */
+
 get_header();
 
-// $s = get_search_query();
-// $args = array(
-//   's' => $s
-// );
+$s = get_search_query();
+$args = array(
+  's' => $s
+);
 
 global $post;
-$search_query = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : null;
+$search_query = isset($_GET['searchwp']) ? sanitize_text_field($_GET['searchwp']) : null;
 $search_page  = isset($_GET['swppg']) ? absint($_GET['swppg']) : 1;
 
 $search_results    = [];
@@ -79,52 +85,31 @@ if (!empty($search_query) && class_exists('\\SearchWP\\Query')) {
           $show_post = TRUE;
           $post_type = $post->post_type;
           //echo $post_type;
-          if ($post_type == 'submission') {
+          if ($post_type == 'submission' || $post_type == 'policy') {
             $id = $post->ID;
             $submission_pdf = get_field('submission_pdf', $id);
             $external_link_submission = get_field('external_link_submission', $id);
             $target = '_blank';
             if ($submission_pdf) {
               $link = $submission_pdf['url'];
-            } elseif ($external_link_submission) {
-              $link = $external_link_submission;
             } else {
-              $show_post = FALSE;
-            }
-          } elseif ($post_type == 'report') {
-            $id = $post->ID;
-            $report_pdf = get_field('report_pdf', $id);
-            $external_link_report = get_field('external_link_report', $id);
-            $target = '_blank';
-            if ($report_pdf) {
-              $link = $report_pdf['url'];
-            } elseif ($external_link_report) {
-              $link = $external_link_report;
-            } else {
-              $show_post = FALSE;
-            }
-          } elseif ($post_type == 'policy') {
-            $id = $post->ID;
-            $policy_pdf = get_field('policy_pdf', $id);
-            $external_link_policy = get_field('external_link_policy', $id);
-            $target = '_blank';
-            if ($policy_pdf) {
-              $link = $policy_pdf['url'];
-            } elseif ($external_link_policy) {
-              $link = $external_link_policy;
-            } else {
-              $show_post = FALSE;
+              if ($external_link_submission) {
+                $link = $external_link_submission;
+              } else {
+                $show_post = FALSE;
+              }
             }
           } else {
             $link = get_the_permalink();
             $target = '_self';
           }
+
           ?>
           <?php if ($show_post) : ?>
             <li class="mb-4 lg:mb-8">
               <a href="<?php echo $link; ?>" target="<?php echo $target; ?>" class="block bg-white shadow-md border border-gray-200 rounded-lg transition duration-300 hover:shadow-xl">
                 <div class="flex flex-wrap md:flex-nowrap">
-                  <?php if ($post_type == 'submission' || $post_type == 'policy' || $post_type == 'report') : ?>
+                  <?php if ($post_type == 'submission' || $post_type == 'policy') : ?>
                     <div class="w-full flex p-4 lg:p-8">
                       <div class="grow pr-4 lg:pr-8">
                         <h3 class="font-bold text-brand-bluedark mb-2 text-xl lg:text-2xl"><?php the_title(); ?></h3>
