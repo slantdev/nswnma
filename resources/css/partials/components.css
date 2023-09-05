@@ -148,3 +148,16 @@
     }
   }
 }
+.nav-links {
+  @apply flex items-center justify-center gap-x-1;
+  .page-numbers {
+    @apply p-2 flex w-10 h-10 justify-center items-center rounded-full cursor-pointer;
+    &.current {
+      @apply bg-brand-blue text-white;
+    }
+    &.prev,
+    &.next {
+      @apply w-auto rounded-none;
+    }
+  }
+}
