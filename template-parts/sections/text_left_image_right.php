@@ -1,5 +1,5 @@
 <?php
-include get_template_directory() . '/content-blocks/layouts/section_settings.php';
+include get_template_directory() . '/template-parts/layouts/section_settings.php';
 /*
  * Available section variables
  * $section_id
