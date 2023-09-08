@@ -8,7 +8,7 @@ function nswnma_yoast_seo_breadcrumb_append_link($links)
   if (is_singular('post')) {
     $categories = get_the_category();
     //preint_r($categories);
-    if ($categories[0]->slug == 'jobs-at-nswnma') {
+    if ($categories) {
       $breadcrumb[] = array(
         'url' => '',
         'text' => $categories[0]->name,
