@@ -8,9 +8,13 @@
       <div class="flex justify-between items-center gap-x-4">
         <?php
         $member_login_button = get_field('member_login_button', 'option');
+        $member_login_target = $member_login_button['target'];
+        if (!$member_login_target) {
+          $member_login_target = '_self';
+        }
         if ($member_login_button) {
           echo '<div class="hidden xl:block">';
-          echo '<a href="' . $member_login_button['url'] . '" class="btn btn-primary">' . $member_login_button['title'] . '</a>';
+          echo '<a href="' . $member_login_button['url'] . '" target="' . $member_login_target . '" class="btn btn-primary">' . $member_login_button['title'] . '</a>';
           echo '</div>';
         }
         ?>
@@ -207,9 +211,13 @@
         endforeach;
 
         $member_login_button = get_field('member_login_button', 'option');
+        $member_login_target = $member_login_button['target'];
+        if (!$member_login_target) {
+          $member_login_target = '_self';
+        }
         if ($member_login_button) {
           echo '<div class="mt-8">';
-          echo '<a href="' . $member_login_button['url'] . '" class="btn btn-primary btn-block !py-4">' . $member_login_button['title'] . '</a>';
+          echo '<a href="' . $member_login_button['url'] . '" target="' . $member_login_target . '" class="btn btn-primary btn-block !py-4">' . $member_login_button['title'] . '</a>';
           echo '</div>';
         }
 

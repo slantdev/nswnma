@@ -112,6 +112,10 @@ if (!in_array($page_id, $exclude_from_page)) :
   $headline = $text['headline'];
   $description = $text['description'];
   $button_link = $text['button_link'];
+  $button_link_target = $button_link['target'];
+  if (!$button_link_target) {
+    $button_link_target = '_self';
+  }
 
   $background = get_field('background', 'option');
   $background_image = $background['background_image'];
@@ -130,7 +134,7 @@ if (!in_array($page_id, $exclude_from_page)) :
           <?php endif; ?>
           <?php if ($button_link) : ?>
             <div class="mt-8">
-              <a href="<?php echo $button_link['url'] ?>" class="btn btn-primary"><?php echo $button_link['title'] ?></a>
+              <a href="<?php echo $button_link['url'] ?>" target="<?php echo $button_link_target ?>" class="btn btn-primary"><?php echo $button_link['title'] ?></a>
             </div>
           <?php endif; ?>
         </div>
