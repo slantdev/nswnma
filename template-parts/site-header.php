@@ -7,6 +7,18 @@
       </a>
       <div class="flex justify-between items-center gap-x-4">
         <?php
+        $join_now_button = get_field('join_now_button', 'option');
+        $join_now_target = $join_now_button['target'];
+        if (!$join_now_target) {
+          $join_now_target = '_self';
+        }
+        if ($join_now_button) {
+          echo '<div class="hidden xl:block">';
+          echo '<a href="' . $join_now_button['url'] . '" target="' . $join_now_target . '" class="btn btn-secondary">' . $join_now_button['title'] . '</a>';
+          echo '</div>';
+        }
+        ?>
+        <?php
         $member_login_button = get_field('member_login_button', 'option');
         $member_login_target = $member_login_button['target'];
         if (!$member_login_target) {
@@ -141,7 +153,7 @@
     </div>
   </div>
 
-  <div id="mobilemenu" class="h-screen w-[300px] bg-brand-grayplatinum fixed top-0 right-0 px-6 pr-2 pt-20 z-50 translate-x-full transition duration-300 ease-in-out">
+  <div id="mobilemenu" class="h-screen w-[300px] bg-brand-grayplatinum fixed top-0 right-0 px-6 pr-2 pt-16 z-50 translate-x-full transition duration-300 ease-in-out">
     <button id="mobilemenu-close" type="button" class="absolute top-3 right-3 text-black/70 hover:text-white transition duration-200">
       <svg class="w-8 h-8" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor" />
@@ -149,6 +161,17 @@
     </button>
     <div class="h-full overflow-y-auto">
       <?php
+
+      echo '<div class="pr-4 mb-8">';
+      echo '<form id="header-searchform" class="relative" method="get" action="' . esc_url(home_url('/')) . '">';
+      echo '<input id="searchform-input" type="text" name="s" value="" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 py-4 pr-7 w-full focus:border-brand-blue">';
+      echo '<button type="button" class="absolute right-0 top-2 p-2.5">';
+      echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark'));
+      echo '</button>';
+      echo '</form>';
+      echo '</div>';
+
+
       $menu_items = get_field('megamenu_items', 'option');
       //preint_r($menu_items);
       if ($menu_items) {
@@ -210,25 +233,29 @@
         //preint_r($menu_item);
         endforeach;
 
+        $join_now_button = get_field('join_now_button', 'option');
+        $join_now_target = $join_now_button['target'];
+        if (!$join_now_target) {
+          $join_now_target = '_self';
+        }
+        if ($join_now_button) {
+          echo '<div class="mt-8">';
+          echo '<a href="' . $join_now_button['url'] . '" target="' . $join_now_target . '" class="btn btn-secondary btn-block !py-4">' . $join_now_button['title'] . '</a>';
+          echo '</div>';
+        }
+
         $member_login_button = get_field('member_login_button', 'option');
         $member_login_target = $member_login_button['target'];
         if (!$member_login_target) {
           $member_login_target = '_self';
         }
         if ($member_login_button) {
-          echo '<div class="mt-8">';
+          echo '<div class="">';
           echo '<a href="' . $member_login_button['url'] . '" target="' . $member_login_target . '" class="btn btn-primary btn-block !py-4">' . $member_login_button['title'] . '</a>';
           echo '</div>';
         }
 
-        echo '<div class="relative">';
-        echo '<form id="header-searchform" class="" method="get" action="' . esc_url(home_url('/')) . '">';
-        echo '<input id="searchform-input" type="text" name="s" value="' . isset($_GET['s']) ? esc_attr($_GET['s']) : '' . '" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 py-4 pr-7 w-full focus:border-brand-blue">';
-        echo '<button type="button" class="absolute right-0 top-2 p-2.5">';
-        echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark'));
-        echo '</button>';
-        echo '</form>';
-        echo '</div>';
+
 
         echo '</div>';
       }
