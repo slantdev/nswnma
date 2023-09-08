@@ -1,6 +1,9 @@
 <?php
 $exclude_from_page = get_field('exclude_from_page', 'option');
 //preint_r($exclude_from_page);
+if (!$exclude_from_page) {
+  $exclude_from_page = array();
+}
 $page_id = get_the_ID();
 
 if (!in_array($page_id, $exclude_from_page)) :
