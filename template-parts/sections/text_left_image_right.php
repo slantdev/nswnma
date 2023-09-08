@@ -32,14 +32,14 @@ $navigation = get_sub_field('navigation');
       <div class="w-full mt-8 lg:mt-0 lg:w-5/12">
         <div class="flex flex-col lg:pl-24">
           <?php if ($image) : ?>
-            <div class="mb-4 xl:mb-8">
+            <div class="">
               <div class="aspect-w-6 aspect-h-7">
                 <img src="<?php echo $image['url'] ?>" alt="" class="rounded-lg object-cover h-full w-full">
               </div>
             </div>
           <?php endif; ?>
           <?php if ($navigation) : ?>
-            <div class="flex flex-col divide-y divide-gray-300">
+            <div class="mt-4 lg:mt-8 flex flex-col divide-y divide-gray-300">
               <?php foreach ($navigation as $nav) : ?>
                 <?php
                 $icon = $nav['icon'];
