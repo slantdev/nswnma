@@ -77,7 +77,7 @@ if (is_admin()) {
 
                 if (!empty($taxonomies)) :
                   foreach ($taxonomies as $category) {
-                    $output .= '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
+                    $output = '<option value="' . esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
                   }
                   echo $output;
                 endif;
