@@ -33,7 +33,7 @@
         <div class="hidden xl:block relative">
           <form id="header-searchform" class="" method="get" action="<?php echo site_url('/'); ?>">
             <input id="searchform-input" type="text" name="s" value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : '' ?>" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 pr-7 w-72 focus:border-brand-blue">
-            <button type="button" type="submit" class="absolute right-0 top-0 p-2.5">
+            <button type="submit" class="absolute right-0 top-0 p-2.5">
               <?php echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark')); ?>
             </button>
           </form>
