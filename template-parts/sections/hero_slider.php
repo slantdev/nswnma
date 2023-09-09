@@ -113,6 +113,7 @@ if ($hero_slider) : ?>
     <?php if (!is_admin()) : ?>
       <script>
         const homeSlider = new Swiper('.home-slider--swiper', {
+          lazy: true,
           loop: true,
           watchOverflow: true,
           slidesPerView: 1,
