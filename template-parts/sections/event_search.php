@@ -38,7 +38,7 @@ $description = $section_intro['description'];
           <div class="hidden md:block w-[24px] text-center flex-none">In</div>
           <div class="w-full md:w-1/2">
             <select id="events-suburb" name="events-suburb" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="all" selected>Suburb</option>
+              <option value="all" selected>-- Suburb --</option>
               <?php
               $taxonomies = get_terms(array(
                 'taxonomy' => 'event_suburb',
@@ -61,7 +61,7 @@ $description = $section_intro['description'];
         <div class="flex flex-col md:flex-row gap-y-3 gap-x-4 w-full items-center">
           <div class="w-full md:w-1/2">
             <select id="events-topic" name="events-topic" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="all" selected>Topic</option>
+              <option value="all" selected>-- Topic --</option>
               <?php
               $taxonomies = get_terms(array(
                 'taxonomy' => 'event_topic',
@@ -83,7 +83,7 @@ $description = $section_intro['description'];
           <div class="hidden md:block w-[24px] text-center flex-none"></div>
           <div class="w-full md:w-1/2">
             <select id="events-month" name="events-month" class="w-full p-4 rounded-lg border border-solid border-gray-200 bg-white shadow-md">
-              <option value="all" selected>Month</option>
+              <option value="all" selected>-- Month --</option>
               <?php
               $taxonomies = get_terms(array(
                 'taxonomy' => 'event_month',

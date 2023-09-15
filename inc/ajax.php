@@ -633,7 +633,7 @@ function pagination_load_events()
       $all_events = new WP_Query(
         array(
           'post_type'         => 'event',
-          'post_status '      => 'publish',
+          'post_status'      => 'publish',
           'orderby'           => 'menu_order',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
@@ -650,7 +650,7 @@ function pagination_load_events()
       $count = new WP_Query(
         array(
           'post_type'         => 'event',
-          'post_status '      => 'publish',
+          'post_status'      => 'publish',
           'posts_per_page'    => -1,
           'tax_query' => array(
             array(
@@ -665,7 +665,7 @@ function pagination_load_events()
       $all_events = new WP_Query(
         array(
           'post_type'         => 'event',
-          'post_status '      => 'publish',
+          'post_status'      => 'publish',
           'orderby'           => 'menu_order',
           'order'             => 'ASC',
           'posts_per_page'    => $per_page,
@@ -675,11 +675,13 @@ function pagination_load_events()
       $count = new WP_Query(
         array(
           'post_type'         => 'event',
-          'post_status '      => 'publish',
+          'post_status'      => 'publish',
           'posts_per_page'    => -1
         )
       );
     }
+
+    //preint_r($all_events);
 
     $count = $count->post_count;
     if ($all_events->have_posts()) {
@@ -875,68 +877,14 @@ function pagination_load_events()
 function filter_events()
 {
   $search_query = $_POST['query'];
-  $search_suburb = $_POST['suburb'];
-  $search_topic = $_POST['topic'];
-  $search_month = $_POST['month'];
+  $suburb = $_POST['suburb'];
+  $topic = $_POST['topic'];
+  $month = $_POST['month'];
   if (isset($_POST['postsperpage'])) {
     $postsPerPage = $_POST['postsperpage'];
   } else {
     $postsPerPage = -1;
   }
-
-  // if ($search_query) {
-  //   if ($search_suburb == 'all') {
-  //     $args = array(
-  //       'post_type' => 'event',
-  //       'posts_per_page' => $postsPerPage,
-  //       'orderby' => 'menu_order',
-  //       'order' => 'ASC',
-  //       's' => $search_query,
-  //       'post_status' => 'publish',
-  //     );
-  //   } else {
-  //     $args = array(
-  //       'post_type' => 'event',
-  //       'posts_per_page' => $postsPerPage,
-  //       'orderby' => 'menu_order',
-  //       'order' => 'ASC',
-  //       's' => $search_query,
-  //       'post_status' => 'publish',
-  //       'tax_query' => array(
-  //         array(
-  //           'taxonomy' => 'event_suburb',
-  //           'field'    => 'term_id',
-  //           'terms'    => $search_suburb,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // } else {
-  //   if ($search_suburb == 'all') {
-  //     $args = array(
-  //       'post_type' => 'event',
-  //       'posts_per_page' => $postsPerPage,
-  //       'orderby' => 'menu_order',
-  //       'order' => 'ASC',
-  //       'post_status' => 'publish',
-  //     );
-  //   } else {
-  //     $args = array(
-  //       'post_type' => 'event',
-  //       'posts_per_page' => $postsPerPage,
-  //       'orderby' => 'menu_order',
-  //       'order' => 'ASC',
-  //       'post_status' => 'publish',
-  //       'tax_query' => array(
-  //         array(
-  //           'taxonomy' => 'event_suburb',
-  //           'field'    => 'term_id',
-  //           'terms'    => $search_suburb,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
 
   $defaults = array(
     'post_type' => 'event',
@@ -946,73 +894,32 @@ function filter_events()
     'post_status' => 'publish',
   );
 
-  if ($search_suburb != 'all' && $search_topic != 'all' && $search_month != 'all') {
+  // All suburb, All topic, All month,
+  if ($search_query == '' && $suburb == 'all' && $topic == 'all' && $month == 'all') {
+  }
+
+  // Search, All suburb, All topic, All month,
+  if ($search_query != '' && $suburb == 'all' && $topic == 'all' && $month == 'all') {
     $args = array(
-      'tax_query' => array(
-        'relation' => 'AND',
-        array(
-          'taxonomy' => 'event_suburb',
-          'field'    => 'term_id',
-          'terms'    => $search_suburb,
-        ),
-        array(
-          'taxonomy' => 'event_topic',
-          'field'    => 'term_id',
-          'terms'    => $search_topic,
-        ),
-        array(
-          'taxonomy' => 'event_month',
-          'field'    => 'term_id',
-          'terms'    => $search_month,
-        ),
-      ),
+      's' => $search_query,
     );
-  } else if ($search_suburb != 'all' && $search_topic != 'all') {
+  }
+
+  // 1 suburb, All topic, All month,
+  if ($search_query == '' && $suburb != 'all' && $topic == 'all' && $month == 'all') {
     $args = array(
       'tax_query' => array(
-        'relation' => 'AND',
         array(
           'taxonomy' => 'event_suburb',
           'field'    => 'term_id',
-          'terms'    => $search_suburb,
-        ),
-        array(
-          'taxonomy' => 'event_topic',
-          'field'    => 'term_id',
-          'terms'    => $search_topic,
-        ),
-      ),
-    );
-  } else if ($search_suburb != 'all' && $search_month != 'all') {
-    $args = array(
-      'tax_query' => array(
-        'relation' => 'AND',
-        array(
-          'taxonomy' => 'event_suburb',
-          'field'    => 'term_id',
-          'terms'    => $search_suburb,
-        ),
-        array(
-          'taxonomy' => 'event_month',
-          'field'    => 'term_id',
-          'terms'    => $search_month,
-        ),
-      ),
-    );
-  } else if ($search_suburb != 'all') {
-    $args = array(
-      'tax_query' => array(
-        'relation' => 'AND',
-        array(
-          'taxonomy' => 'event_suburb',
-          'field'    => 'term_id',
-          'terms'    => $search_suburb,
+          'terms'    => $suburb,
         ),
       ),
     );
   }
 
-  if ($search_query && $search_suburb != 'all' && $search_topic != 'all' && $search_month != 'all') {
+  // Search, 1 suburb, All topic, All month,
+  if ($search_query != '' && $suburb != 'all' && $topic != 'all' && $month == 'all') {
     $args = array(
       's' => $search_query,
       'tax_query' => array(
@@ -1020,21 +927,101 @@ function filter_events()
         array(
           'taxonomy' => 'event_suburb',
           'field'    => 'term_id',
-          'terms'    => $search_suburb,
+          'terms'    => $suburb,
+        ),
+      ),
+    );
+  }
+
+  // 1 suburb, 1 topic, All month
+  if ($search_query == '' && $suburb != 'all' && $topic != 'all' && $month == 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $suburb,
         ),
         array(
           'taxonomy' => 'event_topic',
           'field'    => 'term_id',
-          'terms'    => $search_topic,
+          'terms'    => $topic,
+        ),
+      ),
+    );
+  }
+
+  // Search, 1 suburb, 1 topic, All month
+  if ($search_query != '' && $suburb != 'all' && $topic != 'all' && $month == 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $topic,
+        ),
+      ),
+    );
+  }
+
+  // 1 suburb, 1 topic, 1 month
+  if ($search_query == '' && $suburb != 'all' && $topic != 'all' && $month != 'all') {
+  }
+
+  // Search, 1 suburb, 1 topic, 1 month
+  if ($search_query != '' && $suburb != 'all' && $topic != 'all' && $month != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $suburb,
+        ),
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $topic,
         ),
         array(
           'taxonomy' => 'event_month',
           'field'    => 'term_id',
-          'terms'    => $search_month,
+          'terms'    => $month,
         ),
       ),
     );
-  } else if ($search_query && $search_suburb != 'all' && $search_topic != 'all') {
+  }
+
+  // 1 suburb, All topic, 1 month
+  if ($search_query == '' && $suburb != 'all' && $topic == 'all' && $month != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_suburb',
+          'field'    => 'term_id',
+          'terms'    => $suburb,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
+    );
+  }
+
+  // Search, 1 suburb, All topic, 1 month
+  if ($search_query != '' && $suburb != 'all' && $topic == 'all' && $month != 'all') {
     $args = array(
       's' => $search_query,
       'tax_query' => array(
@@ -1042,36 +1029,241 @@ function filter_events()
         array(
           'taxonomy' => 'event_suburb',
           'field'    => 'term_id',
-          'terms'    => $search_suburb,
+          'terms'    => $suburb,
         ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
+    );
+  }
+
+  // All suburb, 1 topic, All month,
+  if ($search_query == '' && $suburb == 'all' && $topic != 'all' && $month == 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
         array(
           'taxonomy' => 'event_topic',
           'field'    => 'term_id',
-          'terms'    => $search_topic,
+          'terms'    => $topic,
         ),
       ),
     );
-  } else if ($search_query && $search_suburb != 'all') {
+  }
+
+  // Search, All suburb, 1 topic, All month,
+  if ($search_query != '' && $suburb == 'all' && $topic != 'all' && $month == 'all') {
     $args = array(
       's' => $search_query,
       'tax_query' => array(
         'relation' => 'AND',
         array(
-          'taxonomy' => 'event_suburb',
+          'taxonomy' => 'event_topic',
           'field'    => 'term_id',
-          'terms'    => $search_suburb,
+          'terms'    => $topic,
         ),
       ),
     );
-  } else if ($search_query) {
+  }
+
+  // All suburb, 1 topic, 1 month
+  if ($search_query == '' && $suburb == 'all' && $topic != 'all' && $month != 'all') {
     $args = array(
-      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $topic,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
     );
   }
+
+  // Search, All suburb, 1 topic, 1 month
+  if ($search_query != '' && $suburb == 'all' && $topic != 'all' && $month != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_topic',
+          'field'    => 'term_id',
+          'terms'    => $topic,
+        ),
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
+    );
+  }
+
+  // All suburb, All topic, 1 month
+  if ($search_query == '' && $suburb == 'all' && $topic == 'all' && $month != 'all') {
+    $args = array(
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
+    );
+  }
+
+  // Search, All suburb, All topic, 1 month
+  if ($search_query != '' && $suburb == 'all' && $topic == 'all' && $month != 'all') {
+    $args = array(
+      's' => $search_query,
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'event_month',
+          'field'    => 'term_id',
+          'terms'    => $month,
+        ),
+      ),
+    );
+  }
+
+  // if ($suburb != 'all' && $topic != 'all' && $month != 'all') {
+  //   $args = array(
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_topic',
+  //         'field'    => 'term_id',
+  //         'terms'    => $topic,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_month',
+  //         'field'    => 'term_id',
+  //         'terms'    => $month,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($suburb != 'all' && $topic != 'all') {
+  //   $args = array(
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_topic',
+  //         'field'    => 'term_id',
+  //         'terms'    => $topic,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($suburb != 'all' && $month != 'all') {
+  //   $args = array(
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_month',
+  //         'field'    => 'term_id',
+  //         'terms'    => $month,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($suburb != 'all') {
+  //   $args = array(
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // if ($search_query && $suburb != 'all' && $topic != 'all' && $month != 'all') {
+  //   $args = array(
+  //     's' => $search_query,
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_topic',
+  //         'field'    => 'term_id',
+  //         'terms'    => $topic,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_month',
+  //         'field'    => 'term_id',
+  //         'terms'    => $month,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($search_query && $suburb != 'all' && $topic != 'all') {
+  //   $args = array(
+  //     's' => $search_query,
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //       array(
+  //         'taxonomy' => 'event_topic',
+  //         'field'    => 'term_id',
+  //         'terms'    => $topic,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($search_query && $suburb != 'all') {
+  //   $args = array(
+  //     's' => $search_query,
+  //     'tax_query' => array(
+  //       'relation' => 'AND',
+  //       array(
+  //         'taxonomy' => 'event_suburb',
+  //         'field'    => 'term_id',
+  //         'terms'    => $suburb,
+  //       ),
+  //     ),
+  //   );
+  // } else if ($search_query) {
+  //   $args = array(
+  //     's' => $search_query,
+  //   );
+  // }
 
   $args = wp_parse_args($args, $defaults);
 
   $ajaxposts = new WP_Query($args);
+
+  //preint_r($ajaxposts);
 
   $response = '';
 
@@ -1152,7 +1344,6 @@ function filter_events()
           $event_date .= ')';
         }
       }
-      $response = '';
       $response .= '<div class="border rounded-md p-10 bg-slate-50">
         <div class="flex gap-x-10">
           <div class="w-1/2">
