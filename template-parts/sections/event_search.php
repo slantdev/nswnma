@@ -87,8 +87,8 @@ $description = $section_intro['description'];
               <?php
               $taxonomies = get_terms(array(
                 'taxonomy' => 'event_month',
-                'hide_empty' => true,
-                //'hide_empty' => false,
+                //'hide_empty' => true,
+                'hide_empty' => false,
                 'orderby' => 'term_order'
               ));
 
