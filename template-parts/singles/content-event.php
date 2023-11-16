@@ -90,7 +90,7 @@
           </div>
           <?php if ($registration_link) : ?>
             <div class="mt-8 inline-flex gap-4">
-              <a href="<?php echo $registration_link['url'] ?>" class="btn btn-primary">Register</a>
+              <a href="<?php echo $registration_link['url'] ?>" target="<?php echo $registration_link['target'] ?>" class="btn btn-primary">Register</a>
             </div>
           <?php endif; ?>
         </div>

@@ -629,13 +629,49 @@ function pagination_load_events()
     $last_btn = true;
     $start = $page * $per_page;
 
+    $today = date('Ymd');
+
     if ($categories) {
+      // $all_events = new WP_Query(
+      //   array(
+      //     'post_type'         => 'event',
+      //     'post_status'      => 'publish',
+      //     'orderby'           => 'menu_order',
+      //     'order'             => 'ASC',
+      //     'posts_per_page'    => $per_page,
+      //     'offset'            => $start,
+      //     'tax_query' => array(
+      //       array(
+      //         'taxonomy' => 'event_topic',
+      //         'field' => 'term_id',
+      //         'terms' => $categories
+      //       )
+      //     )
+      //   )
+      // );
       $all_events = new WP_Query(
         array(
           'post_type'         => 'event',
           'post_status'      => 'publish',
-          'orderby'           => 'menu_order',
-          'order'             => 'ASC',
+          'meta_query' => array(
+            'relation' => 'OR',
+            array(
+              'key' => 'single_date_event_event_date',
+              'value' => $today,
+              'type' => 'DATE',
+              'compare' => '>='
+            ),
+            array(
+              'key' => 'multidate_event_start_date_start_date',
+              'value' => $today,
+              'type' => 'DATE',
+              'compare' => '>='
+            )
+          ),
+          'orderby' => array(
+            'single_date_event_event_date' => 'ASC',
+            'multidate_event_start_date_start_date' => 'ASC',
+          ),
           'posts_per_page'    => $per_page,
           'offset'            => $start,
           'tax_query' => array(
@@ -662,12 +698,40 @@ function pagination_load_events()
         )
       );
     } else {
+      // $all_events = new WP_Query(
+      //   array(
+      //     'post_type'         => 'event',
+      //     'post_status'      => 'publish',
+      //     'orderby'           => 'menu_order',
+      //     'order'             => 'ASC',
+      //     'posts_per_page'    => $per_page,
+      //     'offset'            => $start
+      //   )
+      // );
       $all_events = new WP_Query(
         array(
           'post_type'         => 'event',
           'post_status'      => 'publish',
-          'orderby'           => 'menu_order',
-          'order'             => 'ASC',
+          'meta_query' => array(
+            'relation' => 'OR',
+            array(
+              'key' => 'single_date_event_event_date',
+              'value' => $today,
+              'type' => 'DATE',
+              'compare' => '>='
+            ),
+            array(
+              'key' => 'multidate_event_start_date_start_date',
+              'value' => $today,
+              'type' => 'DATE',
+              'compare' => '>='
+            )
+          ),
+          'orderby' => array(
+            'single_date_event_event_date' => 'ASC',
+            'multidate_event_start_date_start_date' => 'ASC',
+          ),
+          //'order' => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
         )
@@ -781,7 +845,7 @@ function pagination_load_events()
               </div>
               <div class="mt-4 lg:mt-8 inline-flex gap-4">
                 <?php if ($registration_link) : ?>
-                  <a href="<?php echo $registration_link['url'] ?>" class="btn btn-primary">Register</a>
+                  <a href="<?php echo $registration_link['url'] ?>" target="<?php echo $registration_link['target'] ?>" class="btn btn-primary">Register</a>
                 <?php endif; ?>
                 <a href="<?php echo $link ?>" class="btn btn-secondary">Find Out More</a>
               </div>
@@ -886,17 +950,38 @@ function filter_events()
     $postsPerPage = -1;
   }
 
+  $today = date('Ymd');
+
   $defaults = array(
     'post_type' => 'event',
     'posts_per_page' => $postsPerPage,
-    'orderby' => 'menu_order',
-    'order' => 'ASC',
+    // 'orderby' => 'menu_order',
+    // 'order' => 'ASC',
     'post_status' => 'publish',
+    'meta_query' => array(
+      'relation' => 'OR',
+      array(
+        'key' => 'single_date_event_event_date',
+        'value' => $today,
+        'type' => 'DATE',
+        'compare' => '>='
+      ),
+      array(
+        'key' => 'multidate_event_start_date_start_date',
+        'value' => $today,
+        'type' => 'DATE',
+        'compare' => '>='
+      )
+    ),
+    'orderby' => array(
+      'single_date_event_event_date' => 'ASC',
+      'multidate_event_start_date_start_date' => 'ASC',
+    ),
   );
 
   // All suburb, All topic, All month,
-  if ($search_query == '' && $suburb == 'all' && $topic == 'all' && $month == 'all') {
-  }
+  // if ($search_query == '' && $suburb == 'all' && $topic == 'all' && $month == 'all') {
+  // }
 
   // Search, All suburb, All topic, All month,
   if ($search_query != '' && $suburb == 'all' && $topic == 'all' && $month == 'all') {
@@ -1364,7 +1449,7 @@ function filter_events()
       $response .= '</div>';
       $response .= '<div class="mt-8 inline-flex gap-4">';
       if ($registration_link) {
-        $response .= '<a href="' . $registration_link['url'] . '" class="btn btn-primary">Register</a>';
+        $response .= '<a href="' . $registration_link['url'] . '" target="' . $registration_link['target'] . '" class="btn btn-primary">Register</a>';
       }
       $response .= '<a href="' . $link . '" class="btn btn-secondary">Find Out More</a>';
       $response .= '</div>';
