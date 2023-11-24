@@ -238,20 +238,26 @@
         if (!$join_now_target) {
           $join_now_target = '_self';
         }
-        if ($join_now_button) {
-          echo '<div class="mt-8">';
-          echo '<a href="' . $join_now_button['url'] . '" target="' . $join_now_target . '" class="btn btn-secondary btn-block !py-4">' . $join_now_button['title'] . '</a>';
-          echo '</div>';
-        }
-
         $member_login_button = get_field('member_login_button', 'option');
         $member_login_target = $member_login_button['target'];
         if (!$member_login_target) {
           $member_login_target = '_self';
         }
+
+        if ($join_now_button || $member_login_button) {
+          echo '<div class="flex flex-col gap-y-4 mt-8 mb-16">';
+        }
+        if ($join_now_button) {
+          echo '<div>';
+          echo '<a href="' . $join_now_button['url'] . '" target="' . $join_now_target . '" class="btn btn-secondary btn-block !py-4">' . $join_now_button['title'] . '</a>';
+          echo '</div>';
+        }
         if ($member_login_button) {
-          echo '<div class="">';
+          echo '<div>';
           echo '<a href="' . $member_login_button['url'] . '" target="' . $member_login_target . '" class="btn btn-primary btn-block !py-4">' . $member_login_button['title'] . '</a>';
+          echo '</div>';
+        }
+        if ($join_now_button || $member_login_button) {
           echo '</div>';
         }
 
