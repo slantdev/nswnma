@@ -57,6 +57,7 @@ function nswnma_acf_input_admin_footer()
 }
 add_action('acf/input/admin_footer', 'nswnma_acf_input_admin_footer');
 
+
 /*
  * ACF Icon Picker
  * Modify the path to the icons directory
@@ -188,3 +189,29 @@ function text_left_image_right_layout_thumbnail($thumbnail, $field, $layout)
 {
   return get_stylesheet_directory_uri() . '/assets/images/layouts/text_left_image_right.jpg';
 }
+
+
+/*
+ * ACF CPT - Events
+ * Clear Single Date Event value if Set Multidate Event is true
+ * https://stackoverflow.com/questions/65037123/acf-problem-with-conditional-fields-values
+ */
+add_action('acf/save_post', 'conditionally_clear_event_date', 11);
+function conditionally_clear_event_date($post_id)
+{
+
+  $set_multidate_event = get_field('set_multidate_event', $post_id);
+
+  if (true == $set_multidate_event) {
+    update_field('single_date_event_event_date', '', $post_id);
+    update_field('single_date_event_start_time', '', $post_id);
+    update_field('single_date_event_end_time', '', $post_id);
+  } else {
+    update_field('multidate_event_start_date_start_date', '', $post_id);
+    update_field('multidate_event_start_date_start_time', '', $post_id);
+    update_field('multidate_event_start_date_end_time', '', $post_id);
+    update_field('multidate_event_end_date_start_date', '', $post_id);
+    update_field('multidate_event_end_date_start_time', '', $post_id);
+    update_field('multidate_event_end_date_end_time', '', $post_id);
+  }
+};
