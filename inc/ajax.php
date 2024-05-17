@@ -319,7 +319,7 @@ function filter_reports()
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'menu_order',
-        'order' => 'DESC',
+        'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
       );
@@ -328,7 +328,7 @@ function filter_reports()
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'menu_order',
-        'order' => 'DESC',
+        'order' => 'ASC',
         's' => $search_query,
         'post_status' => 'publish',
         'tax_query' => array(
@@ -346,7 +346,7 @@ function filter_reports()
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'menu_order',
-        'order' => 'DESC',
+        'order' => 'ASC',
         'post_status' => 'publish',
       );
     } else {
@@ -354,7 +354,7 @@ function filter_reports()
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
         'orderby' => 'menu_order',
-        'order' => 'DESC',
+        'order' => 'ASC',
         'post_status' => 'publish',
         'tax_query' => array(
           array(
@@ -445,8 +445,8 @@ function pagination_load_reports()
         array(
           'post_type'         => 'report',
           'post_status'       => 'publish',
-          // 'orderby'           => 'date',
-          // 'order'             => 'ASC',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
           'tax_query' => array(
@@ -477,8 +477,8 @@ function pagination_load_reports()
         array(
           'post_type'         => 'report',
           'post_status'      => 'publish',
-          // 'orderby'           => 'date',
-          // 'order'             => 'ASC',
+          'orderby'           => 'menu_order',
+          'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
         )
