@@ -318,8 +318,8 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        // 'orderby' => 'date',
+        // 'order' => 'DESC',
         's' => $search_query,
         'post_status' => 'publish',
       );
@@ -327,8 +327,8 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        // 'orderby' => 'date',
+        // 'order' => 'DESC',
         's' => $search_query,
         'post_status' => 'publish',
         'tax_query' => array(
@@ -345,16 +345,16 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        // 'orderby' => 'date',
+        // 'order' => 'DESC',
         'post_status' => 'publish',
       );
     } else {
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        // 'orderby' => 'date',
+        // 'order' => 'DESC',
         'post_status' => 'publish',
         'tax_query' => array(
           array(
@@ -445,8 +445,8 @@ function pagination_load_reports()
         array(
           'post_type'         => 'report',
           'post_status'       => 'publish',
-          'orderby'           => 'post_date',
-          'order'             => 'ASC',
+          // 'orderby'           => 'date',
+          // 'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
           'tax_query' => array(
@@ -476,9 +476,9 @@ function pagination_load_reports()
       $all_reports = new WP_Query(
         array(
           'post_type'         => 'report',
-          'post_status'       => 'publish',
-          'orderby'           => 'post_date',
-          'order'             => 'ASC',
+          'post_status'      => 'publish',
+          // 'orderby'           => 'date',
+          // 'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
         )
