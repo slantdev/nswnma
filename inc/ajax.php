@@ -318,8 +318,8 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        // 'orderby' => 'date',
-        // 'order' => 'DESC',
+        'orderby' => 'menu_order',
+        'order' => 'DESC',
         's' => $search_query,
         'post_status' => 'publish',
       );
@@ -327,8 +327,8 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        // 'orderby' => 'date',
-        // 'order' => 'DESC',
+        'orderby' => 'menu_order',
+        'order' => 'DESC',
         's' => $search_query,
         'post_status' => 'publish',
         'tax_query' => array(
@@ -345,16 +345,16 @@ function filter_reports()
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        // 'orderby' => 'date',
-        // 'order' => 'DESC',
+        'orderby' => 'menu_order',
+        'order' => 'DESC',
         'post_status' => 'publish',
       );
     } else {
       $args = array(
         'post_type' => 'report',
         'posts_per_page' => $postsPerPage,
-        // 'orderby' => 'date',
-        // 'order' => 'DESC',
+        'orderby' => 'menu_order',
+        'order' => 'DESC',
         'post_status' => 'publish',
         'tax_query' => array(
           array(
