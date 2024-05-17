@@ -444,9 +444,9 @@ function pagination_load_reports()
       $all_reports = new WP_Query(
         array(
           'post_type'         => 'report',
-          'post_status'      => 'publish',
+          'post_status'       => 'publish',
           'orderby'           => 'post_date',
-          'order'             => 'DESC',
+          'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start,
           'tax_query' => array(
@@ -476,9 +476,9 @@ function pagination_load_reports()
       $all_reports = new WP_Query(
         array(
           'post_type'         => 'report',
-          'post_status'      => 'publish',
+          'post_status'       => 'publish',
           'orderby'           => 'post_date',
-          'order'             => 'DESC',
+          'order'             => 'ASC',
           'posts_per_page'    => $per_page,
           'offset'            => $start
         )
