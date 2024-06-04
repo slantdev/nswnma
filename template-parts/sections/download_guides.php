@@ -31,7 +31,7 @@ function card_guides($atts = array())
       <h4 class="text-xl font-medium text-brand-bluedark line-clamp-2 h-14">' . $atts['title'] . '</h4>
     </div>
     <div class="border-t flex gap-x-2 pt-[8px] hover:border-brand-bluedark hover:border-t-4 hover:pt-[5px]">
-      <a href="' . $atts['download_url'] . '" class="inline-block text-gray-500 hover:text-brand-bluedark">
+      <a href="' . $atts['download_url'] . '" target="_blank" class="inline-block text-gray-500 hover:text-brand-bluedark">
         ' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '
       </a>
     </div>
@@ -71,15 +71,22 @@ function card_guides($atts = array())
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-6">
               <?php foreach ($guide_cards as $card) : ?>
                 <?php
-                $card_image = $card['card_image'];
-                $card_color = $card['card_color'];
-                $title = $card['title'];
-                $guide_pdf = $card['guide_pdf'];
+                $card_image = $card['card_image']['url'] ?? '';
+                $card_color = $card['card_color'] ?? '';
+                $title = $card['title'] ?? '';
+                $guide_pdf = $card['guide_pdf'] ?? '';
+                $external_link = $card['external_link'] ?? '';
+                $download_url = "#";
+                if ($guide_pdf) {
+                  $download_url = $guide_pdf['url'];
+                } else if ($external_link) {
+                  $download_url = $external_link;
+                }
                 echo card_guides(
                   array(
-                    'image' => $card_image['url'],
+                    'image' => $card_image,
                     'title'  => $title,
-                    'download_url'  => $guide_pdf['url'],
+                    'download_url'  => $download_url,
                     'bg_color'  => $card_color,
                   )
                 );
