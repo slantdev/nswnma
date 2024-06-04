@@ -75,7 +75,7 @@ function card_guides($atts = array())
                 $card_color = $card['card_color'] ?? '';
                 $title = $card['title'] ?? '';
                 $guide_pdf = $card['guide_pdf'] ?? '';
-                $external_link = $card['external_link'] ?? '';
+                $external_link = $card['external_link']['url'] ?? '';
                 $download_url = "#";
                 if ($guide_pdf) {
                   $download_url = $guide_pdf['url'];
