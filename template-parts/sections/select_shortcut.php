@@ -10,6 +10,7 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
 $placeholder = get_sub_field('placeholder');
 $links = get_sub_field('links');
 
+
 if ($placeholder) : ?>
   <section class="relative bg-brand-bluedark">
     <div class="container py-12">
@@ -27,9 +28,16 @@ if ($placeholder) : ?>
           </label>
           <?php if ($links) : ?>
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full">
-              <?php foreach ($links as $link) : ?>
-                <li><a href="<?php echo $link['link']['url'] ?>"><?php echo $link['link']['title'] ?></a></li>
-              <?php endforeach; ?>
+              <?php
+              foreach ($links as $link) :
+                $link_url = $link['link']['url'] ?? '#';
+                $link_title = $link['link']['title'] ?? '';
+                if ($link_url && $link_title) :
+              ?>
+                  <li><a href="<?php echo $link_url ?>"><?php echo $link_title ?></a></li>
+              <?php
+                endif;
+              endforeach; ?>
             </ul>
           <?php endif; ?>
         </div>
