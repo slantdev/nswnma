@@ -15,7 +15,7 @@
           @apply flex absolute border border-solid border-[#dcdcde] p-[10px] bg-white w-[235px] mt-1;
         }
       }
-      input[type='text'].wp-color-picker {
+      input[type="text"].wp-color-picker {
         @apply !w-24;
       }
       .wp-picker-holder {
@@ -46,6 +46,9 @@
       float: none;
     }
   }
+}
+.acf-svg-icon-picker__popup-holder {
+  @apply !z-[100001];
 }
 .frm_insert_form svg {
   @apply inline-block;
