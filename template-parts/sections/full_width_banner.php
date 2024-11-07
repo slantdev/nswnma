@@ -8,13 +8,13 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $text = get_sub_field('text');
-$headline = $text['headline'];
-$description = $text['description'];
-$button_link = $text['button_link'];
+$headline = $text['headline'] ?? '';
+$description = $text['description'] ?? '';
+$button_link = $text['button_link'] ?? '';
 
 $background = get_sub_field('background');
-$background_image = $background['background_image'];
-$background_overlay = $background['background_overlay'];
+$background_image = $background['background_image'] ?? '';
+$background_overlay = $background['background_overlay'] ?? '';
 
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">

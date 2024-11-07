@@ -29,12 +29,12 @@
         $event_date = '';
         if ($set_multidate_event) {
           $multidate_event = get_field('multidate_event', $id);
-          $multi_start_date = $multidate_event['start_date']['start_date'];
-          $multi_start_date_start_time = $multidate_event['start_date']['start_time'];
-          $multi_start_date_end_time = $multidate_event['start_date']['end_time'];
-          $multi_end_date = $multidate_event['end_date']['end_date'];
-          $multi_end_date_start_time = $multidate_event['end_date']['start_time'];
-          $multi_end_date_end_time = $multidate_event['end_date']['end_time'];
+          $multi_start_date = $multidate_event['start_date']['start_date'] ?? '';
+          $multi_start_date_start_time = $multidate_event['start_date']['start_time'] ?? '';
+          $multi_start_date_end_time = $multidate_event['start_date']['end_time'] ?? '';
+          $multi_end_date = $multidate_event['end_date']['end_date'] ?? '';
+          $multi_end_date_start_time = $multidate_event['end_date']['start_time'] ?? '';
+          $multi_end_date_end_time = $multidate_event['end_date']['end_time'] ?? '';
           if ($multi_start_date) {
             $event_date .= $multi_start_date;
           }
@@ -59,9 +59,9 @@
           }
         } else {
           $single_date_event = get_field('single_date_event', $id);
-          $single_event_date = $single_date_event['event_date'];
-          $single_start_time = $single_date_event['start_time'];
-          $single_end_time = $single_date_event['end_time'];
+          $single_event_date = $single_date_event['event_date'] ?? '';
+          $single_start_time = $single_date_event['start_time'] ?? '';
+          $single_end_time = $single_date_event['end_time'] ?? '';
           if ($single_event_date) {
             $event_date .= $single_event_date;
           }

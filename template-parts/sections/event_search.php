@@ -8,8 +8,8 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">

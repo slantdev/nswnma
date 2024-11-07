@@ -8,8 +8,8 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $guides_grid = get_sub_field('guides_grid');
 
 function card_guides($atts = array())

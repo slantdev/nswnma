@@ -30,12 +30,12 @@ if ($hero_slider) : ?>
       <div class="swiper-wrapper h-[580px]">
         <?php if (is_admin()) : ?>
           <?php
-          $slide_image = $hero_slider[0]['slide_image'];
-          $bg_overlay = $hero_slider[0]['bg_overlay'];
-          $headline = $hero_slider[0]['headline'];
-          $description = $hero_slider[0]['description'];
-          $buttons = $hero_slider[0]['buttons'];
-          $link = $hero_slider[0]['link'];
+          $slide_image = $hero_slider[0]['slide_image'] ?? '';
+          $bg_overlay = $hero_slider[0]['bg_overlay'] ?? '';
+          $headline = $hero_slider[0]['headline'] ?? '';
+          $description = $hero_slider[0]['description'] ?? '';
+          $buttons = $hero_slider[0]['buttons'] ?? '';
+          $link = $hero_slider[0]['link'] ?? '';
 
           $overlay_style = '';
           if ($bg_overlay) {

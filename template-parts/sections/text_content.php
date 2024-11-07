@@ -8,14 +8,14 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $image_featured = get_sub_field('image_featured');
 $text_content = get_sub_field('text_content');
 $button_link = get_sub_field('button_link');
 
-$intro_settings = $section_intro['intro_settings'];
-$intro_text_alignment = $intro_settings['text_alignment'];
+$intro_settings = $section_intro['intro_settings'] ?? '';
+$intro_text_alignment = $intro_settings['text_alignment'] ?? '';
 $intro_container_class = '';
 switch ($intro_text_alignment) {
   case "left":
@@ -52,7 +52,7 @@ switch ($intro_container_max_width) {
 }
 
 $text_content_settings = get_sub_field('text_content_settings');
-$text_content_text_alignment = $text_content_settings['text_alignment'];
+$text_content_text_alignment = $text_content_settings['text_alignment'] ?? '';
 $text_content_container_class = '';
 switch ($text_content_text_alignment) {
   case "left":
@@ -67,7 +67,7 @@ switch ($text_content_text_alignment) {
   default:
     $text_content_container_class .= ' mr-auto text-left ';
 }
-$text_content_container_max_width = $text_content_settings['container_max_width'];
+$text_content_container_max_width = $text_content_settings['container_max_width'] ?? '';
 switch ($text_content_container_max_width) {
   case "max-w-none":
     $text_content_container_class .= ' max-w-none ';

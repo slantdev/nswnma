@@ -14,14 +14,14 @@ if ($breadcrumbs !== true) {
 $enable_page_header = get_field('enable_page_header');
 if ($enable_page_header) :
   $page_header = get_field('page_header');
-  $hero_title = $page_header['hero_title'];
-  $hero_text = $page_header['hero_text'];
-  $hero_button = $page_header['hero_button'];
-  $hero_background = $page_header['hero_background'];
-  $hero_bg_color = $page_header['hero_bg_color'];
-  $hero_overlay_color = $page_header['hero_overlay_color'];
-  $bg_position_x = $page_header['bg_position_x'];
-  $bg_position_y = $page_header['bg_position_y'];
+  $hero_title = $page_header['hero_title'] ?? '';
+  $hero_text = $page_header['hero_text'] ?? '';
+  $hero_button = $page_header['hero_button'] ?? '';
+  $hero_background = $page_header['hero_background'] ?? '';
+  $hero_bg_color = $page_header['hero_bg_color'] ?? '';
+  $hero_overlay_color = $page_header['hero_overlay_color'] ?? '';
+  $bg_position_x = $page_header['bg_position_x'] ?? '';
+  $bg_position_y = $page_header['bg_position_y'] ?? '';
 
   if (!$hero_title) {
     $hero_title = get_the_title();

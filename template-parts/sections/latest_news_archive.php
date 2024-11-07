@@ -8,14 +8,14 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $posts = get_sub_field('posts');
-$show_search_bar = $posts['show_search_bar'];
-$posts_per_page = $posts['posts_per_page'];
-$include_exclude_categories = $posts['include_exclude_categories'];
-$categories = $include_exclude_categories['categories'];
-$condition = $include_exclude_categories['condition'];
+$show_search_bar = $posts['show_search_bar'] ?? '';
+$posts_per_page = $posts['posts_per_page'] ?? '';
+$include_exclude_categories = $posts['include_exclude_categories'] ?? '';
+$categories = $include_exclude_categories['categories'] ?? '';
+$condition = $include_exclude_categories['condition'] ?? '';
 if (is_admin()) {
   $posts_per_page = 3;
 }

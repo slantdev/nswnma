@@ -8,11 +8,11 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $posts = get_sub_field('posts');
-$event_taxonomy = $posts['event_taxonomy'];
-$posts_per_page = $posts['posts_per_page'];
+$event_taxonomy = $posts['event_taxonomy'] ?? '';
+$posts_per_page = $posts['posts_per_page'] ?? '';
 if (!$posts_per_page) {
   $posts_per_page = 3;
 }

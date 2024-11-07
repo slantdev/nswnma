@@ -8,11 +8,11 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $filters = get_sub_field('filters');
-$enable_filter = $filters['enable_filter'];
-$filters_repeater = $filters['filters'];
+$enable_filter = $filters['enable_filter'] ?? '';
+$filters_repeater = $filters['filters'] ?? '';
 $info_boxes = get_sub_field('info_boxes');
 $info_box = get_sub_field('info_box');
 ?>
@@ -57,15 +57,15 @@ $info_box = get_sub_field('info_box');
                 <div class="swiper-wrapper grid grid-cols-1 md:grid-cols-3">
                   <?php foreach (array_slice($info_box, 0, 3) as $info) : ?>
                     <?php
-                    $icon = $info['icon'];
-                    $icon_color = $info['icon_color'];
+                    $icon = $info['icon'] ?? '';
+                    $icon_color = $info['icon_color'] ?? '';
                     $icon_style = '';
                     if ($icon_color) {
                       $icon_style .= 'color: ' . $icon_color . ';';
                     }
-                    $title = $info['title'];
-                    $description = $info['description'];
-                    $button_link = $info['button_link'];
+                    $title = $info['title'] ?? '';
+                    $description = $info['description'] ?? '';
+                    $button_link = $info['button_link'] ?? '';
                     ?>
                     <div class="swiper-slide">
                       <div class="mx-4 px-10 py-14 rounded-lg border border-solid text-center">
@@ -97,23 +97,23 @@ $info_box = get_sub_field('info_box');
           <?php else : ?>
             <?php foreach ($info_boxes as $key => $row) : ?>
               <?php
-              $assigned_filter_slug = $row['assigned_filter_slug'];
-              $info_box = $row['info_box'];
+              $assigned_filter_slug = $row['assigned_filter_slug'] ?? '';
+              $info_box = $row['info_box'] ?? '';
               ?>
               <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="infobox-swiper my-10">
                 <div class="card-swiper swiper infobox-swiper-<?php echo $key ?>">
                   <div class="swiper-wrapper">
                     <?php foreach ($info_box as $info) : ?>
                       <?php
-                      $icon = $info['icon'];
-                      $icon_color = $info['icon_color'];
+                      $icon = $info['icon'] ?? '';
+                      $icon_color = $info['icon_color'] ?? '';
                       $icon_style = '';
                       if ($icon_color) {
                         $icon_style .= 'color: ' . $icon_color . ';';
                       }
-                      $title = $info['title'];
-                      $description = $info['description'];
-                      $button_link = $info['button_link'];
+                      $title = $info['title'] ?? '';
+                      $description = $info['description'] ?? '';
+                      $button_link = $info['button_link'] ?? '';
                       ?>
                       <div class="swiper-slide">
                         <div class="mx-2 md:mx-4 px-6 py-10 lg:px-10 lg:py-14 rounded-lg border border-solid text-center">

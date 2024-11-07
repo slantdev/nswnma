@@ -3,18 +3,18 @@
  * Section Settings Variables
  */
 $section_settings = get_sub_field('section_settings');
-$section_background_color = $section_settings['section_background_color'];
+$section_background_color = $section_settings['section_background_color'] ?? '';
 $section_style = '';
 if ($section_background_color) {
   $section_style .= 'background-color:' . $section_background_color . ';';
 }
-$spacing_top = $section_settings['section_spacing']['spacing_top'];
-$spacing_bottom = $section_settings['section_spacing']['spacing_bottom'];
-$border_left = $section_settings['section_border']['left'];
-$border_top = $section_settings['section_border']['top'];
-$border_right = $section_settings['section_border']['right'];
-$border_bottom = $section_settings['section_border']['bottom'];
-$border_color = $section_settings['section_border']['border_color'];
+$spacing_top = $section_settings['section_spacing']['spacing_top'] ?? '';
+$spacing_bottom = $section_settings['section_spacing']['spacing_bottom'] ?? '';
+$border_left = $section_settings['section_border']['left'] ?? '';
+$border_top = $section_settings['section_border']['top'] ?? '';
+$border_right = $section_settings['section_border']['right'] ?? '';
+$border_bottom = $section_settings['section_border']['bottom'] ?? '';
+$border_color = $section_settings['section_border']['border_color'] ?? '';
 $border_style = '';
 if ($border_left || $border_top || $border_right || $border_bottom) {
   $border_style = 'border-style: solid;';
@@ -36,7 +36,7 @@ if ($border_color) {
 }
 $section_style .= $border_style;
 
-$add_section_anchor = $section_settings['add_section_anchor'];
+$add_section_anchor = $section_settings['add_section_anchor'] ?? '';
 $section_id = '';
 if ($add_section_anchor) {
   $section_id = $section_settings['section_id'];
@@ -94,7 +94,7 @@ switch ($spacing_bottom) {
     $section_padding_bottom = 'pb-12 lg:pb-20 xl:pb-36';
 }
 
-$section_fullwidth = $section_settings['section_full_width'];
+$section_fullwidth = $section_settings['section_full_width'] ?? '';
 $section_container_class = $section_padding_top . ' ' . $section_padding_bottom  . ' ';
 if (!$section_fullwidth) {
   $section_container_class .= 'relative container mx-auto ';

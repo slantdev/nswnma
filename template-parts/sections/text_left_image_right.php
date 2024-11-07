@@ -42,8 +42,8 @@ $navigation = get_sub_field('navigation');
             <div class="mt-4 lg:mt-8 flex flex-col divide-y divide-gray-300">
               <?php foreach ($navigation as $nav) : ?>
                 <?php
-                $icon = $nav['icon'];
-                $link = $nav['link'];
+                $icon = $nav['icon'] ?? '';
+                $link = $nav['link'] ?? '';
                 ?>
                 <?php if ($link) : ?>
                   <a href="<?php echo $link['url'] ?>" class="inline-flex items-center gap-x-4 px-4 py-3 text-brand-bluedark text-xl font-medium cursor-pointer hover:text-brand-red">

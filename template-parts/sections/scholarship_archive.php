@@ -8,11 +8,11 @@ include get_template_directory() . '/template-parts/layouts/section_settings.php
  * $section_padding_bottom
 */
 $section_intro = get_sub_field('section_intro');
-$headline = $section_intro['headline'];
-$description = $section_intro['description'];
+$headline = $section_intro['headline'] ?? '';
+$description = $section_intro['description'] ?? '';
 $posts = get_sub_field('posts');
-$scholarship_category = $posts['scholarship_category'];
-$posts_per_page = $posts['posts_per_page'];
+$scholarship_category = $posts['scholarship_category'] ?? '';
+$posts_per_page = $posts['posts_per_page'] ?? '';
 if (is_admin()) {
   $posts_per_page = 2;
 }

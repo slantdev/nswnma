@@ -8,7 +8,7 @@
       <div class="flex justify-between items-center gap-x-4">
         <?php
         $join_now_button = get_field('join_now_button', 'option');
-        $join_now_target = $join_now_button['target'];
+        $join_now_target = $join_now_button['target'] ?? '';
         if (!$join_now_target) {
           $join_now_target = '_self';
         }
@@ -20,7 +20,7 @@
         ?>
         <?php
         $member_login_button = get_field('member_login_button', 'option');
-        $member_login_target = $member_login_button['target'];
+        $member_login_target = $member_login_button['target'] ?? '';
         if (!$member_login_target) {
           $member_login_target = '_self';
         }
@@ -57,11 +57,11 @@
       if ($menu_items) {
         echo '<ul class="mega-menu">';
         foreach ($menu_items as $menu_id => $menu) :
-          $menu_item = $menu['menu_item'];
-          $has_submenu = $menu['has_submenu'];
-          $menu_columns = $menu['menu_columns'];
-          $add_featured_text = $menu['add_featured_text'];
-          $featured_text = $menu['featured_text'];
+          $menu_item = $menu['menu_item'] ?? '';
+          $has_submenu = $menu['has_submenu'] ?? '';
+          $menu_columns = $menu['menu_columns'] ?? '';
+          $add_featured_text = $menu['add_featured_text'] ?? '';
+          $featured_text = $menu['featured_text'] ?? '';
           $has_featured_text_class = '';
           if ($add_featured_text) {
             $has_featured_text_class = 'has-featured-text';
@@ -109,10 +109,10 @@
             echo '</div>';
             echo '</div>';
             if ($add_featured_text && $featured_text) {
-              $image = $featured_text['image'];
-              $title = $featured_text['title'];
-              $description = $featured_text['description'];
-              $button = $featured_text['button'];
+              $image = $featured_text['image'] ?? '';
+              $title = $featured_text['title'] ?? '';
+              $description = $featured_text['description'] ?? '';
+              $button = $featured_text['button'] ?? '';
               echo '<div class="w-1/4 bg-brand-gray">';
               echo '<div class="py-10 pl-10">';
               if ($image) {
@@ -177,11 +177,11 @@
       if ($menu_items) {
         echo '<div class="menumobile flex flex-col gap-4 pr-4">';
         foreach ($menu_items as $menu_id => $menu) :
-          $menu_item = $menu['menu_item'];
-          $has_submenu = $menu['has_submenu'];
-          $menu_columns = $menu['menu_columns'];
-          $add_featured_text = $menu['add_featured_text'];
-          $featured_text = $menu['featured_text'];
+          $menu_item = $menu['menu_item'] ?? '';
+          $has_submenu = $menu['has_submenu'] ?? '';
+          $menu_columns = $menu['menu_columns'] ?? '';
+          $add_featured_text = $menu['add_featured_text'] ?? '';
+          $featured_text = $menu['featured_text'] ?? '';
           $has_featured_text_class = '';
           if ($add_featured_text) {
             $has_featured_text_class = 'has-featured-text';
@@ -234,12 +234,12 @@
         endforeach;
 
         $join_now_button = get_field('join_now_button', 'option');
-        $join_now_target = $join_now_button['target'];
+        $join_now_target = $join_now_button['target'] ?? '';
         if (!$join_now_target) {
           $join_now_target = '_self';
         }
         $member_login_button = get_field('member_login_button', 'option');
-        $member_login_target = $member_login_button['target'];
+        $member_login_target = $member_login_button['target'] ?? '';
         if (!$member_login_target) {
           $member_login_target = '_self';
         }
