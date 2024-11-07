@@ -11,6 +11,10 @@ $section_intro = get_sub_field('section_intro');
 $headline = $section_intro['headline'] ?? '';
 $description = $section_intro['description'] ?? '';
 $accordion = get_sub_field('accordion');
+$section_intro_button_link = $section_intro['button_link'] ?? '';
+$section_intro_button_url = $section_intro['button_link']['url'] ?? '';
+$section_intro_button_title = $section_intro['button_link']['title'] ?? '';
+
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
@@ -29,9 +33,9 @@ $accordion = get_sub_field('accordion');
             </div>
           </div>
         <?php endif; ?>
-        <?php if ($section_intro['button_link']) : ?>
+        <?php if ($section_intro_button_url) : ?>
           <div class="w-full lg:w-1/2">
-            <div class="flex mt-6 lg:mt-0 lg:justify-end"><a href="<?php echo $section_intro['button_link']['url'] ?>" class="btn btn-secondary"><?php echo $section_intro['button_link']['title'] ?></a></div>
+            <div class="flex mt-6 lg:mt-0 lg:justify-end"><a href="<?php echo $section_intro_button_url ?>" class="btn btn-secondary"><?php echo $section_intro_button_title ?></a></div>
           </div>
         <?php endif; ?>
       </div>

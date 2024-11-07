@@ -30,7 +30,7 @@ switch ($intro_text_alignment) {
   default:
     $intro_container_class .= ' mr-auto text-left ';
 }
-$intro_container_max_width = $intro_settings['container_max_width'];
+$intro_container_max_width = $intro_settings['container_max_width'] ?? '';
 switch ($intro_container_max_width) {
   case "max-w-none":
     $intro_container_class .= ' max-w-none ';
