@@ -13,7 +13,7 @@ $description = $section_intro['description'] ?? '';
 $button_link = $section_intro['button_link'] ?? '';
 $posts = get_sub_field('posts');
 $post_taxonomy = $posts['post_taxonomy'] ?? '';
-$posts_per_page = $posts['posts_per_page'] ?? '';
+$posts_per_page = $posts['posts_per_page'] ?? '3';
 ?>
 <section id="<?php echo $section_id ?>" style="<?php echo $section_style ?>">
   <div class="relative <?php echo $section_padding_top . ' ' . $section_padding_bottom ?>">
@@ -91,7 +91,7 @@ $posts_per_page = $posts['posts_per_page'] ?? '';
               <?php
               $args = array(
                 'post_type' => 'post',
-                'posts_per_page' => 3,
+                'posts_per_page' => $posts_per_page,
                 'offset' => 1,
                 'tax_query' => array(
                   array(
