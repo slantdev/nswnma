@@ -87,7 +87,7 @@ $posts_per_page = $posts['posts_per_page'] ?? '3';
             <?php endif; ?>
           </div>
           <div class="w-full lg:w-1/2">
-            <div class="flex flex-col gap-y-6 h-full">
+            <div class="flex flex-col gap-y-6 h-full overflow-y-auto" style="max-height: 625px;">
               <?php
               $args = array(
                 'post_type' => 'post',
