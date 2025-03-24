@@ -49,9 +49,9 @@ $info_box = get_sub_field('info_box');
         <div class="infobox-swipers">
           <?php if (is_admin()) : ?>
             <?php
-            return;
-            $assigned_filter_slug = $info_boxes[0]['assigned_filter_slug'];
-            $info_box = $info_boxes[0]['info_box'];
+            $assigned_filter_slug = $info_boxes[0]['assigned_filter_slug'] ?? '';
+            $info_box = $info_boxes[0]['info_box'] ?? '';
+            if ($info_box) :
             ?>
             <div id="infobox-swiper--<?php echo $assigned_filter_slug ?>" class="my-10">
               <div class="card-swiper swiper">
@@ -95,6 +95,7 @@ $info_box = get_sub_field('info_box');
                 <div class="card-swiper--pagination mt-10 text-center"></div>
               </div>
             </div>
+            <?php endif; ?>
           <?php else : ?>
             <?php foreach ($info_boxes as $key => $row) : ?>
               <?php
