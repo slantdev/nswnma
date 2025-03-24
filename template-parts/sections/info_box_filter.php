@@ -49,6 +49,7 @@ $info_box = get_sub_field('info_box');
         <div class="infobox-swipers">
           <?php if (is_admin()) : ?>
             <?php
+            return;
             $assigned_filter_slug = $info_boxes[0]['assigned_filter_slug'];
             $info_box = $info_boxes[0]['info_box'];
             ?>
