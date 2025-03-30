@@ -1,11 +1,11 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import 'custom.css';
-@import 'partials/buttons.css';
-@import 'partials/navigation.css';
-@import 'partials/components.css';
+@import "custom.css";
+@import "partials/buttons.css";
+@import "partials/navigation.css";
+@import "partials/components.css";
 
 .acf-layout {
   @apply font-sans;
@@ -134,18 +134,18 @@
         }
       }
     }
-    [type='text'],
-    [type='email'],
-    [type='url'],
-    [type='password'],
-    [type='number'],
-    [type='date'],
-    [type='datetime-local'],
-    [type='month'],
-    [type='search'],
-    [type='tel'],
-    [type='time'],
-    [type='week'],
+    [type="text"],
+    [type="email"],
+    [type="url"],
+    [type="password"],
+    [type="number"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="week"],
     [multiple],
     textarea,
     select {
@@ -206,7 +206,7 @@
         line-height: 2rem;
       }
     }
-    .prose :where(h3):not(:where([class~='not-prose'] *)) {
+    .prose :where(h3):not(:where([class~="not-prose"] *)) {
       color: var(--tw-prose-headings);
       font-weight: 600;
       font-size: 1.25em;
@@ -214,18 +214,22 @@
       margin-bottom: 0.6em;
       line-height: 1.6;
     }
-    .prose :where(.prose > :first-child):not(:where([class~='not-prose'] *)) {
+    .prose :where(.prose > :first-child):not(:where([class~="not-prose"] *)) {
       margin-top: 0;
     }
-    .prose-lg :where(h3):not(:where([class~='not-prose'] *)) {
+    .prose-lg :where(h3):not(:where([class~="not-prose"] *)) {
       font-size: 1.3333333em;
       margin-top: 1.6666667em;
       margin-bottom: 0.6666667em;
       line-height: 1.5;
     }
     .prose-lg
-      :where(.prose-lg > :first-child):not(:where([class~='not-prose'] *)) {
+      :where(.prose-lg > :first-child):not(:where([class~="not-prose"] *)) {
       margin-top: 0;
     }
   }
+}
+
+.acf-svg-icon-picker__popup-overlay {
+  z-index: 100002 !important;
 }

@@ -607,7 +607,7 @@ function pagination_load_reports()
   exit();
 }
 
-/* ###### Ajax function for pagination ###### */
+/* ###### Ajax function for pagination_load_events ###### */
 add_action('wp_ajax_pagination_load_events', 'pagination_load_events');
 add_action('wp_ajax_nopriv_pagination_load_events', 'pagination_load_events');
 function pagination_load_events()
@@ -932,7 +932,7 @@ function pagination_load_events()
           } ?>
         </ul>
       </div>
-      <?php
+    <?php
     endif;
   }
   exit();
@@ -1604,7 +1604,136 @@ function filter_submissions()
 add_action('wp_ajax_filter_submissions', 'filter_submissions');
 add_action('wp_ajax_nopriv_filter_submissions', 'filter_submissions');
 
-/* ###### Ajax function for pagination ###### */
+/**
+ * Query and display submission posts sorted by year and month
+ */
+function get_sorted_submissions($limit = -1, $offset = 0, $terms = null)
+{
+  // Array to hold all our posts with their taxonomy data
+  $submissions = array();
+
+  $limit = -1;
+
+  // First, get all submission posts
+  if ($terms) {
+    $args = array(
+      'post_type' => 'submission',
+      'posts_per_page' => $limit,
+      'post_status' => 'publish',
+      'offset'            => $offset,
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'submission_year',
+          'field' => 'term_id',
+          'terms' => $terms
+        )
+      )
+    );
+  } else {
+    $args = array(
+      'post_type' => 'submission',
+      'posts_per_page' => $limit,
+      'post_status' => 'publish',
+      'offset'            => $offset,
+    );
+  }
+
+
+  $query = new WP_Query($args);
+
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      // Get the submission_year terms for this post
+      $years = wp_get_post_terms(get_the_ID(), 'submission_year');
+      $year = !empty($years) ? $years[0]->name : '0';
+
+      // Get the submission_month terms for this post
+      $months = wp_get_post_terms(get_the_ID(), 'submission_month');
+      $month = !empty($months) ? $months[0]->name : '';
+
+      // Convert month name to number for sorting
+      $month_num = 0;
+      if (!empty($month)) {
+        $month_num = array_search(strtolower($month), array(
+          'january',
+          'february',
+          'march',
+          'april',
+          'may',
+          'june',
+          'july',
+          'august',
+          'september',
+          'october',
+          'november',
+          'december'
+        ));
+
+        // array_search returns index starting from 0, so add 1
+        $month_num = $month_num !== false ? $month_num + 1 : 0;
+      }
+
+
+      $title =  get_the_title();
+      $submission_pdf = get_field('submission_pdf', get_the_ID());
+      $external_link_submission = get_field('external_link_submission', get_the_ID());
+      $submission_pdf_link = '';
+      $submission_year = get_the_terms(get_the_ID(), 'submission_year');
+      $submission_month = get_the_terms(get_the_ID(), 'submission_month');
+      $month_name = '';
+      $year_name = '';
+
+      if ($submission_year) {
+        // $month_name = $month[0]->name;
+        // $parent_id = $month[0]->parent;
+        //$year_name = get_term_by('id', $parent_id, 'submission_year');
+        //$year_name = get_term($parent_id)->name;
+        $year_name = $submission_year[0]->name;
+        if ($submission_month) {
+          $month_name = $submission_month[0]->name;
+        }
+      }
+      if ($submission_pdf) {
+        $submission_pdf_link = $submission_pdf['url'];
+      } else {
+        if ($external_link_submission) {
+          $submission_pdf_link = $external_link_submission;
+        }
+      }
+
+      // Store post with its taxonomy info
+      $submissions[] = array(
+        'ID' => get_the_ID(),
+        'title' => $title,
+        'permalink' => get_permalink(),
+        'year' => intval($year),
+        'month' => $month,
+        'month_num' => $month_num,
+        'submission_pdf_link' => $submission_pdf_link,
+        'month_name' => $month_name,
+        'year_name' => $year_name
+      );
+    }
+    wp_reset_postdata();
+
+    // Sort submissions by year (desc) and month (desc)
+    usort($submissions, function ($a, $b) {
+      // Compare years first
+      if ($a['year'] != $b['year']) {
+        return $b['year'] - $a['year']; // Descending order
+      }
+
+      // If years are the same, compare months
+      return $b['month_num'] - $a['month_num']; // Descending order
+    });
+  }
+
+  return $submissions;
+}
+
+/* ###### Ajax function for pagination_load_submissions ###### */
 add_action('wp_ajax_pagination_load_submissions', 'pagination_load_submissions');
 add_action('wp_ajax_nopriv_pagination_load_submissions', 'pagination_load_submissions');
 function pagination_load_submissions()
@@ -1627,23 +1756,7 @@ function pagination_load_submissions()
     $start = $page * $per_page;
 
     if ($categories) {
-      $all_submissions = new WP_Query(
-        array(
-          'post_type'         => 'submission',
-          'post_status '      => 'publish',
-          'orderby'           => 'menu_order',
-          'order'             => 'ASC',
-          'posts_per_page'    => $per_page,
-          'offset'            => $start,
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'submission_year',
-              'field' => 'term_id',
-              'terms' => $categories
-            )
-          )
-        )
-      );
+      $sorted_submissions = get_sorted_submissions($per_page, $start, $categories);
       $count = new WP_Query(
         array(
           'post_type'         => 'submission',
@@ -1661,16 +1774,7 @@ function pagination_load_submissions()
         )
       );
     } else {
-      $all_submissions = new WP_Query(
-        array(
-          'post_type'         => 'submission',
-          'post_status '      => 'publish',
-          'orderby'           => 'menu_order',
-          'order'             => 'ASC',
-          'posts_per_page'    => $per_page,
-          'offset'            => $start
-        )
-      );
+      $sorted_submissions = get_sorted_submissions($per_page, $start);
       $count = new WP_Query(
         array(
           'post_type'         => 'submission',
@@ -1683,53 +1787,49 @@ function pagination_load_submissions()
     }
 
     $count = $count->post_count;
-    if ($all_submissions->have_posts()) {
-      echo '<div class="grid grid-cols-1 gap-0 shadow-lg border border-gray-200 rounded-lg">';
-      while ($all_submissions->have_posts()) {
-        $all_submissions->the_post(); ?>
-        <?php
-        $title =  get_the_title();
-        $submission_pdf = get_field('submission_pdf', get_the_ID());
-        $external_link_submission = get_field('external_link_submission', get_the_ID());
-        $submission_pdf_link = '';
-        $year = get_the_terms(get_the_ID(), 'submission_year');
-        $month = get_the_terms(get_the_ID(), 'submission_month');
-        $month_name = '';
-        $year_name = '';
-        if ($year) {
-          // $month_name = $month[0]->name;
-          // $parent_id = $month[0]->parent;
-          //$year_name = get_term_by('id', $parent_id, 'submission_year');
-          //$year_name = get_term($parent_id)->name;
-          $year_name = $year[0]->name;
-          if ($month) {
-            $month_name = $month[0]->name;
-          }
-        }
-        if ($submission_pdf) {
-          $submission_pdf_link = $submission_pdf['url'];
-        } else {
-          if ($external_link_submission) {
-            $submission_pdf_link = $external_link_submission;
-          }
-        }
-        ?>
-        <div class="p-4 border-b border-gray-200">
-          <div class="flex flex-col lg:flex-row">
-            <div class="w-full mb-2 lg:mb-0 lg:w-3/12 flex gap-x-2 text-gray-400 uppercase font-semibold">
-              <div><?php echo $year_name ?></div>
-              <div><?php echo $month_name ?></div>
-            </div>
-            <div class="w-full lg:w-9/12 flex">
-              <div class="grow pr-4 lg:pr-8"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="hover:underline"><?php echo $title ?></a></div>
-              <div class="flex-none"><a href="<?php echo $submission_pdf_link ?>" target="_blank" class="inline-block opacity-80 hover:opacity-100"><?php echo nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) ?></a></div>
-            </div>
-          </div>
-        </div>
-      <?php
+
+    // Display the sorted submissions
+    if (!empty($sorted_submissions)) {
+
+      //preint_r($sorted_submissions);
+
+      if ($per_page !== '-1') {
+        $sorted_submissions = array_slice($sorted_submissions, $start, $per_page);
       }
+
+      echo '<div class="grid grid-cols-1 gap-0 shadow-lg border border-gray-200 rounded-lg">';
+
+      foreach ($sorted_submissions as $index => $submission) {
+
+        echo '<div class="p-4 border-b border-gray-200">';
+        echo '<div class="flex flex-col lg:flex-row">';
+        echo '<div class="w-full mb-2 lg:mb-0 lg:w-3/12 flex gap-x-2 text-gray-400 uppercase font-semibold">';
+        echo '<div>' . esc_html($submission['year_name']) . '</div>';
+        echo '<div>' . esc_html($submission['month_name']) . '</div>';
+        echo '</div>';
+        echo '<div class="w-full lg:w-9/12 flex">';
+        echo '<div class="grow pr-4 lg:pr-8"><a href="' . esc_url($submission['submission_pdf_link']) . '" target="_blank" class="hover:underline">' . esc_html($submission['title']) . '</a></div>';
+        echo '<div class="flex-none"><a href="' . esc_url($submission['submission_pdf_link']) . '" target="_blank" class="inline-block opacity-80 hover:opacity-100">' . nswnma_icon(array('icon' => 'download', 'group' => 'utilities', 'size' => '32', 'class' => '')) . '</a></div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+
+        // echo '<li>';
+        // echo '<a href="' . esc_url($submission['permalink']) . '">';
+        // echo esc_html($submission['title']);
+        // echo '</a> - ';
+        // echo esc_html($submission['year']) . ', ' . esc_html($submission['month']);
+        // echo '</li>';
+
+      }
+
       echo '</div>';
+    } else {
+      echo '<p>No submissions found.</p>';
     }
+
+
+
     // Paginations
     $no_of_paginations = ceil($count / $per_page);
     if ($cur_page >= 7) {
