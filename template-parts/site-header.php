@@ -33,13 +33,13 @@
         <div class="hidden xl:block relative">
           <form id="header-searchform" class="" method="get" action="<?php echo site_url('/'); ?>">
             <input id="searchform-input" type="text" name="s" value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : '' ?>" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 pr-7 w-72 focus:border-brand-blue">
-            <button type="submit" class="absolute right-0 top-0 p-2.5">
+            <button type="submit" aria-label="Search" class="absolute right-0 top-0 p-2.5">
               <?php echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark')); ?>
             </button>
           </form>
         </div>
 
-        <button type="button" id="mobilemenu-open" class="p-2 text-black xl:hidden">
+        <button type="button" id="mobilemenu-open" aria-label="Menu Open" class="p-2 text-black xl:hidden">
           <svg class="w-8 h-8" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 6H21V8H3V6ZM3 11H21V13H3V11ZM3 16H21V18H3V16Z" fill="currentColor" />
           </svg>
@@ -154,7 +154,7 @@
   </div>
 
   <div id="mobilemenu" class="h-screen w-[300px] bg-brand-grayplatinum fixed top-0 right-0 px-6 pr-2 pt-16 z-50 translate-x-full transition duration-300 ease-in-out">
-    <button id="mobilemenu-close" type="button" class="absolute top-3 right-3 text-black/70 hover:text-white transition duration-200">
+    <button id="mobilemenu-close" aria-label="Menu Close" type="button" class="absolute top-3 right-3 text-black/70 hover:text-white transition duration-200">
       <svg class="w-8 h-8" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor" />
       </svg>
@@ -189,7 +189,7 @@
           if ($has_submenu) {
             echo '<div class="collapse collapse-arrow">';
             //echo '<input type="radio" name="mobilemenu-accordion" />';
-            echo '<input type="checkbox" />';
+            echo '<input type="checkbox" aria-label="Collapse" />';
             echo '<div class="collapse-title text-base font-medium">';
             //echo '<a href="' . $menu_item['url'] . '" target="' . $menu_item['target'] . '" class="">';
             echo $menu_item['title'];

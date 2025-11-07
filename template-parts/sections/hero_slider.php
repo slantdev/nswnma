@@ -103,7 +103,7 @@ if ($hero_slider) : ?>
         <?php endif; ?>
       </div>
       <?php if (!is_admin()) : ?>
-        <div class="container relative hidden md:block">
+        <div class="container relative hidden">
           <div class="w-1/3 md:w-1/4 absolute left-auto right-0 -bottom-[34px] md:pl-14">
             <div class="swiper-pagination home-slider--pagination"></div>
           </div>

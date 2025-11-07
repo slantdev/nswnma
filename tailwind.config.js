@@ -43,7 +43,7 @@ module.exports = {
           bluedark: '#0F2E53',
           bluesky: '#00BAFF',
           red: '#BF2031',
-          redchili: '#EA3325',
+          redchili: '#E22413',
           gray: '#58595B',
           graylight: '#F3F1EF',
           grayblue: '#F4F8FF',

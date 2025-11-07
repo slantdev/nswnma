@@ -9,7 +9,7 @@ $contact_info = get_field('contact_info', 'option');
 $social_media = get_field('social_media', 'option');
 $additional_links = get_field('additional_links', 'option');
 ?>
-<footer class="bg-[#7C7C7C] text-white">
+<footer class="bg-[#4b5464] text-white">
 
   <div class="container">
     <div class="py-4 border-b border-solid border-white/40 lg:py-8">
@@ -54,32 +54,32 @@ $additional_links = get_field('additional_links', 'option');
               <div class="mt-4">
                 <div class="flex gap-x-2">
                   <?php if ($social_media['facebook']) : ?>
-                    <a href="<?php echo $social_media['facebook']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['facebook']['url'] ?>" target="_blank" aria-label="Follow us on Facebook" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'facebook', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['twitter']) : ?>
-                    <a href="<?php echo $social_media['twitter']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['twitter']['url'] ?>" target="_blank" aria-label="Follow us on Twitter" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'twitter', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['instagram']) : ?>
-                    <a href="<?php echo $social_media['instagram']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['instagram']['url'] ?>" target="_blank" aria-label="Follow us on Instagram" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'instagram', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['linkedin']) : ?>
-                    <a href="<?php echo $social_media['linkedin']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['linkedin']['url'] ?>" target="_blank" aria-label="Follow us on LinkedIn" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'linkedin', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['youtube']) : ?>
-                    <a href="<?php echo $social_media['youtube']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['youtube']['url'] ?>" target="_blank" aria-label="Subscribe us on YouTube" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'youtube', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['soundcloud']) : ?>
-                    <a href="<?php echo $social_media['soundcloud']['url'] ?>" target="_blank" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white/70 hover:text-white">
+                    <a href="<?php echo $social_media['soundcloud']['url'] ?>" target="_blank" aria-label="Follow us on Soundcloud" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'soundcloud', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>

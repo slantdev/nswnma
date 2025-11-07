@@ -77,7 +77,7 @@ $info_box = get_sub_field('info_box');
                         <?php endif; ?>
                         <div class="my-4">
                           <?php if ($title) : ?>
-                            <h4 class="text-xl leading-tight text-brand-blue mb-4"><?php echo $title ?></h4>
+                            <h3 class="text-xl leading-tight text-brand-blue mb-4"><?php echo $title ?></h3>
                           <?php endif; ?>
                           <?php if ($description) : ?>
                             <p class="text-gray-500 text-sm"><?php echo $description ?></p>
@@ -126,7 +126,7 @@ $info_box = get_sub_field('info_box');
                           <?php endif; ?>
                           <div class="my-4">
                             <?php if ($title) : ?>
-                              <h4 class="text-xl leading-tight text-brand-blue mb-4"><?php echo $title ?></h4>
+                              <h3 class="text-xl leading-tight text-brand-blue mb-4"><?php echo $title ?></h3>
                             <?php endif; ?>
                             <?php if ($description) : ?>
                               <p class="text-gray-500 text-sm"><?php echo $description ?></p>
@@ -141,15 +141,18 @@ $info_box = get_sub_field('info_box');
                       </div>
                     <?php endforeach; ?>
                   </div>
-                  <div class="card-swiper--pagination mt-10 text-center"></div>
+                  <div class="flex gap-x-6 justify-center py-10">
+                    <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
+                      <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
+                    </div>
+                    <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
+                      <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
+                    </div>
+                  </div>
                 </div>
                 <script>
                   new Swiper('.infobox-swiper-<?php echo $key ?>', {
                     loop: false,
-                    pagination: {
-                      el: '.infobox-swiper-<?php echo $key ?> .card-swiper--pagination',
-                      clickable: true,
-                    },
                     watchOverflow: true,
                     slidesPerView: 1,
                     centeredSlides: false,
@@ -162,6 +165,10 @@ $info_box = get_sub_field('info_box');
                         slidesPerView: 3,
                       },
                     },
+                    navigation: {
+                      nextEl: '.infobox-swiper-<?php echo $key ?> .content-carousel--button-next',
+                      prevEl: '.infobox-swiper-<?php echo $key ?> .content-carousel--button-prev',
+                    },                    
                   });
                 </script>
               </div>
