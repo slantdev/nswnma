@@ -94,10 +94,10 @@ $static_content_card = get_sub_field('static_content_card');
                 <?php endif; ?>
               </div>
               <div class="flex gap-x-6 justify-center py-10">
-                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>
-                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
                 </div>
               </div>
@@ -228,10 +228,10 @@ $static_content_card = get_sub_field('static_content_card');
                 </div>
               </div>
               <div class="flex gap-x-6 justify-center py-6 md:py-10">
-                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>
-                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
                 </div>
               </div>
@@ -284,10 +284,10 @@ $static_content_card = get_sub_field('static_content_card');
                 <?php endforeach; ?>
               </div>
               <div class="flex gap-x-6 justify-center py-6 md:py-10">
-                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-prev p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => 'rotate-180')); ?>
                 </div>
-                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-brand-bluedark transition duration-300">
+                <div class="content-carousel--button-next p-3 rounded-full bg-brand-bluedark shadow-lg flex items-center justify-center cursor-pointer text-white hover:bg-brand-bluedark/70 hover:text-white transition duration-300">
                   <?php echo nswnma_icon(array('icon' => 'chevron', 'group' => 'utilities', 'size' => '16', 'class' => '')); ?>
                 </div>
               </div>
