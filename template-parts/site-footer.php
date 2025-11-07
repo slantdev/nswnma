@@ -30,7 +30,7 @@ $additional_links = get_field('additional_links', 'option');
       <div class="lg:w-1/3">
         <?php if ($about_company) : ?>
           <div class="block">
-            <img src="<?php echo nswnma_asset('images/nswnma-logo-white.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-[200px] xl:w-auto xl:h-[90px]">
+            <img src="<?php echo nswnma_asset('images/NSWNMA-ANMFNSW-sp.png') ?>" alt="<?php echo get_bloginfo('name') ?>" class="w-[200px] xl:w-auto xl:h-[90px]">
           </div>
           <div class="text-xs mt-4">
             <?php echo $about_company ?>
@@ -54,32 +54,32 @@ $additional_links = get_field('additional_links', 'option');
               <div class="mt-4">
                 <div class="flex gap-x-2">
                   <?php if ($social_media['facebook']) : ?>
-                    <a href="<?php echo $social_media['facebook']['url'] ?>" target="_blank" aria-label="Follow us on Facebook" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['facebook']['url'] ?>" target="_blank" aria-label="Follow us on Facebook" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'facebook', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['twitter']) : ?>
-                    <a href="<?php echo $social_media['twitter']['url'] ?>" target="_blank" aria-label="Follow us on Twitter" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['twitter']['url'] ?>" target="_blank" aria-label="Follow us on Twitter" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'twitter', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['instagram']) : ?>
-                    <a href="<?php echo $social_media['instagram']['url'] ?>" target="_blank" aria-label="Follow us on Instagram" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['instagram']['url'] ?>" target="_blank" aria-label="Follow us on Instagram" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'instagram', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['linkedin']) : ?>
-                    <a href="<?php echo $social_media['linkedin']['url'] ?>" target="_blank" aria-label="Follow us on LinkedIn" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['linkedin']['url'] ?>" target="_blank" aria-label="Follow us on LinkedIn" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'linkedin', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['youtube']) : ?>
-                    <a href="<?php echo $social_media['youtube']['url'] ?>" target="_blank" aria-label="Subscribe us on YouTube" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['youtube']['url'] ?>" target="_blank" aria-label="Subscribe us on YouTube" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'youtube', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
                   <?php if ($social_media['soundcloud']) : ?>
-                    <a href="<?php echo $social_media['soundcloud']['url'] ?>" target="_blank" aria-label="Follow us on Soundcloud" class="flex justify-center items-end text-white p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
+                    <a href="<?php echo $social_media['soundcloud']['url'] ?>" target="_blank" aria-label="Follow us on Soundcloud" class="flex justify-center items-end p-2 rounded-full bg-gray-600 hover:bg-gray-700 text-white hover:text-white">
                       <?php echo nswnma_icon(array('icon' => 'soundcloud', 'group' => 'social', 'size' => '22', 'class' => '')); ?>
                     </a>
                   <?php endif; ?>
@@ -103,7 +103,7 @@ $additional_links = get_field('additional_links', 'option');
 
   <div class="bg-white py-6 lg:py-8 text-center text-gray-500">
     <div class="container max-w-[800px] text-xs lg:text-sm">
-      All content copyright &copy; <?php echo date_i18n('Y'); ?> NSW Nurses and Midwives' Association and authorised by S. Candish, General Secretary, NSW Nurses and Midwives' Association, 50 O'Dea Avenue Waterloo NSW 2017 Australia.
+      All content copyright &copy; <?php echo date_i18n('Y'); ?> NSW Nurses and Midwives' Association and authorised by S.Candish, General Secretary, NSWNMA and Branch Secretary, ANMF NSW Branch, 50 O'Dea Avenue Waterloo NSW 2017 Australia.
     </div>
   </div>
 
