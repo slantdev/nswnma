@@ -165,7 +165,7 @@
       echo '<div class="pr-4 mb-8">';
       echo '<form id="header-searchform" class="relative" method="get" action="' . esc_url(home_url('/')) . '">';
       echo '<input id="searchform-input" type="text" name="s" value="" placeholder="Search the site for" class="bg-white rounded-md border border-solid border-gray-300 pl-4 py-4 pr-7 w-full focus:border-brand-blue">';
-      echo '<button type="submit" class="absolute right-0 top-2 p-2.5">';
+      echo '<button type="submit" aria-label="Search" class="absolute right-0 top-2 p-2.5">';
       echo nswnma_icon(array('icon' => 'search', 'group' => 'utilities', 'size' => '22', 'class' => 'text-brand-bluedark'));
       echo '</button>';
       echo '</form>';
